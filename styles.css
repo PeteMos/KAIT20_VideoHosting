@@ -1,0 +1,189 @@
+/* Основные стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f8f8; /* Светлый фон */
+    color: #333; /* Темный текст */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Стили заголовка */
+header {
+    background-color: #6a0dad; /* Фиолетовый цвет */
+    color: white;
+    padding: 20px 0;
+    position: relative; /* Для абсолютного позиционирования элементов */
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    justify-content: space-between; /* Распределяем элементы по краям */
+}
+
+.logo img {
+    max-height: 180px; /* Увеличиваем максимальную высоту логотипа */
+    margin-left: 0; /* Убираем отрицательный отступ слева */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Стили для информации о пользователе */
+.user-info {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 20px; /* Отступ сверху */
+    right: 20px; /* Отступ справа */
+}
+
+/* Стили главного блока */
+.hero {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+/* Стили кнопок */
+.btn {
+    background-color: #6a0dad; /* Фиолетовый цвет */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 1.1em;
+}
+
+.btn:hover {
+    background-color: #5a0a9d; /* Темнее фиолетового при наведении */
+}
+
+/* Стили секций курсов */
+.courses {
+    padding: 20px 0;
+}
+
+.courses h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.course-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Стили карточек курсов */
+.course-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    flex: 1 1 calc(25% - 20px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Подъем карточки при наведении */
+}
+
+.course-card h3 {
+    margin-top: 0;
+}
+
+.course-card p {
+    font-size: 0.9em;
+}
+
+/* Стили кнопок в карточках курсов */
+.course-btn {
+    background-color: #6a0dad; /* Фиолетовый цвет */
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.course-btn:hover {
+    background-color: #5a0a9d; /* Темнее фиолетового при наведении */
+}
+
+/* Стили секции "О проекте" */
+.about {
+    padding: 20px 0;
+    background-color: #f0f0f0; /* Светлый фон для секции */
+}
+
+.about h2 {
+    text-align: center;
+}
+
+/* Стили секции "Контакты" */
+.contact {
+    padding: 20px 0;
+    background-color: #f0f0f0; /* Светлый фон для секции */
+}
+
+.contact h2 {
+    text-align: center;
+}
+
+/* Стили подвала */
+footer {
+    background-color: #6a0dad; /* Фиолетовый цвет */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .course-card {
+        flex: 1 1 calc(50% - 20px); /* 2 карточки в ряд на меньших экранах */
+    }
+
+    .btn, .course-btn {
+        padding: 8px 16px; /* Уменьшение размера кнопок на мобильных устройствах */
+    }
+}
+
+@media (max-width: 480px) {
+    .course-card {
+        flex: 1 1 100%; /* 1 карточка в ряд на очень маленьких экранах */
+    }
+
+    .hero h2 {
+        font-size: 2em; /* Уменьшение размера заголовка на мобильных */
+    }
+
+    .hero p {
+        font-size: 1em; /* Уменьшение размера текста на мобильных */
+    }
+}
