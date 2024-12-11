@@ -23,16 +23,17 @@
                     <li><a href="#contact">Контакты</a></li>
                 </ul>
             </nav>
-            <div class="user-info">
-                <span id="username">Гость</span>
-                <div class="auth-links">
-                    <a href="#" id="login-link" class="btn">Войти</a> | 
-                    <a href="#" id="register-link" class="btn">Регистрация</a>
-                    <a href="#" id="logout-link" class="btn" style="display: none;">Выйти</a>
-                </div>
-            </div>
         </div>
-    </header>
+    </header>        
+
+    <div class="user-info">
+        <div class="container">
+            <span id="username" class="username">Гость</span>
+            <a href="#" id="login-link" class="btn">Войти</a>
+            <span>|</span>
+            <a href="#" id="register-link" class="btn">Регистрация</a>
+        </div>
+    </div>    
 
     <main>
         <section id="home" class="hero">
@@ -207,14 +208,14 @@
             registerModal.style.display = "none";
         }
 
-        window.onclick = function(event) {
-            if (event.target == loginModal) {
-                loginModal.style.display = "none";
-            }
-            if (event.target == registerModal) {
-                registerModal.style.display = "none";
-            }
-        }
+        // window.onclick = function(event) {
+        //     if (event.target == loginModal) {
+        //         loginModal.style.display = "none";
+        //     }
+        //     if (event.target == registerModal) {
+        //         registerModal.style.display = "none";
+        //     }
+        // }
 
         openRegister.onclick = function() {
             loginModal.style.display = "none";
