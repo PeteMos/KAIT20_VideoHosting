@@ -13,27 +13,25 @@
     <header>
         <div class="container">
             <h1>Учебный Видеохостинг ГБПОУ КАИТ20</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#trending">В тренде</a></li>
-                    <li><a href="#new-courses">Новые курсы</a></li>
-                    <li><a href="#recommended">Рекомендуемые курсы</a></li>
-                    <li><a href="#about">О проекте</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-            </nav>
         </div>
-    </header>        
-
-    <div class="user-info">
-        <div class="container">
+        <div class="user-info">
             <span id="username" class="username">Гость</span>
-            <a href="#" id="login-link" class="btn">Войти</a>
+            <a href="#" id="login-link" class="btn">Вход</a>
             <span>|</span>
             <a href="#" id="register-link" class="btn">Регистрация</a>
         </div>
-    </div>    
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#trending">В тренде</a></li>
+            <li><a href="#new-courses">Новые курсы</a></li>
+            <li><a href="#recommended">Рекомендуемые курсы</a></li>
+            <li><a href="#about">О проекте</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
 
     <main>
         <section id="home" class="hero">
@@ -42,8 +40,11 @@
                     <img src="KAIT-logo.png" alt="Логотип колледжа">
                 </div>
                 <h2>Добро пожаловать на наш видеохостинг!</h2>
-                <p>Учитесь, развивайтесь и делитесь знаниями через видео.</p>
+                <p>Учитесь, развивайтесь и делитесь знаниями через видео!</p>
                 <a href="#trending" class="btn">Изучить курсы</a>
+            </div>
+            <div class="container-img">
+                
             </div>
         </section>
 
@@ -52,28 +53,40 @@
                 <h2>В тренде</h2>
                 <div class="course-grid">
                     <div class="course-card">
+                        <div class="course-image">
+                            <img src="python.png" alt="Логотип Python">
+                        </div>
                         <h3>Курс: Основы программирования</h3>
                         <p>Изучите основы программирования на Python.</p>
                         <a href="course-programming.html" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
+                        <div class="course-image">
+                            <img src="web-development.png" alt="Логотип Веб-разработки">
+                        </div>
                         <h3>Курс: Веб-разработка</h3>
                         <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
                         <a href="course-web-development.html" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
+                        <div class="course-image">
+                            <img src="design.png" alt="Логотип Дизайна">
+                        </div>
                         <h3>Курс: Основы дизайна</h3>
                         <p>Изучите принципы дизайна и создайте привлекательные интерфейсы.</p>
                         <a href="course-design.html" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
+                        <div class="course-image">
+                            <img src="" alt="Логотип JS">
+                        </div>
                         <h3>Курс: Основы JavaScript</h3>
                         <p>Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.</p>
                         <a href="course-javascript.html" class="course-btn">Смотреть видео</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>        
 
         <section id="new-courses" class="courses">
             <div class="container">
@@ -208,15 +221,6 @@
             registerModal.style.display = "none";
         }
 
-        // window.onclick = function(event) {
-        //     if (event.target == loginModal) {
-        //         loginModal.style.display = "none";
-        //     }
-        //     if (event.target == registerModal) {
-        //         registerModal.style.display = "none";
-        //     }
-        // }
-
         openRegister.onclick = function() {
             loginModal.style.display = "none";
             registerModal.style.display = "block";
@@ -249,7 +253,7 @@
 
             alert("Регистрация выполнена!");
             localStorage.setItem("username", username);
-            localStorage.setItem("email", email); // Сохраняем email
+            localStorage.setItem("email", email);
             window.location.href = "index.html";
         }
 
