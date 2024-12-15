@@ -11,6 +11,9 @@
 </head>
 <body>
     <header>
+        <div class="index-logo">
+            <img src="container-logo-img.png" alt="Главное изображение"> 
+        </div>
         <div class="container">
             <h1>Учебный Видеохостинг ГБПОУ КАИТ20</h1>
         </div>
@@ -19,6 +22,7 @@
             <a href="#" id="login-link" class="btn">Вход</a>
             <span>|</span>
             <a href="#" id="register-link" class="btn">Регистрация</a>
+            <a href="#" id="logout-link" class="btn" style="display:none;">Выход</a>
         </div>
     </header>
 
@@ -39,7 +43,9 @@
                 <div class="hero-content">
                     <div class="hero-text">
                         <div class="logo">
-                            <img src="KAIT-logo.png" alt="Логотип колледжа">
+                            <a href="https://kait20.mskobr.ru/">
+                                <img src="KAIT-logo.png" alt="Логотип колледжа">
+                            </a>
                         </div>
                         <h2>Добро пожаловать на наш видеохостинг!</h2>
                         <p>Учитесь, развивайтесь и делитесь знаниями через видео!</p>
@@ -91,7 +97,6 @@
                 </div>
             </div>
         </section>
-        
 
         <section id="new-courses" class="courses">
             <div class="container">
@@ -153,6 +158,9 @@
             <div class="container">
                 <h2>О проекте</h2>
                 <p>Этот проект создан для студентов ГБПОУ КАИТ20 с целью предоставления доступа к учебным видео и материалам. Мы стремимся сделать процесс обучения более доступным и увлекательным.</p>
+                <p>Наш видеохостинг предлагает курсы по различным направлениям, включая программирование, веб-разработку, дизайн и многое другое. Мы верим, что качественное образование должно быть доступно каждому, и поэтому мы предоставляем бесплатные ресурсы для самообразования.</p>
+                <p>Каждый курс включает в себя видеоматериалы, практические задания и дополнительные ресурсы для углубленного изучения темы. Мы также активно собираем отзывы от студентов, чтобы улучшать качество контента и адаптировать его под реальные потребности учащихся.</p>
+                <p>Присоединяйтесь к нашему сообществу и начните свой путь к знаниям уже сегодня!</p>
             </div>
         </section>
 
@@ -241,7 +249,7 @@
             const username = document.getElementById("login-username").value;
             alert("Вход выполнен!");
             localStorage.setItem("username", username);
-            window.location.href = "index.html";
+            updateUserInfo(username);
         }
 
         function handleRegister(event) {
@@ -258,17 +266,20 @@
 
             alert("Регистрация выполнена!");
             localStorage.setItem("username", username);
-            localStorage.setItem("email", email);
-            window.location.href = "index.html";
+            updateUserInfo(username);
+        }
+
+        function updateUserInfo(username) {
+            document.getElementById("username").textContent = username;
+            document.getElementById("login-link").style.display = "none";
+            document.getElementById("register-link").style.display = "none";
+            document.getElementById("logout-link").style.display = "inline";
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             const username = localStorage.getItem("username");
             if (username) {
-                document.getElementById("username").textContent = username;
-                document.getElementById("login-link").style.display = "none";
-                document.getElementById("register-link").style.display = "none";
-                document.getElementById("logout-link").style.display = "inline";
+                updateUserInfo(username);
             }
         });
 
@@ -276,7 +287,10 @@
             event.preventDefault();
             if (confirm("Вы уверены, что хотите выйти?")) {
                 localStorage.removeItem("username");
-                window.location.href = "index.html";
+                document.getElementById("username").textContent = "Гость";
+                document.getElementById("login-link").style.display = "inline";
+                document.getElementById("register-link").style.display = "inline";
+                document.getElementById("logout-link").style.display = "none";
             }
         };
     </script>
