@@ -57,6 +57,10 @@
             color: #555;
         }
 
+        .video-card {
+            margin-bottom: 60px;
+        }
+        
         .likes {
             margin-top: 15px;
             display: flex;
@@ -147,6 +151,39 @@
             color: red;
             margin-top: 10px;
         }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .search-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -163,9 +200,14 @@
 
     <main>
         <div class="container">
-            <h2>Видеоуроки</h2>
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
             <div class="video-grid">
-                <div class="video-card" onclick="openModal('videos/design-intro.mp4', 'Введение в дизайн', 'Изучите принципы дизайна и создайте привлекательные интерфейсы.', 'Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                <div class="video-card" data-title="Введение в дизайн" data-description="Изучите принципы дизайна и создайте привлекательные интерфейсы." data-details="Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" onclick="openModal('videos/design-intro.mp4', 'Введение в дизайн', 'Изучите принципы дизайна и создайте привлекательные интерфейсы.', 'Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
                     <h3>Введение в дизайн</h3>
                     <video width="100%" controls>
                         <source src="videos/design-intro.mp4" type="video/mp4">
@@ -173,7 +215,7 @@
                     </video>
                     <p>Изучите принципы дизайна и создайте привлекательные интерфейсы.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/design-color-theory.mp4', 'Основы цветовой теории', 'Научитесь использовать цвет в дизайне.', 'Длительность: 4:30, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                <div class="video-card" data-title="Основы цветовой теории" data-description="Научитесь использовать цвет в дизайне." data-details="Длительность: 4:30, Дата публикации: 02.01.2025, Автор: Мария Петрова" onclick="openModal('videos/design-color-theory.mp4', 'Основы цветовой теории', 'Научитесь использовать цвет в дизайне.', 'Длительность: 4:30, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
                     <h3>Основы цветовой теории</h3>
                     <video width="100%" controls>
                         <source src="videos/design-color-theory.mp4" type="video/mp4">
@@ -181,7 +223,7 @@
                     </video>
                     <p>Научитесь использовать цвет в дизайне.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/design-typography.mp4', 'Типографика в дизайне', 'Узнайте, как выбрать шрифты для вашего проекта.', 'Длительность: 5:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                <div class="video-card" data-title="Типографика в дизайне" data-description="Узнайте, как выбрать шрифты для вашего проекта." data-details="Длительность: 5:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" onclick="openModal('videos/design-typography.mp4', 'Типографика в дизайне', 'Узнайте, как выбрать шрифты для вашего проекта.', 'Длительность: 5:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
                     <h3>Типографика в дизайне</h3>
                     <video width="100%" controls>
                         <source src="videos/design-typography.mp4" type="video/mp4">
@@ -189,7 +231,7 @@
                     </video>
                     <p>Узнайте, как выбрать шрифты для вашего проекта.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/design-layouts.mp4', 'Создание макетов', 'Как создать эффективные макеты для дизайна.', 'Длительность: 6:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
+                <div class="video-card" data-title="Создание макетов" data-description="Как создать эффективные макеты для дизайна." data-details="Длительность: 6:00, Дата публикации: 04.01.2025, Автор: Анна Иванова" onclick="openModal('videos/design-layouts.mp4', 'Создание макетов', 'Как создать эффективные макеты для дизайна.', 'Длительность: 6:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
                     <h3>Создание макетов</h3>
                     <video width="100%" controls>
                         <source src="videos/design-layouts.mp4" type="video/mp4">
@@ -197,7 +239,7 @@
                     </video>
                     <p>Как создать эффективные макеты для дизайна.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/design-graphic-editors.mp4', 'Работа с графическими редакторами', 'Изучите популярные графические редакторы.', 'Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                <div class="video-card" data-title="Работа с графическими редакторами" data-description="Изучите популярные графические редакторы." data-details="Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" onclick="openModal('videos/design-graphic-editors.mp4', 'Работа с графическими редакторами', 'Изучите популярные графические редакторы.', 'Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
                     <h3>Работа с графическими редакторами</h3>
                     <video width="100%" controls>
                         <source src="videos/design-graphic-editors.mp4" type="video/mp4">
@@ -229,7 +271,7 @@
                 <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
                 <button class="submit-comment" onclick="submitComment()">Отправить</button>
                 <div class="error-message" id="error-message"></div>
-                <h4>Комментарии</h4> 
+                <h4>Все комментарии</h4> 
                 <div id="commentList" class="comment-list"></div>
             </div>
         </div>
@@ -292,6 +334,23 @@
                 alert('Ссылка на видео скопирована в буфер обмена: ' + shareUrl);
             }, (err) => {
                 console.error('Ошибка при копировании: ', err);
+            });
+        }
+
+        function searchVideos() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const videoCards = document.querySelectorAll('.video-card');
+
+            videoCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const description = card.getAttribute('data-description').toLowerCase();
+                const details = card.getAttribute('data-details').toLowerCase();
+
+                if (title.includes(input) || description.includes(input) || details.includes(input)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>

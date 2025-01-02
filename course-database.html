@@ -55,8 +55,11 @@
             margin-top: 10px;
             font-size: 14px;
             color: #555;
+        } 
+        .video-card {
+            margin-bottom: 60px;
         }
-
+        
         .likes {
             margin-top: 15px;
             display: flex;
@@ -147,6 +150,37 @@
             color: red;
             margin-top: 10px;
         }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .search-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -163,9 +197,14 @@
 
     <main>
         <div class="container">
-            <h2>Видеоуроки</h2>
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
             <div class="video-grid">
-                <div class="video-card" onclick="openModal('videos/database-intro.mp4', 'Введение в базы данных', 'Изучите SQL и управление базами данных.', 'Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                <div class="video-card" data-title="Введение в базы данных" data-description="Изучите SQL и управление базами данных." data-details="Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" onclick="openModal('videos/database-intro.mp4', 'Введение в базы данных', 'Изучите SQL и управление базами данных.', 'Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
                     <h3>Введение в базы данных</h3>
                     <video width="100%" controls>
                         <source src="videos/database-intro.mp4" type="video/mp4">
@@ -173,7 +212,7 @@
                     </video>
                     <p>Изучите SQL и управление базами данных.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/database-create-tables.mp4', 'Создание таблиц', 'Научитесь создавать таблицы в SQL.', 'Длительность: 4:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                <div class="video-card" data-title="Создание таблиц" data-description="Научитесь создавать таблицы в SQL." data-details="Длительность: 4:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" onclick="openModal('videos/database-create-tables.mp4', 'Создание таблиц', 'Научитесь создавать таблицы в SQL.', 'Длительность: 4:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
                     <h3>Создание таблиц</h3>
                     <video width="100%" controls>
                         <source src="videos/database-create-tables.mp4" type="video/mp4">
@@ -181,7 +220,7 @@
                     </video>
                     <p>Научитесь создавать таблицы в SQL.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/database-sql-queries.mp4', 'Запросы SQL', 'Изучите основные запросы SQL для работы с данными.', 'Длительность: 6:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                <div class="video-card" data-title="Запросы SQL" data-description="Изучите основные запросы SQL для работы с данными." data-details="Длительность: 6:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" onclick="openModal('videos/database-sql-queries.mp4', 'Запросы SQL', 'Изучите основные запросы SQL для работы с данными.', 'Длительность: 6:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
                     <h3>Запросы SQL</h3>
                     <video width="100%" controls>
                         <source src="videos/database-sql-queries.mp4" type="video/mp4">
@@ -189,7 +228,7 @@
                     </video>
                     <p>Изучите основные запросы SQL для работы с данными.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/database-join-tables.mp4', 'Объединение таблиц', 'Узнайте, как объединять таблицы в запросах.', 'Длительность: 7:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
+                <div class="video-card" data-title="Объединение таблиц" data-description="Узнайте, как объединять таблицы в запросах." data-details="Длительность: 7:00, Дата публикации: 04.01.2025, Автор: Анна Иванова" onclick="openModal('videos/database-join-tables.mp4', 'Объединение таблиц', 'Узнайте, как объединять таблицы в запросах.', 'Длительность: 7:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
                     <h3>Объединение таблиц</h3>
                     <video width="100%" controls>
                         <source src="videos/database-join-tables.mp4" type="video/mp4">
@@ -197,7 +236,7 @@
                     </video>
                     <p>Узнайте, как объединять таблицы в запросах.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/database-query-optimization.mp4', 'Оптимизация запросов', 'Советы по оптимизации SQL-запросов.', 'Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                <div class="video-card" data-title="Оптимизация запросов" data-description="Советы по оптимизации SQL-запросов." data-details="Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" onclick="openModal('videos/database-query-optimization.mp4', 'Оптимизация запросов', 'Советы по оптимизации SQL-запросов.', 'Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
                     <h3>Оптимизация запросов</h3>
                     <video width="100%" controls>
                         <source src="videos/database-query-optimization.mp4" type="video/mp4">
@@ -229,7 +268,7 @@
                 <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
                 <button class="submit-comment" onclick="submitComment()">Отправить</button>
                 <div class="error-message" id="error-message"></div>
-                <h4>Комментарии</h4> 
+                <h4>Все комментарии</h4> 
                 <div id="commentList" class="comment-list"></div>
             </div>
         </div>
@@ -292,6 +331,23 @@
                 alert('Ссылка на видео скопирована в буфер обмена: ' + shareUrl);
             }, (err) => {
                 console.error('Ошибка при копировании: ', err);
+            });
+        }
+
+        function searchVideos() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const videoCards = document.querySelectorAll('.video-card');
+
+            videoCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const description = card.getAttribute('data-description').toLowerCase();
+                const details = card.getAttribute('data-details').toLowerCase();
+
+                if (title.includes(searchInput) || description.includes(searchInput) || details.includes(searchInput)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>

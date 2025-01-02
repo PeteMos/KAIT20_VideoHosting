@@ -57,6 +57,10 @@
             color: #555;
         }
 
+        .video-card {
+            margin-bottom: 60px;
+        }
+
         .likes {
             margin-top: 15px;
             display: flex;
@@ -147,6 +151,39 @@
             color: red;
             margin-top: 10px;
         }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -163,9 +200,14 @@
 
     <main>
         <div class="container">
-            <h2>Видеоуроки</h2>
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
             <div class="video-grid">
-                <div class="video-card" onclick="openModal('videos/javascript-intro.mp4', 'Введение в JavaScript', 'Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.', 'Длительность: 15:00, Дата публикации: 01.01.2025, Автор: Алексей Иванов')">
+                <div class="video-card" onclick="openModal('videos/javascript-intro.mp4', 'Введение в JavaScript', 'Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.', 'Длительность: 15:00, Дата публикации: 01.01.2025, Автор: Алексей Иванов')" data-title="Введение в JavaScript" data-description="Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными." data-details="Длительность: 15:00, Дата публикации: 01.01.2025, Автор: Алексей Иванов">
                     <h3>Введение в JavaScript</h3>
                     <video width="100%" controls>
                         <source src="videos/javascript-intro.mp4" type="video/mp4">
@@ -173,7 +215,7 @@
                     </video>
                     <p>Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/javascript-variables.mp4', 'Переменные и типы данных', 'Изучите переменные и типы данных в JavaScript.', 'Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                <div class="video-card" onclick="openModal('videos/javascript-variables.mp4', 'Переменные и типы данных', 'Изучите переменные и типы данных в JavaScript.', 'Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')" data-title="Переменные и типы данных" data-description="Изучите переменные и типы данных в JavaScript." data-details="Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Мария Петрова">
                     <h3>Переменные и типы данных</h3>
                     <video width="100%" controls>
                         <source src="videos/javascript-variables.mp4" type="video/mp4">
@@ -181,7 +223,7 @@
                     </video>
                     <p>Изучите переменные и типы данных в JavaScript.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/javascript-conditions-loops.mp4', 'Условия и циклы', 'Научитесь использовать условия и циклы в коде.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                <div class="video-card" onclick="openModal('videos/javascript-conditions-loops.mp4', 'Условия и циклы', 'Научитесь использовать условия и циклы в коде.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')" data-title="Условия и циклы" data-description="Научитесь использовать условия и циклы в коде." data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов">
                     <h3>Условия и циклы</h3>
                     <video width="100%" controls>
                         <source src="videos/javascript-conditions-loops.mp4" type="video/mp4">
@@ -189,7 +231,7 @@
                     </video>
                     <p>Научитесь использовать условия и циклы в коде.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/javascript-functions.mp4', 'Функции в JavaScript', 'Изучите, как создавать и использовать функции.', 'Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова')">
+                <div class="video-card" onclick="openModal('videos/javascript-functions.mp4', 'Функции в JavaScript', 'Изучите, как создавать и использовать функции.', 'Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова')" data-title="Функции в JavaScript" data-description="Изучите, как создавать и использовать функции." data-details="Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова">
                     <h3>Функции в JavaScript</h3>
                     <video width="100%" controls>
                         <source src="videos/javascript-functions.mp4" type="video/mp4">
@@ -197,7 +239,7 @@
                     </video>
                     <p>Изучите, как создавать и использовать функции.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/javascript-dom.mp4', 'Работа с DOM', 'Научитесь взаимодействовать с элементами на странице.', 'Длительность: 14:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                <div class="video-card" onclick="openModal('videos/javascript-dom.mp4', 'Работа с DOM', 'Научитесь взаимодействовать с элементами на странице.', 'Длительность: 14:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')" data-title="Работа с DOM" data-description="Научитесь взаимодействовать с элементами на странице." data-details="Длительность: 14:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров">
                     <h3>Работа с DOM</h3>
                     <video width="100%" controls>
                         <source src="videos/javascript-dom.mp4" type="video/mp4">
@@ -229,7 +271,7 @@
                 <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
                 <button class="submit-comment" onclick="submitComment()">Отправить</button>
                 <div class="error-message" id="error-message"></div>
-                <h4>Комментарии</h4> 
+                <h4>Все комментарии</h4> 
                 <div id="commentList" class="comment-list"></div>
             </div>
         </div>
@@ -292,6 +334,23 @@
                 alert('Ссылка на видео скопирована в буфер обмена: ' + shareUrl);
             }, (err) => {
                 console.error('Ошибка при копировании: ', err);
+            });
+        }
+
+        function searchVideos() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const videoCards = document.querySelectorAll('.video-card');
+
+            videoCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const description = card.getAttribute('data-description').toLowerCase();
+                const details = card.getAttribute('data-details').toLowerCase();
+
+                if (title.includes(input) || description.includes(input) || details.includes(input)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>

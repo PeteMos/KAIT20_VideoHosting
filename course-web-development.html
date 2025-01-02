@@ -57,6 +57,10 @@
             color: #555;
         }
 
+        .video-card {
+            margin-bottom: 60px;
+        }
+
         .likes {
             margin-top: 15px;
             display: flex;
@@ -147,6 +151,37 @@
             color: red;
             margin-top: 10px;
         }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .search-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -163,9 +198,14 @@
 
     <main>
         <div class="container">
-            <h2>Видеоуроки</h2>
-            <div class="video-grid">
-                <div class="video-card" onclick="openModal('videos/web-development-intro.mp4', 'Введение в веб-разработку', 'Создайте свой первый веб-сайт с помощью HTML и CSS.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
+            <div class="video-grid" id="videoGrid">
+                <div class="video-card" data-title="Введение в веб-разработку" data-description="Создайте свой первый веб-сайт с помощью HTML и CSS." data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" onclick="openModal('videos/web-development-intro.mp4', 'Введение в веб-разработку', 'Создайте свой первый веб-сайт с помощью HTML и CSS.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
                     <h3>Введение в веб-разработку</h3>
                     <video width="100%" controls>
                         <source src="videos/web-development-intro.mp4" type="video/mp4">
@@ -173,7 +213,7 @@
                     </video>
                     <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/web-development-html.mp4', 'Основы HTML', 'Научитесь основам HTML и структуре веб-страниц.', 'Длительность: 15:00, Дата публикации: 02.01.2025, Автор: Анна Петрова')">
+                <div class="video-card" data-title="Основы HTML" data-description="Научитесь основам HTML и структуре веб-страниц." data-details="Длительность: 15:00, Дата публикации: 02.01.2025, Автор: Анна Петрова" onclick="openModal('videos/web-development-html.mp4', 'Основы HTML', 'Научитесь основам HTML и структуре веб-страниц.', 'Длительность: 15:00, Дата публикации: 02.01.2025, Автор: Анна Петрова')">
                     <h3>Основы HTML</h3>
                     <video width="100%" controls>
                         <source src="videos/web-development-html.mp4" type="video/mp4">
@@ -181,7 +221,7 @@
                     </video>
                     <p>Научитесь основам HTML и структуре веб-страниц.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/web-development-css.mp4', 'Основы CSS', 'Изучите стилизацию веб-страниц с помощью CSS.', 'Длительность: 12:30, Дата публикации: 03.01.2025, Автор: Сергей Смирнов')">
+                <div class="video-card" data-title="Основы CSS" data-description="Изучите стилизацию веб-страниц с помощью CSS." data-details="Длительность: 12:30, Дата публикации: 03.01.2025, Автор: Сергей Смирнов" onclick="openModal('videos/web-development-css.mp4', 'Основы CSS', 'Изучите стилизацию веб-страниц с помощью CSS.', 'Длительность: 12:30, Дата публикации: 03.01.2025, Автор: Сергей Смирнов')">
                     <h3>Основы CSS</h3>
                     <video width="100%" controls>
                         <source src="videos/web-development-css.mp4" type="video/mp4">
@@ -189,7 +229,7 @@
                     </video>
                     <p>Изучите стилизацию веб-страниц с помощью CSS.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/web-development-javascript.mp4', 'JavaScript для веб-разработки', 'Научитесь добавлять интерактивность на ваши веб-страницы с помощью JavaScript.', 'Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Мария Кузнецова')">
+                <div class="video-card" data-title="JavaScript для веб-разработки" data-description="Научитесь добавлять интерактивность на ваши веб-страницы с помощью JavaScript." data-details="Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Мария Кузнецова" onclick="openModal('videos/web-development-javascript.mp4', 'JavaScript для веб-разработки', 'Научитесь добавлять интерактивность на ваши веб-страницы с помощью JavaScript.', 'Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Мария Кузнецова')">
                     <h3>JavaScript для веб-разработки</h3>
                     <video width="100%" controls>
                         <source src="videos/web-development-javascript.mp4" type="video/mp4">
@@ -197,7 +237,7 @@
                     </video>
                     <p>Научитесь добавлять интерактивность на ваши веб-страницы с помощью JavaScript.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/web-development-responsive-design.mp4', 'Создание адаптивного дизайна', 'Узнайте, как сделать ваши веб-сайты адаптивными для различных устройств.', 'Длительность: 18:00, Дата публикации: 05.01.2025, Автор: Олег Сидоров')">
+                <div class="video-card" data-title="Создание адаптивного дизайна" data-description="Узнайте, как сделать ваши веб-сайты адаптивными для различных устройств." data-details="Длительность: 18:00, Дата публикации: 05.01.2025, Автор: Олег Сидоров" onclick="openModal('videos/web-development-responsive-design.mp4', 'Создание адаптивного дизайна', 'Узнайте, как сделать ваши веб-сайты адаптивными для различных устройств.', 'Длительность: 18:00, Дата публикации: 05.01.2025, Автор: Олег Сидоров')">
                     <h3>Создание адаптивного дизайна</h3>
                     <video width="100%" controls>
                         <source src="videos/web-development-responsive-design.mp4" type="video/mp4">
@@ -229,7 +269,7 @@
                 <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
                 <button class="submit-comment" onclick="submitComment()">Отправить</button>
                 <div class="error-message" id="error-message"></div>
-                <h4>Комментарии</h4> 
+                <h4>Все комментарии</h4> 
                 <div id="commentList" class="comment-list"></div>
             </div>
         </div>
@@ -292,6 +332,23 @@
                 alert('Ссылка на видео скопирована в буфер обмена: ' + shareUrl);
             }, (err) => {
                 console.error('Ошибка при копировании: ', err);
+            });
+        }
+
+        function searchVideos() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const videoCards = document.querySelectorAll('.video-card');
+
+            videoCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const description = card.getAttribute('data-description').toLowerCase();
+                const details = card.getAttribute('data-details').toLowerCase();
+
+                if (title.includes(searchInput) || description.includes(searchInput) || details.includes(searchInput)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>

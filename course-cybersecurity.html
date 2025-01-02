@@ -17,7 +17,7 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.8);
         }
-
+        
         .modal-content {
             background-color: #fff;
             margin: 5% auto;
@@ -57,6 +57,10 @@
             color: #555;
         }
 
+        .video-card {
+            margin-bottom: 60px;
+        }
+
         .likes {
             margin-top: 15px;
             display: flex;
@@ -74,7 +78,6 @@
             border-radius: 5px; 
             transition: transform 0.2s;
         }
-
         .share-icon {
             background-color: transparent;
             border: none;
@@ -85,16 +88,13 @@
             border-radius: 5px; 
             transition: transform 0.2s;
         }
-
         .like-icon:hover, .dislike-icon:hover, .share-icon:hover {
             transform: scale(1.2);
             background-color: rgba(0, 123, 255, 0.1); 
         }
-
         .comments {
             margin-top: 20px;
         }
-
         .comment-list {
             margin-top: 10px;
             max-height: 200px;
@@ -104,7 +104,6 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
-
         .comment {
             margin-bottom: 10px;
             padding: 5px;
@@ -115,7 +114,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .comment-input {
             width: calc(100% - 22px);
             padding: 10px;
@@ -125,7 +123,6 @@
             resize: none;
             max-height: 100px;
         }
-
         .submit-comment {
             margin-top: 10px;
             padding: 10px;
@@ -138,14 +135,42 @@
             min-width: 80px; 
             max-width: 150px; 
         }
-
         .submit-comment:hover {
             background-color: #0056b3;
         }
-
         .error-message {
             color: red;
             margin-top: 10px;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .search-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            outline: none;
         }
     </style>
 </head>
@@ -163,9 +188,14 @@
 
     <main>
         <div class="container">
-            <h2>Видеоуроки</h2>
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
             <div class="video-grid">
-                <div class="video-card" onclick="openModal('videos/cybersecurity-intro.mp4', 'Введение в кибербезопасность', 'Узнайте, как защитить свои данные и устройства.', 'Длительность: 8:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов')">
+                <div class="video-card" data-title="Введение в кибербезопасность" data-description="Узнайте, как защитить свои данные и устройства." data-details="Длительность: 8:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов" onclick="openModal('videos/cybersecurity-intro.mp4', 'Введение в кибербезопасность', 'Узнайте, как защитить свои данные и устройства.', 'Длительность: 8:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов')">
                     <h3>Введение в кибербезопасность</h3>
                     <video width="100%" controls>
                         <source src="videos/cybersecurity-intro.mp4" type="video/mp4">
@@ -173,7 +203,7 @@
                     </video>
                     <p>Узнайте, как защитить свои данные и устройства.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/cybersecurity-threats.mp4', 'Типы угроз кибербезопасности', 'Изучите различные типы угроз и как их избежать.', 'Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Наталья Петрова')">
+                <div class="video-card" data-title="Типы угроз кибербезопасности" data-description="Изучите различные типы угроз и как их избежать." data-details="Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Наталья Петрова" onclick="openModal('videos/cybersecurity-threats.mp4', 'Типы угроз кибербезопасности', 'Изучите различные типы угроз и как их избежать.', 'Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Наталья Петрова')">
                     <h3>Типы угроз кибербезопасности</h3>
                     <video width="100%" controls>
                         <source src="videos/cybersecurity-threats.mp4" type="video/mp4">
@@ -181,7 +211,7 @@
                     </video>
                     <p>Изучите различные типы угроз и как их избежать.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/cybersecurity-encryption.mp4', 'Основы шифрования', 'Узнайте, как работает шифрование данных.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                <div class="video-card" data-title="Основы шифрования" data-description="Узнайте, как работает шифрование данных." data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" onclick="openModal('videos/cybersecurity-encryption.mp4', 'Основы шифрования', 'Узнайте, как работает шифрование данных.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
                     <h3>Основы шифрования</h3>
                     <video width="100%" controls>
                         <source src="videos/cybersecurity-encryption.mp4" type="video/mp4">
@@ -189,7 +219,7 @@
                     </video>
                     <p>Узнайте, как работает шифрование данных.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/cybersecurity-network-security.mp4', 'Безопасность в сети', 'Советы по обеспечению безопасности в интернете.', 'Длительность: 9:30, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
+                <div class="video-card" data-title="Безопасность в сети" data-description="Советы по обеспечению безопасности в интернете." data-details="Длительность: 9:30, Дата публикации: 04.01.2025, Автор: Анна Иванова" onclick="openModal('videos/cybersecurity-network-security.mp4', 'Безопасность в сети', 'Советы по обеспечению безопасности в интернете.', 'Длительность: 9:30, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
                     <h3>Безопасность в сети</h3>
                     <video width="100%" controls>
                         <source src="videos/cybersecurity-network-security.mp4" type="video/mp4">
@@ -197,7 +227,7 @@
                     </video>
                     <p>Советы по обеспечению безопасности в интернете.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/cybersecurity-incident-management.mp4', 'Управление инцидентами', 'Как реагировать на инциденты безопасности.', 'Длительность: 15:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                <div class="video-card" data-title="Управление инцидентами" data-description="Как реагировать на инциденты безопасности." data-details="Длительность: 15:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" onclick="openModal('videos/cybersecurity-incident-management.mp4', 'Управление инцидентами', 'Как реагировать на инциденты безопасности.', 'Длительность: 15:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
                     <h3>Управление инцидентами</h3>
                     <video width="100%" controls>
                         <source src="videos/cybersecurity-incident-management.mp4" type="video/mp4">
@@ -229,7 +259,7 @@
                 <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
                 <button class="submit-comment" onclick="submitComment()">Отправить</button>
                 <div class="error-message" id="error-message"></div>
-                <h4>Комментарии</h4> 
+                <h4>Все комментарии</h4> 
                 <div id="commentList" class="comment-list"></div>
             </div>
         </div>
@@ -292,6 +322,23 @@
                 alert('Ссылка на видео скопирована в буфер обмена: ' + shareUrl);
             }, (err) => {
                 console.error('Ошибка при копировании: ', err);
+            });
+        }
+
+        function searchVideos() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const videoCards = document.querySelectorAll('.video-card');
+
+            videoCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const description = card.getAttribute('data-description').toLowerCase();
+                const details = card.getAttribute('data-details').toLowerCase();
+
+                if (title.includes(searchInput) || description.includes(searchInput) || details.includes(searchInput)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>

@@ -57,6 +57,10 @@
             color: #555;
         }
 
+        .video-card {
+            margin-bottom: 60px;
+        }
+
         .likes {
             margin-top: 15px;
             display: flex;
@@ -147,6 +151,39 @@
             color: red;
             margin-top: 10px;
         }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -163,9 +200,14 @@
 
     <main>
         <div class="container">
-            <h2>Видеоуроки</h2>
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
             <div class="video-grid">
-                <div class="video-card" onclick="openModal('videos/digital-marketing-intro.mp4', 'Введение в цифровой маркетинг', 'Изучите стратегии и инструменты цифрового маркетинга.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов')">
+                <div class="video-card" onclick="openModal('videos/digital-marketing-intro.mp4', 'Введение в цифровой маркетинг', 'Изучите стратегии и инструменты цифрового маркетинга.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов')" data-title="Введение в цифровой маркетинг" data-description="Изучите стратегии и инструменты цифрового маркетинга." data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов">
                     <h3>Введение в цифровой маркетинг</h3>
                     <video width="100%" controls>
                         <source src="videos/digital-marketing-intro.mp4" type="video/mp4">
@@ -173,7 +215,7 @@
                     </video>
                     <p>Изучите стратегии и инструменты цифрового маркетинга.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/digital-marketing-seo.mp4', 'SEO основы', 'Научитесь оптимизировать сайты для поисковых систем.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                <div class="video-card" onclick="openModal('videos/digital-marketing-seo.mp4', 'SEO основы', 'Научитесь оптимизировать сайты для поисковых систем.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')" data-title="SEO основы" data-description="Научитесь оптимизировать сайты для поисковых систем." data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова">
                     <h3>SEO основы</h3>
                     <video width="100%" controls>
                         <source src="videos/digital-marketing-seo.mp4" type="video/mp4">
@@ -181,7 +223,7 @@
                     </video>
                     <p>Научитесь оптимизировать сайты для поисковых систем.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/digital-marketing-content.mp4', 'Контент-маркетинг', 'Создание и продвижение контента для привлечения клиентов.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                <div class="video-card" onclick="openModal('videos/digital-marketing-content.mp4', 'Контент-маркетинг', 'Создание и продвижение контента для привлечения клиентов.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')" data-title="Контент-маркетинг" data-description="Создание и продвижение контента для привлечения клиентов." data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов">
                     <h3>Контент-маркетинг</h3>
                     <video width="100%" controls>
                         <source src="videos/digital-marketing-content.mp4" type="video/mp4">
@@ -189,7 +231,7 @@
                     </video>
                     <p>Создание и продвижение контента для привлечения клиентов.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/digital-marketing-social-media.mp4', 'Социальные сети', 'Как использовать социальные сети для бизнеса.', 'Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
+                <div class="video-card" onclick="openModal('videos/digital-marketing-social-media.mp4', 'Социальные сети', 'Как использовать социальные сети для бизнеса.', 'Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')" data-title="Социальные сети" data-description="Как использовать социальные сети для бизнеса." data-details="Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Анна Иванова">
                     <h3>Социальные сети</h3>
                     <video width="100%" controls>
                         <source src="videos/digital-marketing-social-media.mp4" type="video/mp4">
@@ -197,7 +239,7 @@
                     </video>
                     <p>Как использовать социальные сети для бизнеса.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/digital-marketing-email.mp4', 'Email-маркетинг', 'Создание эффективных email-кампаний.', 'Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                <div class="video-card" onclick="openModal('videos/digital-marketing-email.mp4', 'Email-маркетинг', 'Создание эффективных email-кампаний.', 'Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')" data-title="Email-маркетинг" data-description="Создание эффективных email-кампаний." data-details="Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров">
                     <h3>Email-маркетинг</h3>
                     <video width="100%" controls>
                         <source src="videos/digital-marketing-email.mp4" type="video/mp4">
@@ -229,7 +271,7 @@
                 <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
                 <button class="submit-comment" onclick="submitComment()">Отправить</button>
                 <div class="error-message" id="error-message"></div>
-                <h4>Комментарии</h4> 
+                <h4>Все комментарии</h4> 
                 <div id="commentList" class="comment-list"></div>
             </div>
         </div>
@@ -292,6 +334,23 @@
                 alert('Ссылка на видео скопирована в буфер обмена: ' + shareUrl);
             }, (err) => {
                 console.error('Ошибка при копировании: ', err);
+            });
+        }
+
+        function searchVideos() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const videoCards = document.querySelectorAll('.video-card');
+
+            videoCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const description = card.getAttribute('data-description').toLowerCase();
+                const details = card.getAttribute('data-details').toLowerCase();
+
+                if (title.includes(input) || description.includes(input) || details.includes(input)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>

@@ -68,11 +68,12 @@ header {
     text-decoration: none;
     padding: 10px 30px;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .main-nav ul li a:hover {
     background-color: #5a0a9d;
+    transform: translateY(-4px);
 }
 
 .user-info {
@@ -95,11 +96,12 @@ header {
     text-decoration: none;
     padding: 8px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s; 
 }
 
 .user-info a:hover {
     background-color: rgba(208, 172, 255, 0.918);
+    transform: translateY(-3px); 
 }
 
 .user-info span {
@@ -149,14 +151,14 @@ header {
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     font-size: 1.1em;
     margin-left: 10px;
 }
 
 .btn:hover {
     background-color: #5a0a9d;
-    text-decoration: underline;
+    transform: translateY(-3px);
 }
 
 .courses {
@@ -213,13 +215,14 @@ header {
     padding: 10px;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     display: inline-block;
     margin-top: 10px;
 }
 
 .course-btn:hover {
     background-color: #5a0a9d;
+    transform: translateY(-3px); 
 }
 
 .about {
@@ -342,11 +345,10 @@ footer {
     }
 }
 
-
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px; /* расстояние между карточками */
+    gap: 20px;
 }
 
 .video-card {
