@@ -59,6 +59,12 @@
 
         .video-card {
             margin-bottom: 60px;
+            cursor: pointer;
+        }
+
+        .video-preview {
+            width: 100%;
+            height: auto;
         }
 
         .likes {
@@ -208,44 +214,40 @@
             </div>
             <div class="video-grid">
                 <div class="video-card" onclick="openModal('videos/ux-ui-design-intro.mp4', 'Введение в UX/UI дизайн', 'Создание пользовательского интерфейса и улучшение пользовательского опыта.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анастасия Смирнова')">
+                    <canvas class="video-preview" id="previewCanvas1"></canvas>
+                    <video id="video1" src="videos/ux-ui-design-intro.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Введение в UX/UI дизайн</h3>
-                    <video width="100%" controls>
-                        <source src="videos/ux-ui-design-intro.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Создание пользовательского интерфейса и улучшение пользовательского опыта.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/ux-ui-design-research.mp4', 'Исследование пользователей', 'Научитесь проводить исследования для понимания потребностей пользователей.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Олег Петров')">
+                    <canvas class="video-preview" id="previewCanvas2"></canvas>
+                    <video id="video2" src="videos/ux-ui-design-research.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Исследование пользователей</h3>
-                    <video width="100%" controls>
-                        <source src="videos/ux-ui-design-research.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Научитесь проводить исследования для понимания потребностей пользователей.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/ux-ui-design-prototyping.mp4', 'Создание прототипов', 'Изучите методы создания прототипов для тестирования идей.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Ирина Коваленко')">
+                    <canvas class="video-preview" id="previewCanvas3"></canvas>
+                    <video id="video3" src="videos/ux-ui-design-prototyping.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Создание прототипов</h3>
-                    <video width="100%" controls>
-                        <source src="videos/ux-ui-design-prototyping.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите методы создания прототипов для тестирования идей.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/ux-ui-design-interface.mp4', 'Дизайн интерфейса', 'Как создавать привлекательные и функциональные интерфейсы.', 'Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Максим Иванов')">
+                    <canvas class="video-preview" id="previewCanvas4"></canvas>
+                    <video id="video4" src="videos/ux-ui-design-interface.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Дизайн интерфейса</h3>
-                    <video width="100%" controls>
-                        <source src="videos/ux-ui-design-interface.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Как создавать привлекательные и функциональные интерфейсы.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/ux-ui-design-testing.mp4', 'Тестирование пользовательского опыта', 'Научитесь проводить тестирование для улучшения дизайна.', 'Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Светлана Фролова')">
+                    <canvas class="video-preview" id="previewCanvas5"></canvas>
+                    <video id="video5" src="videos/ux-ui-design-testing.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Тестирование пользовательского опыта</h3>
-                    <video width="100%" controls>
-                        <source src="videos/ux-ui-design-testing.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Научитесь проводить тестирование для улучшения дизайна.</p>
+                </div>
+                <div class="video-card" onclick="openModal('videos/ux-ui-design-advanced.mp4', 'Продвинутые техники UX/UI', 'Изучите более сложные техники и подходы в UX/UI дизайне.', 'Длительность: 14:00, Дата публикации: 06.01.2025, Автор: Алексей Романов')">
+                    <canvas class="video-preview" id="previewCanvas6"></canvas>
+                    <video id="video6" src="videos/ux-ui-design-advanced.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Продвинутые техники UX/UI</h3>
+                    <p>Изучите более сложные техники и подходы в UX/UI дизайне.</p>
                 </div>
             </div>
         </div>
@@ -296,6 +298,8 @@
         }
 
         function closeModal() {
+            document.getElementById('modalVideo').pause();
+            document.getElementById('modalVideo').currentTime = 0;
             document.getElementById('videoModal').style.display = "none";
         }
 
@@ -352,6 +356,33 @@
                 }
             });
         }
+
+        function setVideoPreview(videoElementId, canvasId) {
+            const video = document.getElementById(videoElementId);
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = video.duration / 2;
+            });
+
+            video.addEventListener('seeked', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            });
+
+            video.load();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setVideoPreview('video1', 'previewCanvas1');
+            setVideoPreview('video2', 'previewCanvas2');
+            setVideoPreview('video3', 'previewCanvas3');
+            setVideoPreview('video4', 'previewCanvas4');
+            setVideoPreview('video5', 'previewCanvas5');
+            setVideoPreview('video6', 'previewCanvas6');
+        });
     </script>
 </body>
 </html>

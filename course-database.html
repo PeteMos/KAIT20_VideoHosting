@@ -58,8 +58,14 @@
         } 
         .video-card {
             margin-bottom: 60px;
+            cursor: pointer;
         }
-        
+
+        .video-preview {
+            width: 100%;
+            height: auto;
+        }
+
         .likes {
             margin-top: 15px;
             display: flex;
@@ -157,12 +163,14 @@
             justify-content: center;
             margin: 20px 0;
         }
+
         h2 {
             font-size: 28px;
             color: #333;
             margin-right: 20px;
             font-weight: bold;
         }
+
         .search-container {
             max-width: 600px;
             width: 100%;
@@ -203,46 +211,42 @@
                     <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
                 </div>
             </div>
-            <div class="video-grid">
+            <div class="video-grid" id="videoGrid">
                 <div class="video-card" data-title="Введение в базы данных" data-description="Изучите SQL и управление базами данных." data-details="Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" onclick="openModal('videos/database-intro.mp4', 'Введение в базы данных', 'Изучите SQL и управление базами данных.', 'Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                    <canvas class="video-preview" id="previewCanvas1"></canvas>
+                    <video id="video1" src="videos/database-intro.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Введение в базы данных</h3>
-                    <video width="100%" controls>
-                        <source src="videos/database-intro.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите SQL и управление базами данных.</p>
                 </div>
                 <div class="video-card" data-title="Создание таблиц" data-description="Научитесь создавать таблицы в SQL." data-details="Длительность: 4:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" onclick="openModal('videos/database-create-tables.mp4', 'Создание таблиц', 'Научитесь создавать таблицы в SQL.', 'Длительность: 4:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                    <canvas class="video-preview" id="previewCanvas2"></canvas>
+                    <video id="video2" src="videos/database-create-tables.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Создание таблиц</h3>
-                    <video width="100%" controls>
-                        <source src="videos/database-create-tables.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Научитесь создавать таблицы в SQL.</p>
                 </div>
                 <div class="video-card" data-title="Запросы SQL" data-description="Изучите основные запросы SQL для работы с данными." data-details="Длительность: 6:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" onclick="openModal('videos/database-sql-queries.mp4', 'Запросы SQL', 'Изучите основные запросы SQL для работы с данными.', 'Длительность: 6:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                    <canvas class="video-preview" id="previewCanvas3"></canvas>
+                    <video id="video3" src="videos/database-sql-queries.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Запросы SQL</h3>
-                    <video width="100%" controls>
-                        <source src="videos/database-sql-queries.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите основные запросы SQL для работы с данными.</p>
                 </div>
                 <div class="video-card" data-title="Объединение таблиц" data-description="Узнайте, как объединять таблицы в запросах." data-details="Длительность: 7:00, Дата публикации: 04.01.2025, Автор: Анна Иванова" onclick="openModal('videos/database-join-tables.mp4', 'Объединение таблиц', 'Узнайте, как объединять таблицы в запросах.', 'Длительность: 7:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
+                    <canvas class="video-preview" id="previewCanvas4"></canvas>
+                    <video id="video4" src="videos/database-join-tables.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Объединение таблиц</h3>
-                    <video width="100%" controls>
-                        <source src="videos/database-join-tables.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Узнайте, как объединять таблицы в запросах.</p>
                 </div>
                 <div class="video-card" data-title="Оптимизация запросов" data-description="Советы по оптимизации SQL-запросов." data-details="Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" onclick="openModal('videos/database-query-optimization.mp4', 'Оптимизация запросов', 'Советы по оптимизации SQL-запросов.', 'Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                    <canvas class="video-preview" id="previewCanvas5"></canvas>
+                    <video id="video5" src="videos/database-query-optimization.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Оптимизация запросов</h3>
-                    <video width="100%" controls>
-                        <source src="videos/database-query-optimization.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Советы по оптимизации SQL-запросов.</p>
+                </div>
+                <div class="video-card" data-title="Нормализация данных" data-description="Узнайте, как нормализовать данные в базах данных." data-details="Длительность: 5:45, Дата публикации: 06.01.2025, Автор: Ольга Смирнова" onclick="openModal('videos/database-normalization.mp4', 'Нормализация данных', 'Узнайте, как нормализовать данные в базах данных.', 'Длительность: 5:45, Дата публикации: 06.01.2025, Автор: Ольга Смирнова')">
+                    <canvas class="video-preview" id="previewCanvas6"></canvas>
+                    <video id="video6" src="videos/database-normalization.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Нормализация данных</h3>
+                    <p>Узнайте, как нормализовать данные в базах данных.</p>
                 </div>
             </div>
         </div>
@@ -293,6 +297,8 @@
         }
 
         function closeModal() {
+            document.getElementById('modalVideo').pause();
+            document.getElementById('modalVideo').currentTime = 0;
             document.getElementById('videoModal').style.display = "none";
         }
 
@@ -350,6 +356,33 @@
                 }
             });
         }
+
+        function setVideoPreview(videoElementId, canvasId) {
+            const video = document.getElementById(videoElementId);
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = video.duration / 2;
+            });
+
+            video.addEventListener('seeked', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            });
+
+            video.load();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setVideoPreview('video1', 'previewCanvas1');
+            setVideoPreview('video2', 'previewCanvas2');
+            setVideoPreview('video3', 'previewCanvas3');
+            setVideoPreview('video4', 'previewCanvas4');
+            setVideoPreview('video5', 'previewCanvas5');
+            setVideoPreview('video6', 'previewCanvas6');
+        });
     </script>
 </body>
 </html>

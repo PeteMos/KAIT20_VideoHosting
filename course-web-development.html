@@ -59,6 +59,12 @@
 
         .video-card {
             margin-bottom: 60px;
+            cursor: pointer;
+        }
+
+        .video-preview {
+            width: 100%;
+            height: auto;
         }
 
         .likes {
@@ -205,45 +211,41 @@
                 </div>
             </div>
             <div class="video-grid" id="videoGrid">
-                <div class="video-card" data-title="Введение в веб-разработку" data-description="Создайте свой первый веб-сайт с помощью HTML и CSS." data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" onclick="openModal('videos/web-development-intro.mp4', 'Введение в веб-разработку', 'Создайте свой первый веб-сайт с помощью HTML и CSS.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                <div class="video-card" data-title="Введение в веб-разработку" data-description="Создайте свой первый веб-сайт с помощью HTML и CSS." data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" onclick="openModal('videos/play_720p.mp4', 'Введение в веб-разработку', 'Создайте свой первый веб-сайт с помощью HTML и CSS.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                    <canvas class="video-preview" id="previewCanvas1"></canvas>
+                    <video id="video1" src="videos/web-development-intro.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Введение в веб-разработку</h3>
-                    <video width="100%" controls>
-                        <source src="videos/web-development-intro.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
                 </div>
-                <div class="video-card" data-title="Основы HTML" data-description="Научитесь основам HTML и структуре веб-страниц." data-details="Длительность: 15:00, Дата публикации: 02.01.2025, Автор: Анна Петрова" onclick="openModal('videos/web-development-html.mp4', 'Основы HTML', 'Научитесь основам HTML и структуре веб-страниц.', 'Длительность: 15:00, Дата публикации: 02.01.2025, Автор: Анна Петрова')">
-                    <h3>Основы HTML</h3>
-                    <video width="100%" controls>
-                        <source src="videos/web-development-html.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <p>Научитесь основам HTML и структуре веб-страниц.</p>
+                <div class="video-card" data-title="CSS для начинающих" data-description="Изучите основы CSS для стилизации веб-страниц." data-details="Длительность: 15:00, Дата публикации: 01.02.2025, Автор: Анна Петрова" onclick="openModal('videos/css_basics.mp4', 'CSS для начинающих', 'Изучите основы CSS для стилизации веб-страниц.', 'Длительность: 15:00, Дата публикации: 01.02.2025, Автор: Анна Петрова')">
+                    <canvas class="video-preview" id="previewCanvas2"></canvas>
+                    <video id="video2" src="videos/css_basics.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>CSS для начинающих</h3>
+                    <p>Изучите основы CSS для стилизации веб-страниц.</p>
                 </div>
-                <div class="video-card" data-title="Основы CSS" data-description="Изучите стилизацию веб-страниц с помощью CSS." data-details="Длительность: 12:30, Дата публикации: 03.01.2025, Автор: Сергей Смирнов" onclick="openModal('videos/web-development-css.mp4', 'Основы CSS', 'Изучите стилизацию веб-страниц с помощью CSS.', 'Длительность: 12:30, Дата публикации: 03.01.2025, Автор: Сергей Смирнов')">
-                    <h3>Основы CSS</h3>
-                    <video width="100%" controls>
-                        <source src="videos/web-development-css.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <p>Изучите стилизацию веб-страниц с помощью CSS.</p>
+                <div class="video-card" data-title="JavaScript для веб-разработчиков" data-description="Научитесь писать скрипты на JavaScript." data-details="Длительность: 20:00, Дата публикации: 01.03.2025, Автор: Сергей Смирнов" onclick="openModal('videos/javascript_basics.mp4', 'JavaScript для веб-разработчиков', 'Научитесь писать скрипты на JavaScript.', 'Длительность: 20:00, Дата публикации: 01.03.2025, Автор: Сергей Смирнов')">
+                    <canvas class="video-preview" id="previewCanvas3"></canvas>
+                    <video id="video3" src="videos/javascript_basics.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>JavaScript для веб-разработчиков</h3>
+                    <p>Научитесь писать скрипты на JavaScript.</p>
                 </div>
-                <div class="video-card" data-title="JavaScript для веб-разработки" data-description="Научитесь добавлять интерактивность на ваши веб-страницы с помощью JavaScript." data-details="Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Мария Кузнецова" onclick="openModal('videos/web-development-javascript.mp4', 'JavaScript для веб-разработки', 'Научитесь добавлять интерактивность на ваши веб-страницы с помощью JavaScript.', 'Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Мария Кузнецова')">
-                    <h3>JavaScript для веб-разработки</h3>
-                    <video width="100%" controls>
-                        <source src="videos/web-development-javascript.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <p>Научитесь добавлять интерактивность на ваши веб-страницы с помощью JavaScript.</p>
-                </div>
-                <div class="video-card" data-title="Создание адаптивного дизайна" data-description="Узнайте, как сделать ваши веб-сайты адаптивными для различных устройств." data-details="Длительность: 18:00, Дата публикации: 05.01.2025, Автор: Олег Сидоров" onclick="openModal('videos/web-development-responsive-design.mp4', 'Создание адаптивного дизайна', 'Узнайте, как сделать ваши веб-сайты адаптивными для различных устройств.', 'Длительность: 18:00, Дата публикации: 05.01.2025, Автор: Олег Сидоров')">
+                <div class="video-card" data-title="Создание адаптивного дизайна" data-description="Узнайте, как сделать ваш сайт адаптивным." data-details="Длительность: 25:00, Дата публикации: 01.04.2025, Автор: Мария Иванова" onclick="openModal('videos/responsive_design.mp4', 'Создание адаптивного дизайна', 'Узнайте, как сделать ваш сайт адаптивным.', 'Длительность: 25:00, Дата публикации: 01.04.2025, Автор: Мария Иванова')">
+                    <canvas class="video-preview" id="previewCanvas4"></canvas>
+                    <video id="video4" src="videos/responsive_design.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Создание адаптивного дизайна</h3>
-                    <video width="100%" controls>
-                        <source src="videos/web-development-responsive-design.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <p>Узнайте, как сделать ваши веб-сайты адаптивными для различных устройств.</p>
+                    <p>Узнайте, как сделать ваш сайт адаптивным.</p>
+                </div>
+                <div class="video-card" data-title="Основы работы с API" data-description="Научитесь взаимодействовать с API для получения данных." data-details="Длительность: 18:00, Дата публикации: 01.05.2025, Автор: Алексей Кузнецов" onclick="openModal('videos/api_basics.mp4', 'Основы работы с API', 'Научитесь взаимодействовать с API для получения данных.', 'Длительность: 18:00, Дата публикации: 01.05.2025, Автор: Алексей Кузнецов')">
+                    <canvas class="video-preview" id="previewCanvas5"></canvas>
+                    <video id="video5" src="videos/api_basics.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Основы работы с API</h3>
+                    <p>Научитесь взаимодействовать с API для получения данных.</p>
+                </div>
+                <div class="video-card" data-title="Введение в фреймворк React" data-description="Изучите основы работы с фреймворком React." data-details="Длительность: 22:00, Дата публикации: 01.06.2025, Автор: Ольга Сидорова" onclick="openModal('videos/react_intro.mp4', 'Введение в фреймворк React', 'Изучите основы работы с фреймворком React.', 'Длительность: 22:00, Дата публикации: 01.06.2025, Автор: Ольга Сидорова')">
+                    <canvas class="video-preview" id="previewCanvas6"></canvas>
+                    <video id="video6" src="videos/react_intro.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Введение в фреймворк React</h3>
+                    <p>Изучите основы работы с фреймворком React.</p>
                 </div>
             </div>
         </div>
@@ -286,7 +288,9 @@
 
         function openModal(videoSrc, title, description, details) {
             document.getElementById('videoSource').src = videoSrc;
-            document.getElementById('modalVideo').load();
+            const modalVideo = document.getElementById('modalVideo');
+            modalVideo.load(); 
+            modalVideo.play(); 
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('videoDescription').innerText = description;
             document.getElementById('videoDetails').innerText = details;
@@ -294,6 +298,9 @@
         }
 
         function closeModal() {
+            const modalVideo = document.getElementById('modalVideo');
+            modalVideo.pause(); 
+            modalVideo.currentTime = 0; 
             document.getElementById('videoModal').style.display = "none";
         }
 
@@ -351,6 +358,33 @@
                 }
             });
         }
+
+        function setVideoPreview(videoElementId, canvasId) {
+            const video = document.getElementById(videoElementId);
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = video.duration / 2;
+            });
+
+            video.addEventListener('seeked', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            });
+
+            video.load();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setVideoPreview('video1', 'previewCanvas1');
+            setVideoPreview('video2', 'previewCanvas2');
+            setVideoPreview('video3', 'previewCanvas3');
+            setVideoPreview('video4', 'previewCanvas4');
+            setVideoPreview('video5', 'previewCanvas5');
+            setVideoPreview('video6', 'previewCanvas6');
+        });
     </script>
 </body>
 </html>

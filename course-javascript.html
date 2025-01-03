@@ -59,6 +59,12 @@
 
         .video-card {
             margin-bottom: 60px;
+            cursor: pointer;
+        }
+
+        .video-preview {
+            width: 100%;
+            height: auto;
         }
 
         .likes {
@@ -208,44 +214,40 @@
             </div>
             <div class="video-grid">
                 <div class="video-card" onclick="openModal('videos/javascript-intro.mp4', 'Введение в JavaScript', 'Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.', 'Длительность: 15:00, Дата публикации: 01.01.2025, Автор: Алексей Иванов')" data-title="Введение в JavaScript" data-description="Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными." data-details="Длительность: 15:00, Дата публикации: 01.01.2025, Автор: Алексей Иванов">
+                    <canvas class="video-preview" id="previewCanvas1"></canvas>
+                    <video id="video1" src="videos/javascript-intro.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Введение в JavaScript</h3>
-                    <video width="100%" controls>
-                        <source src="videos/javascript-intro.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/javascript-variables.mp4', 'Переменные и типы данных', 'Изучите переменные и типы данных в JavaScript.', 'Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')" data-title="Переменные и типы данных" data-description="Изучите переменные и типы данных в JavaScript." data-details="Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Мария Петрова">
+                    <canvas class="video-preview" id="previewCanvas2"></canvas>
+                    <video id="video2" src="videos/javascript-variables.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Переменные и типы данных</h3>
-                    <video width="100%" controls>
-                        <source src="videos/javascript-variables.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите переменные и типы данных в JavaScript.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/javascript-conditions-loops.mp4', 'Условия и циклы', 'Научитесь использовать условия и циклы в коде.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')" data-title="Условия и циклы" data-description="Научитесь использовать условия и циклы в коде." data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов">
+                    <canvas class="video-preview" id="previewCanvas3"></canvas>
+                    <video id="video3" src="videos/javascript-conditions-loops.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Условия и циклы</h3>
-                    <video width="100%" controls>
-                        <source src="videos/javascript-conditions-loops.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Научитесь использовать условия и циклы в коде.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/javascript-functions.mp4', 'Функции в JavaScript', 'Изучите, как создавать и использовать функции.', 'Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова')" data-title="Функции в JavaScript" data-description="Изучите, как создавать и использовать функции." data-details="Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова">
+                    <canvas class="video-preview" id="previewCanvas4"></canvas>
+                    <video id="video4" src="videos/javascript-functions.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Функции в JavaScript</h3>
-                    <video width="100%" controls>
-                        <source src="videos/javascript-functions.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите, как создавать и использовать функции.</p>
                 </div>
                 <div class="video-card" onclick="openModal('videos/javascript-dom.mp4', 'Работа с DOM', 'Научитесь взаимодействовать с элементами на странице.', 'Длительность: 14:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')" data-title="Работа с DOM" data-description="Научитесь взаимодействовать с элементами на странице." data-details="Длительность: 14:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров">
+                    <canvas class="video-preview" id="previewCanvas5"></canvas>
+                    <video id="video5" src="videos/javascript-dom.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Работа с DOM</h3>
-                    <video width="100%" controls>
-                        <source src="videos/javascript-dom.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Научитесь взаимодействовать с элементами на странице.</p>
+                </div>
+                <div class="video-card" onclick="openModal('videos/javascript-async.mp4', 'Асинхронное программирование в JavaScript', 'Погрузитесь в асинхронное программирование и его применение в JavaScript.', 'Длительность: 13:00, Дата публикации: 06.01.2025, Автор: Анна Смирнова')" data-title="Асинхронное программирование в JavaScript" data-description="Погрузитесь в асинхронное программирование и его применение в JavaScript." data-details="Длительность: 13:00, Дата публикации: 06.01.2025, Автор: Анна Смирнова">
+                    <canvas class="video-preview" id="previewCanvas6"></canvas>
+                    <video id="video6" src="videos/javascript-async.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Асинхронное программирование в JavaScript</h3>
+                    <p>Погрузитесь в асинхронное программирование и его применение в JavaScript.</p>
                 </div>
             </div>
         </div>
@@ -296,6 +298,8 @@
         }
 
         function closeModal() {
+            document.getElementById('modalVideo').pause();
+            document.getElementById('modalVideo').currentTime = 0;
             document.getElementById('videoModal').style.display = "none";
         }
 
@@ -353,6 +357,33 @@
                 }
             });
         }
+
+        function setVideoPreview(videoElementId, canvasId) {
+            const video = document.getElementById(videoElementId);
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = video.duration / 2;
+            });
+
+            video.addEventListener('seeked', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            });
+
+            video.load();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setVideoPreview('video1', 'previewCanvas1');
+            setVideoPreview('video2', 'previewCanvas2');
+            setVideoPreview('video3', 'previewCanvas3');
+            setVideoPreview('video4', 'previewCanvas4');
+            setVideoPreview('video5', 'previewCanvas5');
+            setVideoPreview('video6', 'previewCanvas6');
+        });
     </script>
 </body>
 </html>

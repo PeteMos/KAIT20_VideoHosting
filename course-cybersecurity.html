@@ -17,7 +17,7 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.8);
         }
-        
+
         .modal-content {
             background-color: #fff;
             margin: 5% auto;
@@ -59,6 +59,12 @@
 
         .video-card {
             margin-bottom: 60px;
+            cursor: pointer;
+        }
+
+        .video-preview {
+            width: 100%;
+            height: auto;
         }
 
         .likes {
@@ -78,6 +84,7 @@
             border-radius: 5px; 
             transition: transform 0.2s;
         }
+
         .share-icon {
             background-color: transparent;
             border: none;
@@ -88,13 +95,16 @@
             border-radius: 5px; 
             transition: transform 0.2s;
         }
+
         .like-icon:hover, .dislike-icon:hover, .share-icon:hover {
             transform: scale(1.2);
             background-color: rgba(0, 123, 255, 0.1); 
         }
+
         .comments {
             margin-top: 20px;
         }
+
         .comment-list {
             margin-top: 10px;
             max-height: 200px;
@@ -104,6 +114,7 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
+
         .comment {
             margin-bottom: 10px;
             padding: 5px;
@@ -114,6 +125,7 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .comment-input {
             width: calc(100% - 22px);
             padding: 10px;
@@ -123,6 +135,7 @@
             resize: none;
             max-height: 100px;
         }
+
         .submit-comment {
             margin-top: 10px;
             padding: 10px;
@@ -135,25 +148,30 @@
             min-width: 80px; 
             max-width: 150px; 
         }
+
         .submit-comment:hover {
             background-color: #0056b3;
         }
+
         .error-message {
             color: red;
             margin-top: 10px;
         }
+
         .header-container {
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 20px 0;
         }
+
         h2 {
             font-size: 28px;
             color: #333;
             margin-right: 20px;
             font-weight: bold;
         }
+
         .search-container {
             max-width: 600px;
             width: 100%;
@@ -194,46 +212,42 @@
                     <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
                 </div>
             </div>
-            <div class="video-grid">
+            <div class="video-grid" id="videoGrid">
                 <div class="video-card" data-title="Введение в кибербезопасность" data-description="Узнайте, как защитить свои данные и устройства." data-details="Длительность: 8:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов" onclick="openModal('videos/cybersecurity-intro.mp4', 'Введение в кибербезопасность', 'Узнайте, как защитить свои данные и устройства.', 'Длительность: 8:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов')">
+                    <canvas class="video-preview" id="previewCanvas1"></canvas>
+                    <video id="video1" src="videos/cybersecurity-intro.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Введение в кибербезопасность</h3>
-                    <video width="100%" controls>
-                        <source src="videos/cybersecurity-intro.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Узнайте, как защитить свои данные и устройства.</p>
                 </div>
                 <div class="video-card" data-title="Типы угроз кибербезопасности" data-description="Изучите различные типы угроз и как их избежать." data-details="Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Наталья Петрова" onclick="openModal('videos/cybersecurity-threats.mp4', 'Типы угроз кибербезопасности', 'Изучите различные типы угроз и как их избежать.', 'Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Наталья Петрова')">
+                    <canvas class="video-preview" id="previewCanvas2"></canvas>
+                    <video id="video2" src="videos/cybersecurity-threats.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Типы угроз кибербезопасности</h3>
-                    <video width="100%" controls>
-                        <source src="videos/cybersecurity-threats.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите различные типы угроз и как их избежать.</p>
                 </div>
                 <div class="video-card" data-title="Основы шифрования" data-description="Узнайте, как работает шифрование данных." data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" onclick="openModal('videos/cybersecurity-encryption.mp4', 'Основы шифрования', 'Узнайте, как работает шифрование данных.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                    <canvas class="video-preview" id="previewCanvas3"></canvas>
+                    <video id="video3" src="videos/cybersecurity-encryption.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Основы шифрования</h3>
-                    <video width="100%" controls>
-                        <source src="videos/cybersecurity-encryption.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Узнайте, как работает шифрование данных.</p>
                 </div>
                 <div class="video-card" data-title="Безопасность в сети" data-description="Советы по обеспечению безопасности в интернете." data-details="Длительность: 9:30, Дата публикации: 04.01.2025, Автор: Анна Иванова" onclick="openModal('videos/cybersecurity-network-security.mp4', 'Безопасность в сети', 'Советы по обеспечению безопасности в интернете.', 'Длительность: 9:30, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
+                    <canvas class="video-preview" id="previewCanvas4"></canvas>
+                    <video id="video4" src="videos/cybersecurity-network-security.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Безопасность в сети</h3>
-                    <video width="100%" controls>
-                        <source src="videos/cybersecurity-network-security.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Советы по обеспечению безопасности в интернете.</p>
                 </div>
                 <div class="video-card" data-title="Управление инцидентами" data-description="Как реагировать на инциденты безопасности." data-details="Длительность: 15:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" onclick="openModal('videos/cybersecurity-incident-management.mp4', 'Управление инцидентами', 'Как реагировать на инциденты безопасности.', 'Длительность: 15:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                    <canvas class="video-preview" id="previewCanvas5"></canvas>
+                    <video id="video5" src="videos/cybersecurity-incident-management.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Управление инцидентами</h3>
-                    <video width="100%" controls>
-                        <source src="videos/cybersecurity-incident-management.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Как реагировать на инциденты безопасности.</p>
+                </div>
+                <div class="video-card" data-title="Этика в кибербезопасности" data-description="Обсуждение этических вопросов в кибербезопасности." data-details="Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Ирина Соколова" onclick="openModal('videos/cybersecurity-ethics.mp4', 'Этика в кибербезопасности', 'Обсуждение этических вопросов в кибербезопасности.', 'Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Ирина Соколова')">
+                    <canvas class="video-preview" id="previewCanvas6"></canvas>
+                    <video id="video6" src="videos/cybersecurity-ethics.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Этика в кибербезопасности</h3>
+                    <p>Обсуждение этических вопросов в кибербезопасности.</p>
                 </div>
             </div>
         </div>
@@ -276,7 +290,9 @@
 
         function openModal(videoSrc, title, description, details) {
             document.getElementById('videoSource').src = videoSrc;
-            document.getElementById('modalVideo').load();
+            const modalVideo = document.getElementById('modalVideo');
+            modalVideo.load(); 
+            modalVideo.play(); 
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('videoDescription').innerText = description;
             document.getElementById('videoDetails').innerText = details;
@@ -284,6 +300,9 @@
         }
 
         function closeModal() {
+            const modalVideo = document.getElementById('modalVideo');
+            modalVideo.pause(); 
+            modalVideo.currentTime = 0; 
             document.getElementById('videoModal').style.display = "none";
         }
 
@@ -341,6 +360,33 @@
                 }
             });
         }
+
+        function setVideoPreview(videoElementId, canvasId) {
+            const video = document.getElementById(videoElementId);
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = video.duration / 2;
+            });
+
+            video.addEventListener('seeked', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            });
+
+            video.load();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setVideoPreview('video1', 'previewCanvas1');
+            setVideoPreview('video2', 'previewCanvas2');
+            setVideoPreview('video3', 'previewCanvas3');
+            setVideoPreview('video4', 'previewCanvas4');
+            setVideoPreview('video5', 'previewCanvas5');
+            setVideoPreview('video6', 'previewCanvas6'); 
+        });
     </script>
 </body>
 </html>

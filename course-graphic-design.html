@@ -59,6 +59,12 @@
 
         .video-card {
             margin-bottom: 60px;
+            cursor: pointer;
+        }
+
+        .video-preview {
+            width: 100%;
+            height: auto;
         }
 
         .likes {
@@ -207,45 +213,41 @@
                 </div>
             </div>
             <div class="video-grid">
-                <div class="video-card" onclick="openModal('videos/graphic-design-intro.mp4', 'Введение в графический дизайн', 'Научитесь основам графического дизайна и работе с Adobe Photoshop.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров')" data-title="Введение в графический дизайн" data-description="Научитесь основам графического дизайна и работе с Adobe Photoshop." data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров">
+                <div class="video-card" data-title="Введение в графический дизайн" data-description="Научитесь основам графического дизайна и работе с Adobe Photoshop." data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров" onclick="openModal('videos/graphic-design-intro.mp4', 'Введение в графический дизайн', 'Научитесь основам графического дизайна и работе с Adobe Photoshop.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров')">
+                    <canvas class="video-preview" id="previewCanvas1"></canvas>
+                    <video id="video1" src="videos/graphic-design-intro.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Введение в графический дизайн</h3>
-                    <video width="100%" controls>
-                        <source src="videos/graphic-design-intro.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Научитесь основам графического дизайна и работе с Adobe Photoshop.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/graphic-design-color.mp4', 'Работа с цветом', 'Как использовать цвет в графическом дизайне.', 'Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова')" data-title="Работа с цветом" data-description="Как использовать цвет в графическом дизайне." data-details="Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова">
+                <div class="video-card" data-title="Работа с цветом" data-description="Как использовать цвет в графическом дизайне." data-details="Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова" onclick="openModal('videos/graphic-design-color.mp4', 'Работа с цветом', 'Как использовать цвет в графическом дизайне.', 'Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова')">
+                    <canvas class="video-preview" id="previewCanvas2"></canvas>
+                    <video id="video2" src="videos/graphic-design-color.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Работа с цветом</h3>
-                    <video width="100%" controls>
-                        <source src="videos/graphic-design-color.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Как использовать цвет в графическом дизайне.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/graphic-design-composition.mp4', 'Основы композиции', 'Изучите правила композиции в дизайне.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')" data-title="Основы композиции" data-description="Изучите правила композиции в дизайне." data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов">
+                <div class="video-card" data-title="Основы композиции" data-description="Изучите правила композиции в дизайне." data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" onclick="openModal('videos/graphic-design-composition.mp4', 'Основы композиции', 'Изучите правила композиции в дизайне.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                    <canvas class="video-preview" id="previewCanvas3"></canvas>
+                    <video id="video3" src="videos/graphic-design-composition.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Основы композиции</h3>
-                    <video width="100%" controls>
-                        <source src="videos/graphic-design-composition.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите правила композиции в дизайне.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/graphic-design-logos.mp4', 'Создание логотипов', 'Как создать эффективный логотип для бренда.', 'Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова')" data-title="Создание логотипов" data-description="Как создать эффективный логотип для бренда." data-details="Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова">
+                <div class="video-card" data-title="Создание логотипов" data-description="Как создать эффективный логотип для бренда." data-details="Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова" onclick="openModal('videos/graphic-design-logos.mp4', 'Создание логотипов', 'Как создать эффективный логотип для бренда.', 'Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова')">
+                    <canvas class="video-preview" id="previewCanvas4"></canvas>
+                    <video id="video4" src="videos/graphic-design-logos.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Создание логотипов</h3>
-                    <video width="100%" controls>
-                        <source src="videos/graphic-design-logos.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Как создать эффективный логотип для бренда.</p>
                 </div>
-                <div class="video-card" onclick="openModal('videos/graphic-design-typography.mp4', 'Работа с типографикой', 'Изучите основы работы с шрифтами в дизайне.', 'Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')" data-title="Работа с типографикой" data-description="Изучите основы работы с шрифтами в дизайне." data-details="Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров">
+                <div class="video-card" data-title="Работа с типографикой" data-description="Изучите основы работы с шрифтами в дизайне." data-details="Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" onclick="openModal('videos/graphic-design-typography.mp4', 'Работа с типографикой', 'Изучите основы работы с шрифтами в дизайне.', 'Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                    <canvas class="video-preview" id="previewCanvas5"></canvas>
+                    <video id="video5" src="videos/graphic-design-typography.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Работа с типографикой</h3>
-                    <video width="100%" controls>
-                        <source src="videos/graphic-design-typography.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите основы работы с шрифтами в дизайне.</p>
+                </div>
+                <div class="video-card" data-title="Брендинг" data-description="Как создать и развивать бренд." data-details="Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Елена Соколова" onclick="openModal('videos/graphic-design-branding.mp4', 'Брендинг', 'Как создать и развивать бренд.', 'Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Елена Соколова')">
+                    <canvas class="video-preview" id="previewCanvas6"></canvas>
+                    <video id="video6" src="videos/graphic-design-branding.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Брендинг</h3>
+                    <p>Как создать и развивать бренд.</p>
                 </div>
             </div>
         </div>
@@ -296,6 +298,8 @@
         }
 
         function closeModal() {
+            document.getElementById('modalVideo').pause();
+            document.getElementById('modalVideo').currentTime = 0;
             document.getElementById('videoModal').style.display = "none";
         }
 
@@ -353,6 +357,33 @@
                 }
             });
         }
+
+        function setVideoPreview(videoElementId, canvasId) {
+            const video = document.getElementById(videoElementId);
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = video.duration / 2;
+            });
+
+            video.addEventListener('seeked', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            });
+
+            video.load();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setVideoPreview('video1', 'previewCanvas1');
+            setVideoPreview('video2', 'previewCanvas2');
+            setVideoPreview('video3', 'previewCanvas3');
+            setVideoPreview('video4', 'previewCanvas4');
+            setVideoPreview('video5', 'previewCanvas5');
+            setVideoPreview('video6', 'previewCanvas6'); 
+        });
     </script>
 </body>
 </html>

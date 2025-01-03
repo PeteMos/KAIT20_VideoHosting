@@ -59,8 +59,14 @@
 
         .video-card {
             margin-bottom: 60px;
+            cursor: pointer;
         }
-        
+
+        .video-preview {
+            width: 100%;
+            height: auto;
+        }
+
         .likes {
             margin-top: 15px;
             display: flex;
@@ -206,46 +212,42 @@
                     <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
                 </div>
             </div>
-            <div class="video-grid">
+            <div class="video-grid" id="videoGrid">
                 <div class="video-card" data-title="Введение в дизайн" data-description="Изучите принципы дизайна и создайте привлекательные интерфейсы." data-details="Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" onclick="openModal('videos/design-intro.mp4', 'Введение в дизайн', 'Изучите принципы дизайна и создайте привлекательные интерфейсы.', 'Длительность: 5:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                    <canvas class="video-preview" id="previewCanvas1"></canvas>
+                    <video id="video1" src="videos/design-intro.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Введение в дизайн</h3>
-                    <video width="100%" controls>
-                        <source src="videos/design-intro.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите принципы дизайна и создайте привлекательные интерфейсы.</p>
                 </div>
                 <div class="video-card" data-title="Основы цветовой теории" data-description="Научитесь использовать цвет в дизайне." data-details="Длительность: 4:30, Дата публикации: 02.01.2025, Автор: Мария Петрова" onclick="openModal('videos/design-color-theory.mp4', 'Основы цветовой теории', 'Научитесь использовать цвет в дизайне.', 'Длительность: 4:30, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                    <canvas class="video-preview" id="previewCanvas2"></canvas>
+                    <video id="video2" src="videos/design-color-theory.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Основы цветовой теории</h3>
-                    <video width="100%" controls>
-                        <source src="videos/design-color-theory.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Научитесь использовать цвет в дизайне.</p>
                 </div>
                 <div class="video-card" data-title="Типографика в дизайне" data-description="Узнайте, как выбрать шрифты для вашего проекта." data-details="Длительность: 5:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" onclick="openModal('videos/design-typography.mp4', 'Типографика в дизайне', 'Узнайте, как выбрать шрифты для вашего проекта.', 'Длительность: 5:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                    <canvas class="video-preview" id="previewCanvas3"></canvas>
+                    <video id="video3" src="videos/design-typography.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Типографика в дизайне</h3>
-                    <video width="100%" controls>
-                        <source src="videos/design-typography.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Узнайте, как выбрать шрифты для вашего проекта.</p>
                 </div>
                 <div class="video-card" data-title="Создание макетов" data-description="Как создать эффективные макеты для дизайна." data-details="Длительность: 6:00, Дата публикации: 04.01.2025, Автор: Анна Иванова" onclick="openModal('videos/design-layouts.mp4', 'Создание макетов', 'Как создать эффективные макеты для дизайна.', 'Длительность: 6:00, Дата публикации: 04.01.2025, Автор: Анна Иванова')">
+                    <canvas class="video-preview" id="previewCanvas4"></canvas>
+                    <video id="video4" src="videos/design-layouts.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Создание макетов</h3>
-                    <video width="100%" controls>
-                        <source src="videos/design-layouts.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Как создать эффективные макеты для дизайна.</p>
                 </div>
                 <div class="video-card" data-title="Работа с графическими редакторами" data-description="Изучите популярные графические редакторы." data-details="Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" onclick="openModal('videos/design-graphic-editors.mp4', 'Работа с графическими редакторами', 'Изучите популярные графические редакторы.', 'Длительность: 5:30, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                    <canvas class="video-preview" id="previewCanvas5"></canvas>
+                    <video id="video5" src="videos/design-graphic-editors.mp4" preload="metadata" style="display: none;"></video>
                     <h3>Работа с графическими редакторами</h3>
-                    <video width="100%" controls>
-                        <source src="videos/design-graphic-editors.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
                     <p>Изучите популярные графические редакторы.</p>
+                </div>
+                <div class="video-card" data-title="Дизайн пользовательского интерфейса" data-description="Научитесь создавать удобные интерфейсы для пользователей." data-details="Длительность: 6:30, Дата публикации: 06.01.2025, Автор: Ольга Смирнова" onclick="openModal('videos/design-ui.mp4', 'Дизайн пользовательского интерфейса', 'Научитесь создавать удобные интерфейсы для пользователей.', 'Длительность: 6:30, Дата публикации: 06.01.2025, Автор: Ольга Смирнова')">
+                    <canvas class="video-preview" id="previewCanvas6"></canvas>
+                    <video id="video6" src="videos/design-ui.mp4" preload="metadata" style="display: none;"></video>
+                    <h3>Дизайн пользовательского интерфейса</h3>
+                    <p>Научитесь создавать удобные интерфейсы для пользователей.</p>
                 </div>
             </div>
         </div>
@@ -296,6 +298,8 @@
         }
 
         function closeModal() {
+            document.getElementById('modalVideo').pause();
+            document.getElementById('modalVideo').currentTime = 0;
             document.getElementById('videoModal').style.display = "none";
         }
 
@@ -353,6 +357,33 @@
                 }
             });
         }
+
+        function setVideoPreview(videoElementId, canvasId) {
+            const video = document.getElementById(videoElementId);
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = video.duration / 2;
+            });
+
+            video.addEventListener('seeked', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            });
+
+            video.load();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setVideoPreview('video1', 'previewCanvas1');
+            setVideoPreview('video2', 'previewCanvas2');
+            setVideoPreview('video3', 'previewCanvas3');
+            setVideoPreview('video4', 'previewCanvas4');
+            setVideoPreview('video5', 'previewCanvas5');
+            setVideoPreview('video6', 'previewCanvas6');
+        });
     </script>
 </body>
 </html>
