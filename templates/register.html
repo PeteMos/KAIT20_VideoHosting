@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .index-logo img {
+            width: 385px;
+            height: auto; 
+        }
+        .container {
+            text-align: center; 
+        }
+        .form-container {
+            text-align: center; 
+        }
+        .form-container h2 {
+            margin-bottom: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="index-logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+            </a>
+        </div>
+        <div class="container">
+            <h1>Учебный Видеохостинг ГБПОУ КАИТ20</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Регистрация</h2>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+            <form method="POST">
+                <input type="text" name="username" placeholder="Имя пользователя" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <input type="password" name="password_confirm" placeholder="Подтвердите пароль" required>
+                <button type="submit" class="btn">Зарегистрироваться</button>
+            </form>
+            <p>Уже есть аккаунт? <a href="{{ url_for('login') }}">Войдите</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
+        </div>
+    </footer>
+</body>
+</html>

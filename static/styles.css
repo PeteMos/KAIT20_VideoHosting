@@ -321,53 +321,47 @@ footer {
     background-color: #5a0a9d;
 }
 
-@media (max-width: 768px) {
-    .course-card {
-        flex: 1 1 calc(50% - 20px);
-    }
 
-    .btn, .course-btn {
-        padding: 8px 16px;
-    }
+.form-container {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 40px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    margin: 50px auto; 
+    max-width: 450px; 
 }
 
-@media (max-width: 480px) {
-    .course-card {
-        flex: 1 1 100%;
-    }
-
-    .hero h2 {
-        font-size: 2em;
-    }
-
-    .hero p {
-        font-size: 1em;
-    }
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.video-card {
-    background-color: white;
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 15px; 
+    margin: 15px 0; 
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    font-size: 1em; 
 }
 
-.video-card:hover {
-    transform: translateY(-5px);
+.btn {
+    background-color: #6a0dad; 
+    color: white;
+    padding: 15px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.1em; 
 }
 
-.video-card h3 {
-    margin-top: 0;
+.btn:hover {
+    background-color: #5a0a9d; 
+    transform: translateY(-3px);
 }
 
-.video-card p {
-    font-size: 0.9em;
+p {
+    text-align: center;
 }

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс: Основы JavaScript</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="index-logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+            </a>
+        </div>
+        <div class="container">
+            <h1>Курс: Основы JavaScript</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
+            <div class="video-grid" id="videoGrid">
+                <div class="video-card" 
+                     data-title="Введение в JavaScript" 
+                     data-description="Научитесь основам JavaScript и его синтаксису." 
+                     data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров" 
+                     onclick="openModal('videos/javascript-intro.mp4', 'Введение в JavaScript', 'Научитесь основам JavaScript и его синтаксису.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров')">
+                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Введение в JavaScript</h3>
+                    <p>Научитесь основам JavaScript и его синтаксису.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Работа с переменными" 
+                     data-description="Как использовать переменные в JavaScript." 
+                     data-details="Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова" 
+                     onclick="openModal('videos/javascript-variables.mp4', 'Работа с переменными', 'Как использовать переменные в JavaScript.', 'Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова')">
+                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Работа с переменными</h3>
+                    <p>Как использовать переменные в JavaScript.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Условия и циклы" 
+                     data-description="Изучите условия и циклы в JavaScript." 
+                     data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" 
+                     onclick="openModal('videos/javascript-conditions-loops.mp4', 'Условия и циклы', 'Изучите условия и циклы в JavaScript.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
+                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Условия и циклы</h3>
+                    <p>Изучите условия и циклы в JavaScript.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Функции" 
+                     data-description="Как создавать и использовать функции." 
+                     data-details="Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова" 
+                     onclick="openModal('videos/javascript-functions.mp4', 'Функции', 'Как создавать и использовать функции.', 'Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова')">
+                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Функции</h3>
+                    <p>Как создавать и использовать функции.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Объекты" 
+                     data-description="Изучите основы работы с объектами в JavaScript." 
+                     data-details="Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" 
+                     onclick="openModal('videos/javascript-objects.mp4', 'Объекты', 'Изучите основы работы с объектами в JavaScript.', 'Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
+                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Объекты</h3>
+                    <p>Изучите основы работы с объектами в JavaScript.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Асинхронное программирование" 
+                     data-description="Как работать с асинхронным кодом." 
+                     data-details="Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Елена Соколова" 
+                     onclick="openModal('videos/javascript-async.mp4', 'Асинхронное программирование', 'Как работать с асинхронным кодом.', 'Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Елена Соколова')">
+                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Асинхронное программирование</h3>
+                    <p>Как работать с асинхронным кодом.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <video id="modalVideo" width="100%" controls>
+                <source id="videoSource" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+            <div class="video-description" id="videoDescription"></div>
+            <div class="video-details" id="videoDetails"></div>
+            <div class="likes-container">
+                <div class="likes">
+                    <span class="like-icon" onclick="likeVideo(event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                            <path d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z"/>
+                        </svg>
+                    </span>
+                    <span class="like-count" id="likeCount">0</span>
+                    <span class="dislike-icon" onclick="dislikeVideo(event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                            <path d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z"/>
+                        </svg>
+                    </span>
+                    <span class="dislike-count" id="dislikeCount">0</span>
+                </div>
+                <button class="share-button" onclick="shareVideo()">Поделиться</button>
+            </div>
+            <div class="comments">
+                <h4>Комментарии:</h4>
+                <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
+                <button class="submit-comment" onclick="submitComment()">Отправить</button>
+                <div class="error-message" id="error-message"></div>
+                <h4>Все комментарии</h4> 
+                <div id="commentList" class="comment-list"></div>
+            </div>
+        </div>
+    </div>    
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
+        </div>
+    </footer>
+</body>
+</html>

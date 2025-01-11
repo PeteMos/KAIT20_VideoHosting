@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Учебный Видеохостинг ГБПОУ КАИТ20</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -12,18 +13,21 @@
 <body>
     <header>
         <div class="index-logo">
-            <img src="container-logo-img.png" alt="Главное изображение"> 
+            <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
         </div>
         <div class="container">
             <h1>Учебный Видеохостинг ГБПОУ КАИТ20</h1>
         </div>
         <div class="user-info">
-            <span id="username" class="username">Гость</span>
-            <a href="#" id="login-link" class="btn">Вход</a>
-            <span>|</span>
-            <a href="#" id="register-link" class="btn">Регистрация</a>
-            <a href="#" id="logout-link" class="btn" style="display:none;">Выход</a>
-        </div>
+            <span id="username" class="username">{{ session.get('username', 'Гость') }}</span>
+            {% if session.get('username') %}
+                <a href="/logout" id="logout-link" class="btn">Выход</a>
+            {% else %}
+                <a href="/login" class="btn" id="login-btn">Вход</a>
+                <span>|</span>
+                <a href="/register" class="btn" id="register-btn">Регистрация</a>
+            {% endif %}
+        </div>   
     </header>
 
     <nav class="main-nav">
@@ -44,7 +48,7 @@
                     <div class="hero-text">
                         <div class="logo">
                             <a href="https://kait20.mskobr.ru/">
-                                <img src="KAIT-logo.png" alt="Логотип колледжа">
+                                <img src="{{ url_for('static', filename='KAIT-logo.png') }}" alt="Логотип колледжа">
                             </a>
                         </div>
                         <h2>Добро пожаловать на наш видеохостинг!</h2>
@@ -52,7 +56,7 @@
                         <a href="#trending" class="btn">Изучить курсы</a>
                     </div>
                     <div class="hero-image">
-                        <img src="container_image.png" alt="Главное изображение">
+                        <img src="{{ url_for('static', filename='container_image.png') }}" alt="Главное изображение">
                     </div>
                 </div>
             </div>
@@ -64,35 +68,35 @@
                 <div class="course-grid">
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="python.png" alt="Логотип Python">
+                            <img src="{{ url_for('static', filename='python.png') }}" alt="Логотип Python">
                         </div>
                         <h3>Курс: Основы программирования</h3>
                         <p>Изучите основы программирования на Python.</p>
-                        <a href="course-programming.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_programming') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="web-development.png" alt="Логотип Веб-разработки">
+                            <img src="{{ url_for('static', filename='web-development.png') }}" alt="Логотип Веб-разработки">
                         </div>
                         <h3>Курс: Веб-разработка</h3>
                         <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
-                        <a href="course-web-development.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_web_development') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="design.png" alt="Логотип Дизайна">
+                            <img src="{{ url_for('static', filename='design.png') }}" alt="Логотип Дизайна">
                         </div>
                         <h3>Курс: Основы дизайна</h3>
                         <p>Изучите принципы дизайна и создайте привлекательные интерфейсы.</p>
-                        <a href="course-design.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_design') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="javascript.png" alt="Логотип JS">
+                            <img src="{{ url_for('static', filename='javascript.png') }}" alt="Логотип JS">
                         </div>
                         <h3>Курс: Основы JavaScript</h3>
                         <p>Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.</p>
-                        <a href="course-javascript.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_javascript') }}" class="course-btn">Смотреть видео</a>
                     </div>
                 </div>
             </div>
@@ -105,22 +109,22 @@
                     <div class="course-card">
                         <h3>Курс: Введение в машинное обучение</h3>
                         <p>Познакомьтесь с основами машинного обучения и его применениями.</p>
-                        <a href="course-machine-learning.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_machine_learning') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <h3>Курс: Разработка мобильных приложений</h3>
                         <p>Создайте свое первое мобильное приложение на React Native.</p>
-                        <a href="course-mobile-development.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_mobile_development') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <h3>Курс: Основы кибербезопасности</h3>
                         <p>Узнайте, как защитить свои данные и устройства.</p>
-                        <a href="course-cybersecurity.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_cybersecurity') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <h3>Курс: Основы работы с базами данных</h3>
                         <p>Изучите SQL и управление базами данных.</p>
-                        <a href="course-database.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_database') }}" class="course-btn">Смотреть видео</a>
                     </div>
                 </div>
             </div>
@@ -133,22 +137,22 @@
                     <div class="course-card">
                         <h3>Курс: UX/UI дизайн</h3>
                         <p>Создание пользовательского интерфейса и улучшение пользовательского опыта.</p>
-                        <a href="course-ux-ui-design.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_ux_ui_design') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <h3>Курс: Основы DevOps</h3>
                         <p>Изучите практики DevOps и автоматизацию процессов разработки.</p>
-                        <a href="course-devops.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_devops') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <h3>Курс: Основы графического дизайна</h3>
                         <p>Научитесь основам графического дизайна и работе с Adobe Photoshop.</p>
-                        <a href="course-graphic-design.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_graphic_design') }}" class="course-btn">Смотреть видео</a>
                     </div>
                     <div class="course-card">
                         <h3>Курс: Основы цифрового маркетинга</h3>
                         <p>Изучите стратегии и инструменты цифрового маркетинга.</p>
-                        <a href="course-digital-marketing.html" class="course-btn">Смотреть видео</a>
+                        <a href="{{ url_for('course_digital_marketing') }}" class="course-btn">Смотреть видео</a>
                     </div>
                 </div>
             </div>
@@ -175,124 +179,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Учебный Видеохостинг ГБПОУ КАИТ20</p>
+            <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
         </div>
     </footer>
-
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="close-login">&times;</span>
-            <h2>Авторизация</h2>
-            <form onsubmit="return handleLogin(event)">
-                <input type="text" id="login-username" placeholder="Имя" required>
-                <input type="password" placeholder="Пароль" required>
-                <button type="submit" class="btn">Войти</button>
-            </form>
-            <p>Нет аккаунта? <a href="#" id="open-register">Зарегистрируйтесь</a></p>
-        </div>
-    </div>
-
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="close-register">&times;</span>
-            <h2>Регистрация</h2>
-            <form onsubmit="return handleRegister(event)">
-                <input type="text" id="register-username" placeholder="Имя" required>
-                <input type="email" id="register-email" placeholder="Email" required>
-                <input type="password" id="register-password" placeholder="Пароль" required>
-                <input type="password" id="register-password-confirm" placeholder="Повторите пароль" required>
-                <button type="submit" class="btn">Зарегистрироваться</button>
-            </form>
-            <p>Уже есть аккаунт? <a href="#" id="open-login">Войдите</a></p>
-        </div>
-    </div>
-
-    <script>
-        var loginModal = document.getElementById("login-modal");
-        var registerModal = document.getElementById("register-modal");
-        var loginLink = document.getElementById("login-link");
-        var registerLink = document.getElementById("register-link");
-        var openRegister = document.getElementById("open-register");
-        var openLogin = document.getElementById("open-login");
-        var closeLogin = document.getElementById("close-login");
-        var closeRegister = document.getElementById("close-register");
-        var logoutLink = document.getElementById("logout-link");
-
-        loginLink.onclick = function() {
-            loginModal.style.display = "block";
-        }
-
-        registerLink.onclick = function() {
-            registerModal.style.display = "block";
-        }
-
-        closeLogin.onclick = function() {
-            loginModal.style.display = "none";
-        }
-
-        closeRegister.onclick = function() {
-            registerModal.style.display = "none";
-        }
-
-        openRegister.onclick = function() {
-            loginModal.style.display = "none";
-            registerModal.style.display = "block";
-        }
-
-        openLogin.onclick = function() {
-            registerModal.style.display = "none";
-            loginModal.style.display = "block";
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById("login-username").value;
-            alert("Вход выполнен!");
-            localStorage.setItem("username", username);
-            updateUserInfo(username);
-        }
-
-        function handleRegister(event) {
-            event.preventDefault();
-            const username = document.getElementById("register-username").value;
-            const email = document.getElementById("register-email").value;
-            const password = document.getElementById("register-password").value;
-            const passwordConfirm = document.getElementById("register-password-confirm").value;
-
-            if (password !== passwordConfirm) {
-                alert("Пароли не совпадают!");
-                return false;
-            }
-
-            alert("Регистрация выполнена!");
-            localStorage.setItem("username", username);
-            updateUserInfo(username);
-        }
-
-        function updateUserInfo(username) {
-            document.getElementById("username").textContent = username;
-            document.getElementById("login-link").style.display = "none";
-            document.getElementById("register-link").style.display = "none";
-            document.getElementById("logout-link").style.display = "inline";
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const username = localStorage.getItem("username");
-            if (username) {
-                updateUserInfo(username);
-            }
-        });
-
-        logoutLink.onclick = function(event) {
-            event.preventDefault();
-            if (confirm("Вы уверены, что хотите выйти?")) {
-                localStorage.removeItem("username");
-                document.getElementById("username").textContent = "Гость";
-                document.getElementById("login-link").style.display = "inline";
-                document.getElementById("register-link").style.display = "inline";
-                document.getElementById("logout-link").style.display = "none";
-            }
-        };
-    </script>
 </body>
 </html>

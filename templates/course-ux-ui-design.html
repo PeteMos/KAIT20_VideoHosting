@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс: UX/UI дизайн</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="index-logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+            </a>
+        </div>
+        <div class="container">
+            <h1>Курс: UX/UI дизайн</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="header-container">
+                <h2>Видеоуроки</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+                </div>
+            </div>
+            <div class="video-grid" id="videoGrid">
+                <div class="video-card" 
+                     data-title="Введение в UX/UI дизайн" 
+                     data-description="В этом видео мы познакомимся с основами UX/UI дизайна и его значением." 
+                     data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анастасия Смирнова" 
+                     onclick="openModal('videos/ux-ui-design-intro.mp4', 'Введение в UX/UI дизайн', 'В этом видео мы познакомимся с основами UX/UI дизайна и его значением.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анастасия Смирнова')">
+                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Введение в UX/UI дизайн</h3>
+                    <p>В этом видео мы познакомимся с основами UX/UI дизайна и его значением.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Исследование пользователей" 
+                     data-description="Научитесь проводить исследования для понимания потребностей пользователей." 
+                     data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Олег Петров" 
+                     onclick="openModal('videos/ux-ui-design-research.mp4', 'Исследование пользователей', 'Научитесь проводить исследования для понимания потребностей пользователей.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Олег Петров')">
+                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Исследование пользователей</h3>
+                    <p>Научитесь проводить исследования для понимания потребностей пользователей.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Создание прототипов" 
+                     data-description="Изучите методы создания прототипов для тестирования идей." 
+                     data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Ирина Коваленко" 
+                     onclick="openModal('videos/ux-ui-design-prototyping.mp4', 'Создание прототипов', 'Изучите методы создания прототипов для тестирования идей.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Ирина Коваленко')">
+                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Создание прототипов</h3>
+                    <p>Изучите методы создания прототипов для тестирования идей.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Дизайн интерфейса" 
+                     data-description="Как создавать привлекательные и функциональные интерфейсы." 
+                     data-details="Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Максим Иванов" 
+                     onclick="openModal('videos/ux-ui-design-interface.mp4', 'Дизайн интерфейса', 'Как создавать привлекательные и функциональные интерфейсы.', 'Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Максим Иванов')">
+                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Дизайн интерфейса</h3>
+                    <p>Как создавать привлекательные и функциональные интерфейсы.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Тестирование пользовательского опыта" 
+                     data-description="Научитесь проводить тестирование для улучшения дизайна." 
+                     data-details="Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Светлана Фролова" 
+                     onclick="openModal('videos/ux-ui-design-testing.mp4', 'Тестирование пользовательского опыта', 'Научитесь проводить тестирование для улучшения дизайна.', 'Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Светлана Фролова')">
+                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Тестирование пользовательского опыта</h3>
+                    <p>Научитесь проводить тестирование для улучшения дизайна.</p>
+                </div>
+                <div class="video-card" 
+                     data-title="Продвинутые техники UX/UI" 
+                     data-description="Изучите более сложные техники и подходы в UX/UI дизайне." 
+                     data-details="Длительность: 14:00, Дата публикации: 06.01.2025, Автор: Алексей Романов" 
+                     onclick="openModal('videos/ux-ui-design-advanced.mp4', 'Продвинутые техники UX/UI', 'Изучите более сложные техники и подходы в UX/UI дизайне.', 'Длительность: 14:00, Дата публикации: 06.01.2025, Автор: Алексей Романов')">
+                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <h3>Продвинутые техники UX/UI</h3>
+                    <p>Изучите более сложные техники и подходы в UX/UI дизайне.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <video id="modalVideo" width="100%" controls>
+                <source id="videoSource" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+            <div class="video-description" id="videoDescription"></div>
+            <div class="video-details" id="videoDetails"></div>
+            <div class="likes-container">
+                <div class="likes">
+                    <span class="like-icon" onclick="likeVideo(event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                            <path d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z"/>
+                        </svg>
+                    </span>
+                    <span class="like-count" id="likeCount">0</span>
+                    <span class="dislike-icon" onclick="dislikeVideo(event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                            <path d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z"/>
+                        </svg>
+                    </span>
+                    <span class="dislike-count" id="dislikeCount">0</span>
+                </div>
+                <button class="share-button" onclick="shareVideo()">Поделиться</button>
+            </div>
+            <div class="comments">
+                <h4>Комментарии:</h4>
+                <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
+                <button class="submit-comment" onclick="submitComment()">Отправить</button>
+                <div class="error-message" id="error-message"></div>
+                <h4>Все комментарии</h4> 
+                <div id="commentList" class="comment-list"></div>
+            </div>
+        </div>
+    </div>    
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
+        </div>
+    </footer>
+</body>
+</html>
