@@ -87,7 +87,7 @@ header {
     color: #fff;
     font-weight: bold;
     margin-right: 15px;
-    font-size: 1.1em;
+    font-size: 1.4em;
 }
 
 .user-info a {
@@ -177,6 +177,7 @@ header {
 }
 
 .course-card {
+    text-align: left;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -195,6 +196,7 @@ header {
 }
 
 .course-card p {
+    text-align: left;
     font-size: 0.9em;
 }
 
@@ -234,13 +236,47 @@ header {
     text-align: center;
 }
 
+.about p {
+    text-align: left;
+}
+
 .contact {
+    text-align: left;
     padding: 20px 0;
     background-color: #f0f0f0;
 }
 
 .contact h2 {
     text-align: center;
+}
+
+.contact p {
+    text-align: left;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px; 
+    right: 20px; 
+    background: #3f016b; 
+    color: white; 
+    border: none; 
+    padding: 12px 15px;
+    border-radius: 8px; 
+    display: none;
+    font-size: 16px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: background 0.3s, transform 0.3s; 
+    z-index: 1000; /* Положение над другими элементами */
+}
+
+.back-to-top:hover {
+    background: #5c027c; /* Более светлый цвет при наведении */
+    transform: translateY(-3px); /* Подъем кнопки при наведении */
+}
+
+.back-to-top:active {
+    transform: translateY(1px); /* Небольшое движение вниз при нажатии */
 }
 
 footer {

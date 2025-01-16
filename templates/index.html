@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="index-logo">
-            <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+            <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение">
         </div>
         <div class="container">
             <h1>Учебный Видеохостинг ГБПОУ КАИТ20</h1>
@@ -27,7 +27,7 @@
                 <span>|</span>
                 <a href="/register" class="btn" id="register-btn">Регистрация</a>
             {% endif %}
-        </div>   
+        </div>
     </header>
 
     <nav class="main-nav">
@@ -176,6 +176,8 @@
             </div>
         </section>
     </main>
+
+    <button class="back-to-top" style="display: none;" onclick="scrollToTop()">Вернуться наверх</button>
 
     <footer>
         <div class="container">
