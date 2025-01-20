@@ -183,6 +183,5 @@ let userVote = null;
     // Добавляем обработчик события на кнопку
     document.querySelector('.back-to-top').addEventListener('click', scrollToTop);
 
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    });
+    const currentYear = new Date().getFullYear();
+    document.getElementById('currentYear').textContent = currentYear;

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Курс: Основы JavaScript</title>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,5 +134,7 @@
             <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
         </div>
     </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
