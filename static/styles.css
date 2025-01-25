@@ -1,39 +1,49 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     background: url('background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #333;
-    margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
-header {
+header, footer {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
     background-color: #6a0dad;
     color: white;
-    padding: 8px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: center;
 }
 
 .container {
     width: 100%;
-    max-width: 1150px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px; 
+    padding: 0;    
 }
 
 .container h1 {
-    margin-right: 450px; 
-    width: 100%;
-    max-width: 1200px;
+    text-align: center;
+    margin: 0;
+    display: inline-block;
+    max-width: 400px;
 }
 
 .index-logo img {
-    max-width: 70%;
-    margin-right: 10px;
-    transition: none;
+    max-width: 50%;
+    margin: 0 auto;
+    display: block;
 }
 
 .container-logo img {
@@ -55,7 +65,7 @@ header {
 }
 
 .main-nav ul li {
-    margin-right: 80px;
+    margin-right: 20px;
 }
 
 .main-nav ul li:last-child {
@@ -66,28 +76,41 @@ header {
     background-color: #6a0dad;
     color: white;
     text-decoration: none;
-    padding: 10px 30px;
+    padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.3s;
+    font-size: 1em; 
+    min-width: 120px;
+    text-align: center; 
 }
 
 .main-nav ul li a:hover {
     background-color: #5a0a9d;
-    transform: translateY(-4px);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .main-nav ul li {
+        margin-right: 10px;
+    }
+
+    .main-nav ul li a {
+        padding: 8px 15px; 
+    }
 }
 
 .user-info {
     display: flex;
     align-items: center;
-    margin-left: 2px;
     margin-right: 20px;
+    text-align: center;
 }
 
 .username {
     color: #fff;
     font-weight: bold;
-    margin-right: 15px;
-    font-size: 1.4em;
+    margin-right: 10px;
+    font-size: 1.2em;
 }
 
 .user-info a {
@@ -118,10 +141,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .hero-text {
     flex: 1;
+    padding-right: 20px;
 }
 
 .hero h2 {
@@ -173,18 +198,18 @@ header {
 .course-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    justify-content: space-between;
 }
 
 .course-card {
-    text-align: left;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
-    flex: 1 1 calc(25% - 20px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
+    flex: 1 1 calc(25% - 20px);
+    margin: 10px;
 }
 
 .course-card:hover {
@@ -201,7 +226,10 @@ header {
 }
 
 .course-image {
-    margin-bottom: 15px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .course-image img {
@@ -224,66 +252,75 @@ header {
 
 .course-btn:hover {
     background-color: #5a0a9d;
-    transform: translateY(-3px); 
+    transform: translateY(-3px);
 }
 
-.about {
-    padding: 20px 0;
-    background-color: #f0f0f0;
+.about, .contact {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-.about h2 {
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #6a0dad;
     text-align: center;
+    position: relative;
 }
 
-.about p {
+h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: #6a0dad;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+.about p, .contact p {
     text-align: left;
+    line-height: 1.6;
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 15px;
 }
 
-.contact {
-    text-align: left;
-    padding: 20px 0;
-    background-color: #f0f0f0;
+a {
+    color: #6a0dad;
+    text-decoration: none;
 }
 
-.contact h2 {
+.about h2, .contact h2 {
     text-align: center;
-}
-
-.contact p {
-    text-align: left;
 }
 
 .back-to-top {
     position: fixed;
-    bottom: 20px; 
-    right: 20px; 
-    background: #3f016b; 
-    color: white; 
-    border: none; 
+    bottom: 20px;
+    right: 20px;
+    background: #3f016b;
+    color: white;
+    border: none;
     padding: 12px 15px;
-    border-radius: 8px; 
+    border-radius: 8px;
     display: none;
-    font-size: 16px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    transition: background 0.3s, transform 0.3s; 
-    z-index: 1000; /* Положение над другими элементами */
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.3s;
+    z-index: 1000;
 }
 
 .back-to-top:hover {
-    background: #5c027c; /* Более светлый цвет при наведении */
-    transform: translateY(-3px); /* Подъем кнопки при наведении */
+    background: #5c027c;
+    transform: translateY(-3px);
 }
 
 .back-to-top:active {
-    transform: translateY(1px); /* Небольшое движение вниз при нажатии */
-}
-
-footer {
-    background-color: #6a0dad;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
+    transform: translateY(1px);
 }
 
 .modal {
@@ -357,14 +394,13 @@ footer {
     background-color: #5a0a9d;
 }
 
-
 .form-container {
-    background-color: rgba(255, 255, 255, 0.9); 
-    padding: 40px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
-    margin: 50px auto; 
-    max-width: 450px; 
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    max-width: 450px;
 }
 
 form {
@@ -375,29 +411,62 @@ form {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-    padding: 15px; 
-    margin: 15px 0; 
+    padding: 15px;
+    margin: 15px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1em; 
+    font-size: 1em;
 }
 
 .btn {
-    background-color: #6a0dad; 
+    background-color: #6a0dad;
     color: white;
-    padding: 15px; 
+    padding: 14px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
-    font-size: 1.1em; 
+    font-size: 1.1em;
 }
 
 .btn:hover {
-    background-color: #5a0a9d; 
-    transform: translateY(-3px);
+    background-color: #5a0a9d;
+    transform: translateY(-2px);
 }
 
 p {
     text-align: center;
+}
+
+.password-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.password-container input {
+    width: 100%; 
+    padding: 10px 40px 20px 10px; /* Отступы: сверху, справа для значка, снизу, слева */
+    box-sizing: border-box; 
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%);
+    background: transparent; /* Прозрачный фон */
+    border: none; 
+    cursor: pointer; 
+    outline: none; 
+    padding: 0; 
+}
+
+.toggle-password i {
+    font-size: 1.2em;
+    color: #aaa; 
+    transition: color 0.3s ease; /* Плавный переход цвета */
+}
+
+.toggle-password:hover i {
+    color: #6a0dad; 
 }

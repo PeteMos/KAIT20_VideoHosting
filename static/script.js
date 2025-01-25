@@ -3,6 +3,22 @@ let likeCount = 0;
 let dislikeCount = 0;
 let userVote = null; 
 
+    function togglePassword(passwordFieldId) {
+        const passwordField = document.getElementById(passwordFieldId);
+        const eyeIcon = passwordField.nextElementSibling.querySelector("i");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
+
+
     function openModal(videoSrc, title, description, details) {
         const modalVideo = document.getElementById('modalVideo');
         const videoSource = document.getElementById('videoSource');
@@ -180,7 +196,7 @@ let userVote = null;
         }
     };
 
-    // Добавляем обработчик события на кнопку
+    // Обработчик события на кнопку
     document.querySelector('.back-to-top').addEventListener('click', scrollToTop);
 
     const currentYear = new Date().getFullYear();
