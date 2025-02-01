@@ -88,6 +88,15 @@ def register():
 
     return render_template('register.html')
 
+@app.route('/reset-password', methods=['GET', 'POST'])
+def reset_password_request():
+    if request.method == 'POST':
+        email = request.form['email']
+        # Здесь можно добавить логику для сброса пароля
+        flash('Инструкции по сбросу пароля отправлены на ваш email.', 'info')
+        return redirect(url_for('login'))
+    return render_template('reset-password.html')
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)  # Удаляем имя пользователя из сессии
