@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,15 +44,13 @@
                     <button type="button" class="toggle-password" onclick="togglePassword('password')">
                         <i class="fas fa-eye" id="eye-icon"></i>
                     </button>
-                </div>
-                
+                </div>               
                 <div class="password-container">
-                    <input type="password" id="password_confirm" name="password_confirm" placeholder="Подтвердите пароль" required>
-                    <button type="button" class="toggle-password" onclick="togglePassword('password_confirm')">
+                    <input type="password" id="password" name="password" placeholder="Пароль" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword('password')">
                         <i class="fas fa-eye" id="eye-icon"></i>
                     </button>
-                </div>
-                
+                </div>                               
                 <button type="submit" class="btn">Зарегистрироваться</button>
             </form>            
             <p>Уже есть аккаунт? <a href="{{ url_for('login') }}">Войдите</a></p>

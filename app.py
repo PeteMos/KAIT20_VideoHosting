@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
+import jwt
+import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my_secret_key'
@@ -21,25 +23,24 @@ def create_tables():
 
 @app.route('/')
 def index():
-    full_name = session.get('username')  # Получаем имя пользователя из сессии
-    return render_template('index.html', username=full_name)  # Передаем имя пользователя в шаблон
+    full_name = session.get('username')
+    return render_template('index.html', username=full_name)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        login = request.form['login']  # Получаем значение из поля 'login'
+        login = request.form['login']
         password = request.form['password']
         
-        # Проверяем, является ли ввод email или номером телефона
-        if re.match(r"[^@]+@[^@]+\.[^@]+", login):  # Это email
+        if re.match(r"[^@]+@[^@]+\.[^@]+", login):
             user = User.query.filter_by(email=login).first()
-        else:  # Это телефон
+        else:
             user = User.query.filter_by(username=login).first()
 
-        if user and check_password_hash(user.password, password):  # Проверяем пароль
-            session['username'] = user.full_name  # Сохраняем имя пользователя в сессии
-            flash('Вы успешно вошли в систему.', 'success')  # Сообщение об успешном входе
-            return redirect(url_for('index'))  # Перенаправляем на главную страницу
+        if user and check_password_hash(user.password, password):
+            session['username'] = user.full_name
+            flash('Вы успешно вошли в систему.', 'success')
+            return redirect(url_for('index'))
         else:
             flash('Неверный email или пароль', 'error')
     
@@ -48,12 +49,11 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        full_name = request.form['full_name']  # Получаем полное имя
+        full_name = request.form['full_name']
         login = request.form['login']
         password = request.form['password']
         password_confirm = request.form['password_confirm']
 
-        # Проверка на наличие имени и фамилии
         if not re.match(r'^\S+\s+\S+$', full_name):
             flash('Полное имя должно содержать как минимум имя и фамилию.')
             return redirect(url_for('register'))
@@ -62,12 +62,11 @@ def register():
             flash('Пароли не совпадают. Пожалуйста, попробуйте снова.')
             return redirect(url_for('register'))
 
-        hashed_password = generate_password_hash(password)  # Хэшируем пароль
+        hashed_password = generate_password_hash(password)
 
-        # Проверяем, является ли ввод email или номером телефона
-        if re.match(r"[^@]+@[^@]+\.[^@]+", login):  # Это email
+        if re.match(r"[^@]+@[^@]+\.[^@]+", login):
             existing_user = User.query.filter_by(email=login).first()
-        else:  # Это телефон
+        else:
             existing_user = User.query.filter_by(username=login).first()
 
         if existing_user:
@@ -79,31 +78,78 @@ def register():
         try:
             db.session.add(new_user)
             db.session.commit()
-            session['username'] = new_user.full_name  # Сохраняем полное имя пользователя в сессии
-            flash('Регистрация прошла успешно! Вы успешно вошли в систему.')  # Сообщение об успешной регистрации
-            return redirect(url_for('index'))  # Перенаправляем на главную страницу
+            session['username'] = new_user.full_name
+            flash('Регистрация прошла успешно! Вы успешно вошли в систему.')
+            return redirect(url_for('index'))
         except Exception as e:
             flash('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.')
             return redirect(url_for('register'))
 
     return render_template('register.html')
 
-@app.route('/reset-password', methods=['GET', 'POST'])
+def generate_reset_token(email):
+    token = jwt.encode({'reset_password': email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)}, app.config['SECRET_KEY'], algorithm='HS256')
+    return token
+
+def verify_reset_token(token):
+    try:
+        email = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+    return email
+
+@app.route('/reset-password-request', methods=['GET', 'POST'])
 def reset_password_request():
     if request.method == 'POST':
         email = request.form['email']
-        # Здесь можно добавить логику для сброса пароля
-        flash('Инструкции по сбросу пароля отправлены на ваш email.', 'info')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            token = generate_reset_token(user.email)
+            # Можно будет добавить код для отправки email с токеном
+            # Например, с использованием Flask-Mail
+            flash('Инструкции по сбросу пароля отправлены на ваш email.', 'info')
+        else:
+            flash('Если такой email существует в нашей базе, вы получите инструкции по сбросу пароля.', 'info')
+        
         return redirect(url_for('login'))
-    return render_template('reset-password.html')
+    
+    return render_template('reset-password-request.html')
+
+@app.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    email = verify_reset_token(token)
+    if email is None:
+        flash('Недействительный или истекший токен', 'warning')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+
+        if new_password != confirm_password:
+            flash('Пароли не совпадают. Пожалуйста, попробуйте снова.', 'error')
+            return redirect(url_for('reset_password', token=token))
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            user.password = generate_password_hash(new_password)
+            db.session.commit()
+            flash('Пароль успешно сброшен!', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Пользователь не найден.', 'error')
+            return redirect(url_for('login'))
+
+    return render_template('reset-password.html', token=token)
 
 @app.route('/logout')
 def logout():
-    session.pop('username', None)  # Удаляем имя пользователя из сессии
-    flash('Вы вышли из системы.', 'info')  # Сообщение об успешном выходе
+    session.pop('username', None)
+    flash('Вы вышли из системы.', 'info')
     return redirect(url_for('index'))
 
-# Остальные маршруты для курсов...
 @app.route('/course/programming')
 def course_programming():
     return render_template('course-programming.html')
@@ -154,3 +200,4 @@ def course_digital_marketing():
 
 if __name__ == '__main__':
     app.run(debug=True)
+

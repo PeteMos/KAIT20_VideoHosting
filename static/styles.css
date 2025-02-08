@@ -411,6 +411,7 @@ form {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
+    width: calc(100% - 30px);
     padding: 15px;
     margin: 15px 0;
     border: 1px solid #ddd;
@@ -421,7 +422,7 @@ input[type="password"] {
 .btn {
     background-color: #6a0dad;
     color: white;
-    padding: 14px;
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -470,3 +471,4 @@ p {
 .toggle-password:hover i {
     color: #6a0dad; 
 }
+
