@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Курс: Основы JavaScript</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <header>
         <div class="index-logo">
             <a href="/">
-                <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+                <img src="{{ url_for('images', filename='container-logo-img.png') }}" alt="Главное изображение"> 
             </a>
         </div>
         <div class="container">
@@ -37,7 +37,7 @@
                      data-description="Научитесь основам JavaScript и его синтаксису." 
                      data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров" 
                      onclick="openModal('videos/javascript-intro.mp4', 'Введение в JavaScript', 'Научитесь основам JavaScript и его синтаксису.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Петров')">
-                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Введение в JavaScript</h3>
                     <p>Научитесь основам JavaScript и его синтаксису.</p>
                 </div>
@@ -46,7 +46,7 @@
                      data-description="Как использовать переменные в JavaScript." 
                      data-details="Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова" 
                      onclick="openModal('videos/javascript-variables.mp4', 'Работа с переменными', 'Как использовать переменные в JavaScript.', 'Длительность: 8:00, Дата публикации: 02.01.2025, Автор: Анна Смирнова')">
-                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Работа с переменными</h3>
                     <p>Как использовать переменные в JavaScript.</p>
                 </div>
@@ -55,7 +55,7 @@
                      data-description="Изучите условия и циклы в JavaScript." 
                      data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов" 
                      onclick="openModal('videos/javascript-conditions-loops.mp4', 'Условия и циклы', 'Изучите условия и циклы в JavaScript.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Кузнецов')">
-                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Условия и циклы</h3>
                     <p>Изучите условия и циклы в JavaScript.</p>
                 </div>
@@ -64,7 +64,7 @@
                      data-description="Как создавать и использовать функции." 
                      data-details="Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова" 
                      onclick="openModal('videos/javascript-functions.mp4', 'Функции', 'Как создавать и использовать функции.', 'Длительность: 10:00, Дата публикации: 04.01.2025, Автор: Ольга Воронова')">
-                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Функции</h3>
                     <p>Как создавать и использовать функции.</p>
                 </div>
@@ -73,7 +73,7 @@
                      data-description="Изучите основы работы с объектами в JavaScript." 
                      data-details="Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров" 
                      onclick="openModal('videos/javascript-objects.mp4', 'Объекты', 'Изучите основы работы с объектами в JavaScript.', 'Длительность: 9:00, Дата публикации: 05.01.2025, Автор: Дмитрий Федоров')">
-                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Объекты</h3>
                     <p>Изучите основы работы с объектами в JavaScript.</p>
                 </div>
@@ -82,7 +82,7 @@
                      data-description="Как работать с асинхронным кодом." 
                      data-details="Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Елена Соколова" 
                      onclick="openModal('videos/javascript-async.mp4', 'Асинхронное программирование', 'Как работать с асинхронным кодом.', 'Длительность: 11:00, Дата публикации: 06.01.2025, Автор: Елена Соколова')">
-                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Асинхронное программирование</h3>
                     <p>Как работать с асинхронным кодом.</p>
                 </div>

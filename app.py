@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
@@ -25,6 +25,10 @@ def create_tables():
 def index():
     full_name = session.get('username')
     return render_template('index.html', username=full_name)
+
+@app.route('/images/<path:filename>')
+def images(filename):
+    return send_from_directory('images', filename)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

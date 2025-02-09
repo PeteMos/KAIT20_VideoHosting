@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Учебный Видеохостинг ГБПОУ КАИТ20</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="index-logo">
-            <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение">
+            <img src="{{ url_for('images', filename='container-logo-img.png') }}" alt="Главное изображение">
         </div>
         <div class="container">
             <h1>Учебный Видеохостинг<br>ГБПОУ КАИТ20</h1>
@@ -48,7 +48,7 @@
                     <div class="hero-text">
                         <div class="logo">
                             <a href="https://kait20.mskobr.ru/">
-                                <img src="{{ url_for('static', filename='KAIT-logo.png') }}" alt="Логотип колледжа">
+                                <img src="{{ url_for('images', filename='KAIT-logo.png') }}" alt="Логотип колледжа">
                             </a>
                         </div>
                         <h2>Добро пожаловать на наш видеохостинг!</h2>
@@ -56,7 +56,7 @@
                         <a href="#trending" class="btn">Изучить курсы</a>
                     </div>
                     <div class="hero-image">
-                        <img src="{{ url_for('static', filename='container_image.png') }}" alt="Главное изображение">
+                        <img src="{{ url_for('images', filename='container_image.png') }}" alt="Главное изображение">
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 <div class="course-grid">
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="{{ url_for('static', filename='python.png') }}" alt="Логотип Python">
+                            <img src="{{ url_for('images', filename='python.png') }}" alt="Логотип Python">
                         </div>
                         <h3>Курс: Основы программирования</h3>
                         <p>Изучите основы программирования на Python.</p>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="{{ url_for('static', filename='web-development.png') }}" alt="Логотип Веб-разработки">
+                            <img src="{{ url_for('images', filename='web-development.png') }}" alt="Логотип Веб-разработки">
                         </div>
                         <h3>Курс: Веб-разработка</h3>
                         <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="{{ url_for('static', filename='design.png') }}" alt="Логотип Дизайна">
+                            <img src="{{ url_for('images', filename='design.png') }}" alt="Логотип Дизайна">
                         </div>
                         <h3>Курс: Основы дизайна</h3>
                         <p>Изучите принципы дизайна и создайте привлекательные интерфейсы.</p>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="{{ url_for('static', filename='javascript.png') }}" alt="Логотип JS">
+                            <img src="{{ url_for('images', filename='javascript.png') }}" alt="Логотип JS">
                         </div>
                         <h3>Курс: Основы JavaScript</h3>
                         <p>Познакомьтесь с основами JavaScript и сделайте свои сайты интерактивными.</p>

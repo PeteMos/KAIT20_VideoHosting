@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Курс: UX/UI дизайн</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <header>
         <div class="index-logo">
             <a href="/">
-                <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+                <img src="{{ url_for('images', filename='container-logo-img.png') }}" alt="Главное изображение"> 
             </a>
         </div>
         <div class="container">
@@ -37,7 +37,7 @@
                      data-description="В этом видео мы познакомимся с основами UX/UI дизайна и его значением." 
                      data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анастасия Смирнова" 
                      onclick="openModal('videos/ux-ui-design-intro.mp4', 'Введение в UX/UI дизайн', 'В этом видео мы познакомимся с основами UX/UI дизайна и его значением.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анастасия Смирнова')">
-                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Введение в UX/UI дизайн</h3>
                     <p>В этом видео мы познакомимся с основами UX/UI дизайна и его значением.</p>
                 </div>
@@ -46,7 +46,7 @@
                      data-description="Научитесь проводить исследования для понимания потребностей пользователей." 
                      data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Олег Петров" 
                      onclick="openModal('videos/ux-ui-design-research.mp4', 'Исследование пользователей', 'Научитесь проводить исследования для понимания потребностей пользователей.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Олег Петров')">
-                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Исследование пользователей</h3>
                     <p>Научитесь проводить исследования для понимания потребностей пользователей.</p>
                 </div>
@@ -55,7 +55,7 @@
                      data-description="Изучите методы создания прототипов для тестирования идей." 
                      data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Ирина Коваленко" 
                      onclick="openModal('videos/ux-ui-design-prototyping.mp4', 'Создание прототипов', 'Изучите методы создания прототипов для тестирования идей.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Ирина Коваленко')">
-                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Создание прототипов</h3>
                     <p>Изучите методы создания прототипов для тестирования идей.</p>
                 </div>
@@ -64,7 +64,7 @@
                      data-description="Как создавать привлекательные и функциональные интерфейсы." 
                      data-details="Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Максим Иванов" 
                      onclick="openModal('videos/ux-ui-design-interface.mp4', 'Дизайн интерфейса', 'Как создавать привлекательные и функциональные интерфейсы.', 'Длительность: 11:00, Дата публикации: 04.01.2025, Автор: Максим Иванов')">
-                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Дизайн интерфейса</h3>
                     <p>Как создавать привлекательные и функциональные интерфейсы.</p>
                 </div>
@@ -73,7 +73,7 @@
                      data-description="Научитесь проводить тестирование для улучшения дизайна." 
                      data-details="Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Светлана Фролова" 
                      onclick="openModal('videos/ux-ui-design-testing.mp4', 'Тестирование пользовательского опыта', 'Научитесь проводить тестирование для улучшения дизайна.', 'Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Светлана Фролова')">
-                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Тестирование пользовательского опыта</h3>
                     <p>Научитесь проводить тестирование для улучшения дизайна.</p>
                 </div>
@@ -82,7 +82,7 @@
                      data-description="Изучите более сложные техники и подходы в UX/UI дизайне." 
                      data-details="Длительность: 14:00, Дата публикации: 06.01.2025, Автор: Алексей Романов" 
                      onclick="openModal('videos/ux-ui-design-advanced.mp4', 'Продвинутые техники UX/UI', 'Изучите более сложные техники и подходы в UX/UI дизайне.', 'Длительность: 14:00, Дата публикации: 06.01.2025, Автор: Алексей Романов')">
-                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Продвинутые техники UX/UI</h3>
                     <p>Изучите более сложные техники и подходы в UX/UI дизайне.</p>
                 </div>

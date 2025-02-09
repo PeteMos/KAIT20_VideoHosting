@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Курс: Веб-разработка</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <header>
         <div class="index-logo">
             <a href="/">
-                <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+                <img src="{{ url_for('images', filename='container-logo-img.png') }}" alt="Главное изображение"> 
             </a>
         </div>
         <div class="container">
@@ -37,7 +37,7 @@
                      data-description="Создайте свой первый веб-сайт с помощью HTML и CSS." 
                      data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" 
                      onclick="openModal('videos/web-development-intro.mp4', 'Введение в веб-разработку', 'Создайте свой первый веб-сайт с помощью HTML и CSS.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
-                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Введение в веб-разработку</h3>
                     <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
                 </div>
@@ -46,7 +46,7 @@
                      data-description="Изучите основы CSS для стилизации веб-страниц." 
                      data-details="Длительность: 15:00, Дата публикации: 01.02.2025, Автор: Анна Петрова" 
                      onclick="openModal('videos/css_basics.mp4', 'CSS для начинающих', 'Изучите основы CSS для стилизации веб-страниц.', 'Длительность: 15:00, Дата публикации: 01.02.2025, Автор: Анна Петрова')">
-                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>CSS для начинающих</h3>
                     <p>Изучите основы CSS для стилизации веб-страниц.</p>
                 </div>
@@ -55,7 +55,7 @@
                      data-description="Научитесь писать скрипты на JavaScript." 
                      data-details="Длительность: 20:00, Дата публикации: 01.03.2025, Автор: Сергей Смирнов" 
                      onclick="openModal('videos/javascript_basics.mp4', 'JavaScript для веб-разработчиков', 'Научитесь писать скрипты на JavaScript.', 'Длительность: 20:00, Дата публикации: 01.03.2025, Автор: Сергей Смирнов')">
-                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>JavaScript для веб-разработчиков</h3>
                     <p>Научитесь писать скрипты на JavaScript.</p>
                 </div>
@@ -64,7 +64,7 @@
                      data-description="Узнайте, как сделать ваш сайт адаптивным." 
                      data-details="Длительность: 25:00, Дата публикации: 01.04.2025, Автор: Мария Иванова" 
                      onclick="openModal('videos/responsive_design.mp4', 'Создание адаптивного дизайна', 'Узнайте, как сделать ваш сайт адаптивным.', 'Длительность: 25:00, Дата публикации: 01.04.2025, Автор: Мария Иванова')">
-                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Создание адаптивного дизайна</h3>
                     <p>Узнайте, как сделать ваш сайт адаптивным.</p>
                 </div>
@@ -73,7 +73,7 @@
                      data-description="Научитесь взаимодействовать с API для получения данных." 
                      data-details="Длительность: 18:00, Дата публикации: 01.05.2025, Автор: Алексей Кузнецов" 
                      onclick="openModal('videos/api_basics.mp4', 'Основы работы с API', 'Научитесь взаимодействовать с API для получения данных.', 'Длительность: 18:00, Дата публикации: 01.05.2025, Автор: Алексей Кузнецов')">
-                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Основы работы с API</h3>
                     <p>Научитесь взаимодействовать с API для получения данных.</p>
                 </div>
@@ -82,7 +82,7 @@
                      data-description="Изучите основы работы с фреймворком React." 
                      data-details="Длительность: 22:00, Дата публикации: 01.06.2025, Автор: Ольга Сидорова" 
                      onclick="openModal('videos/react_intro.mp4', 'Введение в фреймворк React', 'Изучите основы работы с фреймворком React.', 'Длительность: 22:00, Дата публикации: 01.06.2025, Автор: Ольга Сидорова')">
-                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Введение в фреймворк React</h3>
                     <p>Изучите основы работы с фреймворком React.</p>
                 </div>

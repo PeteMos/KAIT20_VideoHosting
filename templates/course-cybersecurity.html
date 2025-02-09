@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Курс: Основы кибербезопасности</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <header>
         <div class="index-logo">
             <a href="/">
-                <img src="{{ url_for('static', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+                <img src="{{ url_for('images', filename='container-logo-img.png') }}" alt="Главное изображение"> 
             </a>
         </div>
         <div class="container">
@@ -37,7 +37,7 @@
                      data-description="Узнайте, как защитить свои данные и устройства." 
                      data-details="Длительность: 8:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов" 
                      onclick="openModal('video_placeholder.mp4', 'Введение в кибербезопасности', 'Узнайте, как защитить свои данные и устройства.', 'Длительность: 8:00, Дата публикации: 01.01.2025, Автор: Алексей Смирнов')">
-                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Введение в кибербезопасности</h3>
                     <p>Узнайте, как защитить свои данные и устройства.</p>
                 </div>
@@ -46,7 +46,7 @@
                      data-description="Обзор основных принципов сетевой безопасности." 
                      data-details="Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Мария Иванова" 
                      onclick="openModal('video_placeholder.mp4', 'Основы сетевой безопасности', 'Обзор основных принципов сетевой безопасности.', 'Длительность: 10:00, Дата публикации: 02.01.2025, Автор: Мария Иванова')">
-                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Основы сетевой безопасности</h3>
                     <p>Обзор основных принципов сетевой безопасности.</p>
                 </div>
@@ -55,7 +55,7 @@
                      data-description="Как защитить свои устройства от вирусов и вредоносных программ." 
                      data-details="Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Петров" 
                      onclick="openModal('video_placeholder.mp4', 'Защита от вредоносного ПО', 'Как защитить свои устройства от вирусов и вредоносных программ.', 'Длительность: 12:00, Дата публикации: 03.01.2025, Автор: Сергей Петров')">
-                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Защита от вредоносного ПО</h3>
                     <p>Как защитить свои устройства от вирусов и вредоносных программ.</p>
                 </div>
@@ -64,7 +64,7 @@
                      data-description="Изучите методы социальной инженерии и как от них защититься." 
                      data-details="Длительность: 9:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова" 
                      onclick="openModal('video_placeholder.mp4', 'Социальная инженерия', 'Изучите методы социальной инженерии и как от них защититься.', 'Длительность: 9:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова')">
-                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Социальная инженерия</h3>
                     <p>Изучите методы социальной инженерии и как от них защититься.</p>
                 </div>
@@ -73,7 +73,7 @@
                      data-description="Как защитить свои мобильные устройства от угроз." 
                      data-details="Длительность: 11:00, Дата публикации: 05.01.2025, Автор: Дмитрий Сидоров" 
                      onclick="openModal('video_placeholder.mp4', 'Безопасность мобильных устройств', 'Как защитить свои мобильные устройства от угроз.', 'Длительность: 11:00, Дата публикации: 05.01.2025, Автор: Дмитрий Сидоров')">
-                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Безопасность мобильных устройств</h3>
                     <p>Как защитить свои мобильные устройства от угроз.</p>
                 </div>
@@ -82,7 +82,7 @@
                      data-description="Основы шифрования и его важность для безопасности." 
                      data-details="Длительность: 15:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева" 
                      onclick="openModal('video_placeholder.mp4', 'Шифрование данных', 'Основы шифрования и его важность для безопасности.', 'Длительность: 15:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева')">
-                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('static', filename='video_placeholder.jpg') }}"></canvas>
+                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
                     <h3>Шифрование данных</h3>
                     <p>Основы шифрования и его важность для безопасности.</p>
                 </div>
