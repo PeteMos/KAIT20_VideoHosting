@@ -12,10 +12,9 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(150), nullable=False) 
-    username = db.Column(db.String(150), unique=True, nullable=False)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(150), nullable=False)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(128), nullable=False)
 
 @app.before_request
 def create_tables():
@@ -36,13 +35,15 @@ def login():
         login = request.form['login']
         password = request.form['password']
         
+        # Проверяем, является ли ввод email
         if re.match(r"[^@]+@[^@]+\.[^@]+", login):
             user = User.query.filter_by(email=login).first()
         else:
             user = User.query.filter_by(username=login).first()
 
+        # Проверяем, существует ли пользователь и правильный ли пароль
         if user and check_password_hash(user.password, password):
-            session['username'] = user.full_name
+            session['username'] = user.username 
             flash('Вы успешно вошли в систему.', 'success')
             return redirect(url_for('index'))
         else:
@@ -53,40 +54,39 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        full_name = request.form['full_name']
+        username = request.form['username']  # Получаем username из формы
         login = request.form['login']
         password = request.form['password']
         password_confirm = request.form['password_confirm']
 
-        if not re.match(r'^\S+\s+\S+$', full_name):
-            flash('Полное имя должно содержать как минимум имя и фамилию.')
+        if not username:  # Проверяем, что username не пустой
+            flash('Имя пользователя не может быть пустым.')
             return redirect(url_for('register'))
 
         if password != password_confirm:
             flash('Пароли не совпадают. Пожалуйста, попробуйте снова.')
             return redirect(url_for('register'))
 
-        hashed_password = generate_password_hash(password)
-
-        if re.match(r"[^@]+@[^@]+\.[^@]+", login):
-            existing_user = User.query.filter_by(email=login).first()
-        else:
-            existing_user = User.query.filter_by(username=login).first()
-
+        existing_user = User.query.filter((User .email == login) | (User .username == username)).first()
         if existing_user:
-            flash('Пользователь с указанным email или номером телефона уже существует. Пожалуйста, используйте другой.')
+            flash('Пользователь с указанным email или именем пользователя уже существует. Пожалуйста, используйте другой.')
             return redirect(url_for('register'))
 
-        new_user = User(full_name=full_name, username=login, email=login if re.match(r"[^@]+@[^@]+\.[^@]+", login) else None, password=hashed_password)
+        hashed_password = generate_password_hash(password)
+
+        # Создаем нового пользователя без поля full_name
+        new_user = User(username=username, email=login, password=hashed_password)
 
         try:
             db.session.add(new_user)
             db.session.commit()
-            session['username'] = new_user.full_name
+            session['username'] = new_user.username  # Сохраняем имя пользователя в сессии
             flash('Регистрация прошла успешно! Вы успешно вошли в систему.')
-            return redirect(url_for('index'))
+            return redirect(url_for('index'))  # Перенаправление на главную страницу
         except Exception as e:
-            flash('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.')
+            db.session.rollback()  # Откат транзакции в случае ошибки
+            print(f'Ошибка при регистрации: {e}')  # Вывод ошибки в консоль
+            flash(f'Произошла ошибка при регистрации: {e}. Пожалуйста, попробуйте позже.')
             return redirect(url_for('register'))
 
     return render_template('register.html')
@@ -97,7 +97,7 @@ def generate_reset_token(email):
 
 def verify_reset_token(token):
     try:
-        email = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+                email = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
     except jwt.ExpiredSignatureError:
         return None
     except jwt.InvalidTokenError:
@@ -111,7 +111,7 @@ def reset_password_request():
         user = User.query.filter_by(email=email).first()
         if user:
             token = generate_reset_token(user.email)
-            # Можно будет добавить код для отправки email с токеном
+            # Здесь можно добавить код для отправки email с токеном
             # Например, с использованием Flask-Mail
             flash('Инструкции по сбросу пароля отправлены на ваш email.', 'info')
         else:

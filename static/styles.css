@@ -446,7 +446,7 @@ p {
 
 .password-container input {
     width: 100%; 
-    padding: 10px 40px 20px 10px; /* Отступы: сверху, справа для значка, снизу, слева */
+    padding: 20px 40px 20px 16px; /* Отступы: сверху, справа для значка, снизу, слева */
     box-sizing: border-box; 
 }
 
