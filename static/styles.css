@@ -472,3 +472,28 @@ p {
     color: #6a0dad; 
 }
 
+.role-select {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    color: #333;
+    appearance: none; /* Убираем стандартный стиль */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%236a0dad"><path d="M8 10.5l-4-4h8z"/></svg>'); /* Стрелка вниз */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Положение стрелки */
+    background-size: 12px; /* Размер стрелки */
+    transition: border-color 0.3s; /* Плавный переход цвета границы */
+}
+
+.role-select:focus {
+    border-color: #6a0dad; /* Цвет границы при фокусе */
+    outline: none; /* Убираем стандартный контур */
+}
+
+.role-select option {
+    padding: 10px; /* Отступы для опций */
+}

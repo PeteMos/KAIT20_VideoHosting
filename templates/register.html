@@ -36,23 +36,32 @@
               {% endif %}
             {% endwith %}
             <form method="POST">
-                <input type="text" name="username" placeholder="Имя пользователя" required> <!-- Поле для username -->
-                <input type="text" name="login" placeholder="Email или телефон" required>
-                
-                <div class="password-container">
-                    <input type="password" id="password" name="password" placeholder="Пароль" required>
-                    <button type="button" class="toggle-password" onclick="togglePassword('password')">
-                        <i class="fas fa-eye" id="eye-icon"></i>
-                    </button>
-                </div>               
-                <div class="password-container">
-                    <input type="password" id="password_confirm" name="password_confirm" placeholder="Подтверждение пароля" required>
-                    <button type="button" class="toggle-password" onclick="togglePassword('password_confirm')">
-                        <i class="fas fa-eye" id="eye-icon"></i>
-                    </button>
-                </div>                               
-                <button type="submit" class="btn">Зарегистрироваться</button>
-            </form>                                  
+    		<input type="text" name="username" placeholder="Имя пользователя" required>
+    		<input type="text" name="login" placeholder="Email или телефон" required>
+    
+    		<div class="password-container">
+        		<input type="password" id="password" name="password" placeholder="Пароль" required>
+        		<button type="button" class="toggle-password" onclick="togglePassword('password')">
+            			<i class="fas fa-eye" id="eye-icon"></i>
+        		</button>
+    		</div>               
+    		<div class="password-container">
+        	<input type="password" id="password_confirm" name="password_confirm" placeholder="Подтверждение пароля" required>
+        	<button type="button" class="toggle-password" onclick="togglePassword('password_confirm')">
+            		<i class="fas fa-eye" id="eye-icon"></i>
+        	</button>
+    	</div>                               
+
+    	<label for="role">Выберите роль:</label>
+            <select name="role" class="role-select" required>
+                <option value="student">Студент</option>
+                <option value="teacher">Преподаватель</option>
+                <option value="admin">Администратор</option>
+            </select>
+
+    	<button type="submit" class="btn">Зарегистрироваться</button>
+	</form>
+                                  
             <p>Уже есть аккаунт? <a href="{{ url_for('login') }}">Войдите</a></p>
         </div>
     </main>

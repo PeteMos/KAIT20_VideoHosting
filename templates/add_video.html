@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление Видео</title>
+    <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="index-logo">
+            <a href="/">
+                <img src="{{ url_for('images', filename='container-logo-img.png') }}" alt="Главное изображение"> 
+            </a>
+        </div>
+        <div class="container">
+            <h1>Добавление Видео</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form action="{{ url_for('add_video') }}" method="POST" enctype="multipart/form-data">
+                <label for="course">Выберите курс:</label>
+                <select name="course" id="course" required>
+                    <option value="Основы программирования">Основы программирования</option>
+                    <option value="Основы дизайна">Основы дизайна</option>
+                    <option value="Основы JavaScript">Основы JavaScript</option>
+                    <option value="Кибербезопасность">Кибербезопасность</option>
+                    <option value="Базы данных">Базы данных</option>
+                    <option value="DevOps">DevOps</option>
+                    <option value="Цифровой маркетинг">Цифровой маркетинг</option>
+                    <option value="Графический дизайн">Графический дизайн</option>
+                    <option value="Машинное обучение">Машинное обучение</option>
+                    <option value="Мобильная разработка">Мобильная разработка</option>
+                    <option value="UX/UI дизайн">UX/UI дизайн</option>
+                    <option value="Веб-разработка">Веб-разработка</option>
+                </select>
+
+                <input type="text" name="title" placeholder="Название видео" required>
+                <input type="text" name="description" placeholder="Описание видео" required>
+                <input type="text" name="duration" id="duration" placeholder="Длительность" readonly>
+                <input type="hidden" name="author" id="author" value="{{ current_user.username }}">
+                <input type="file" name="video_file" accept="video/*" required onchange="setDuration(this)">
+                <button type="submit">Добавить видео</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        function setDuration(input) {
+            const file = input.files[0];
+            if (file) {
+                const videoElement = document.createElement('video');
+                videoElement.src = URL.createObjectURL(file);
+                videoElement.onloadedmetadata = function() {
+                    const duration = videoElement.duration; // Длительность в секундах
+                    const minutes = Math.floor(duration / 60);
+                    const seconds = Math.floor(duration % 60);
+                    const formattedDuration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    document.getElementById('duration').value = formattedDuration; // Устанавливаем длительность
+                };
+            }
+        }
+    </script>
+</body>
+</html>
