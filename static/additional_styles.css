@@ -379,6 +379,20 @@ footer {
     padding: 10px 0;
 }
 
-#currentYear {
-    font-weight: bold;
+textarea {
+    width: 92%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    resize: none; /* Запретить изменение размера */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+textarea:focus {
+    border-color: #6a0dad; /* Цвет рамки при фокусе */
+    box-shadow: 0 0 5px rgba(153, 0, 255, 0.5);
+    outline: none; /* Убираем стандартный контур */
 }

@@ -481,11 +481,11 @@ p {
     font-size: 1em;
     background-color: #fff;
     color: #333;
-    appearance: none; /* Убираем стандартный стиль */
+    appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%236a0dad"><path d="M8 10.5l-4-4h8z"/></svg>'); /* Стрелка вниз */
     background-repeat: no-repeat;
     background-position: right 10px center; /* Положение стрелки */
-    background-size: 12px; /* Размер стрелки */
+    background-size: 14px; /* Размер стрелки */
     transition: border-color 0.3s; /* Плавный переход цвета границы */
 }
 

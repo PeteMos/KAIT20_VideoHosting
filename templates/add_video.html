@@ -5,11 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавление Видео</title>
     <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='additional_styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px; /* Отступ между колонками */
+        }
+
+        .form-container, #uploadedVideos {
+            flex: 1; /* Занимать равное пространство */
+            min-width: 300px; /* Минимальная ширина для удобства */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        video {
+            max-width: 100%; /* Ограничение ширины видео */
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,58 +53,94 @@
             <h1>Добавление Видео</h1>
         </div>
     </header>
-
     <main>
-        <div class="form-container">
-            <form action="{{ url_for('add_video') }}" method="POST" enctype="multipart/form-data">
-                <label for="course">Выберите курс:</label>
-                <select name="course" id="course" required>
-                    <option value="Основы программирования">Основы программирования</option>
-                    <option value="Основы дизайна">Основы дизайна</option>
-                    <option value="Основы JavaScript">Основы JavaScript</option>
-                    <option value="Кибербезопасность">Кибербезопасность</option>
-                    <option value="Базы данных">Базы данных</option>
-                    <option value="DevOps">DevOps</option>
-                    <option value="Цифровой маркетинг">Цифровой маркетинг</option>
-                    <option value="Графический дизайн">Графический дизайн</option>
-                    <option value="Машинное обучение">Машинное обучение</option>
-                    <option value="Мобильная разработка">Мобильная разработка</option>
-                    <option value="UX/UI дизайн">UX/UI дизайн</option>
-                    <option value="Веб-разработка">Веб-разработка</option>
-                </select>
+        <div class="main-container">
+            <div class="form-container">
+                <form action="{{ url_for('add_video') }}" method="POST" enctype="multipart/form-data" id="videoUploadForm">
+                    <label for="course">Выберите курс:</label>
+                    <select name="course" id="course" required>
+                        <option value="Основы программирования">Основы программирования</option>
+                        <option value="Основы дизайна">Основы дизайна</option>
+                        <option value="Основы JavaScript">Основы JavaScript</option>
+                        <option value="Кибербезопасность">Кибербезопасность</option>
+                        <option value="Базы данных">Базы данных</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="Цифровой маркетинг">Цифровой маркетинг</option>
+                        <option value="Графический дизайн">Графический дизайн</option>
+                        <option value="Машинное обучение">Машинное обучение</option>
+                        <option value="Мобильная разработка">Мобильная разработка</option>
+                        <option value="UX/UI дизайн">UX/UI дизайн</option>
+                        <option value="Веб-разработка">Веб-разработка</option>
+                    </select>
 
-                <input type="text" name="title" placeholder="Название видео" required>
-                <input type="text" name="description" placeholder="Описание видео" required>
-                <input type="text" name="duration" id="duration" placeholder="Длительность" readonly>
-                <input type="hidden" name="author" id="author" value="{{ current_user.username }}">
-                <input type="file" name="video_file" accept="video/*" required onchange="setDuration(this)">
-                <button type="submit">Добавить видео</button>
-            </form>
+                    <input type="text" name="title" placeholder="Название видео" required>
+                    <textarea name="description" id="videoDescription" rows="4" placeholder="Описание видео..." required></textarea>
+                    <input type="text" name="duration" id="duration" placeholder="Длительность" readonly>
+                    <input type="hidden" name="author" id="author" value="{{ current_user.username }}">
+                    <input type="file" name="video_file" accept="video/*" required onchange="setDuration(this)">
+                    <button type="submit">Добавить Видео</button>
+                </form>
+            </div>
+            <div id="uploadedVideos">
+                <h2>Загруженные Видео</h2>
+                <div id="videoList"></div>
+            </div>
         </div>
     </main>
-
     <footer>
         <div class="container">
             <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
         </div>
     </footer>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
         function setDuration(input) {
             const file = input.files[0];
             if (file) {
-                const videoElement = document.createElement('video');
-                videoElement.src = URL.createObjectURL(file);
-                videoElement.onloadedmetadata = function() {
-                    const duration = videoElement.duration; // Длительность в секундах
-                    const minutes = Math.floor(duration / 60);
-                    const seconds = Math.floor(duration % 60);
-                    const formattedDuration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                    document.getElementById('duration').value = formattedDuration; // Устанавливаем длительность
-                };
+                const video = document.createElement('video');
+                video.src = URL.createObjectURL(file);
+                video.addEventListener('loadedmetadata', function() {
+                    const durationInSeconds = Math.floor(video.duration);
+                    document.getElementById('duration').value = formatDuration(durationInSeconds);
+                });
             }
         }
+
+        document.getElementById('videoUploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = this.title.value;
+            const description = this.description.value;
+            const duration = this.duration.value;
+            const fileInput = this.video_file;
+
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card';
+
+            // Создаем элемент video
+            const videoElement = document.createElement('video');
+            videoElement.controls = true; // Добавляем элементы управления
+            videoElement.src = URL.createObjectURL(fileInput.files[0]);
+            videoElement.style.width = '100%'; // Устанавливаем ширину видео
+
+            videoCard.innerHTML = `<strong>Название:</strong> ${title}<br>
+                                   <strong>Описание:</strong> ${description}<br>
+                                   <strong>Длительность:</strong> ${duration}<br>`;
+            videoCard.appendChild(videoElement); // Добавляем видео в карточку
+
+            document.getElementById('videoList').appendChild(videoCard);
+            document.getElementById('uploadedVideos').style.display = 'block'; // Показать список загруженных видео
+
+            this.reset(); // Сброс формы после добавления
+        });
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
+
