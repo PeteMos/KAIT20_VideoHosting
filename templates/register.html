@@ -19,8 +19,24 @@
             </a>
         </div>
         <div class="container">
-            <h1>Учебный Видеохостинг ГБПОУ КАИТ20</h1>
+            <h1>Учебный Видеохостинг<br>ГБПОУ КАИТ20</h1>
         </div>
+
+        <div class="user-info">
+            <span id="username" class="username">{{ session.get('username', 'Гость') }}</span>
+            {% if session.get('username') %}
+                <span class="user-role" style="margin-left: 10px;">({{ ROLE_TRANSLATIONS[session.get('role')] if session.get('role') in ROLE_TRANSLATIONS else session.get('role') }})</span>
+                {% if session.get('role') == 'teacher' %}
+                    <a href="{{ url_for('add_video') }}" class="btn" id="add-video-btn" style="margin-left: 20px;">Добавить видео</a>
+                {% endif %}
+                <a href="/logout" id="logout-link" class="btn" style="margin-left: 20px;">Выход</a>
+            {% else %}
+                <a href="/login" class="btn" id="login-btn">Вход</a>
+                <span>|</span>
+                <a href="/register" class="btn" id="register-btn">Регистрация</a>
+            {% endif %}
+        </div>
+
     </header>
 
     <main>

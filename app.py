@@ -236,7 +236,7 @@ def add_video():
         else:
             flash('Пожалуйста, загрузите корректный видеофайл.', 'error')
 
-    return render_template('add_video.html', current_user=session)
+    return render_template('add_video.html', current_user=session, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 def allowed_file(filename):
     allowed_extensions = {'mp4', 'avi', 'mov', 'mkv'}  # Добавьте нужные форматы
@@ -244,51 +244,51 @@ def allowed_file(filename):
 
 @app.route('/course/programming')
 def course_programming():
-    return render_template('course-programming.html')
+    return render_template('course-programming.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/web-development')
 def course_web_development():
-    return render_template('course-web-development.html')
+    return render_template('course-web-development.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/design')
 def course_design():
-    return render_template('course-design.html')
+    return render_template('course-design.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/javascript')
 def course_javascript():
-    return render_template('course-javascript.html')
+    return render_template('course-javascript.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/machine-learning')
 def course_machine_learning():
-    return render_template('course-machine-learning.html')
+    return render_template('course-machine-learning.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/mobile-development')
 def course_mobile_development():
-    return render_template('course-mobile-development.html')
+    return render_template('course-mobile-development.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/cybersecurity')
 def course_cybersecurity():
-    return render_template('course-cybersecurity.html')
+    return render_template('course-cybersecurity.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/database')
 def course_database():
-    return render_template('course-database.html')
+    return render_template('course-database.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/ux-ui-design')
 def course_ux_ui_design():
-    return render_template('course-ux-ui-design.html')
+    return render_template('course-ux-ui-design.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/devops')
 def course_devops():
-    return render_template('course-devops.html')
+    return render_template('course-devops.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/graphic-design')
 def course_graphic_design():
-    return render_template('course-graphic-design.html')
+    return render_template('course-graphic-design.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/digital-marketing')
 def course_digital_marketing():
-    return render_template('course-digital-marketing.html')
+    return render_template('course-digital-marketing.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -19,8 +19,24 @@
             </a>
         </div>
         <div class="container">
-            <h1>Курс: Работа с базами данных</h1>
+            <h1>Курс: Основы дизайна в Figma</h1>
         </div>
+
+        <div class="user-info">
+            <span id="username" class="username">{{ session.get('username', 'Гость') }}</span>
+            {% if session.get('username') %}
+                <span class="user-role" style="margin-left: 10px;">({{ ROLE_TRANSLATIONS[session.get('role')] if session.get('role') in ROLE_TRANSLATIONS else session.get('role') }})</span>
+                {% if session.get('role') == 'teacher' %}
+                    <a href="{{ url_for('add_video') }}" class="btn" id="add-video-btn" style="margin-left: 20px;">Добавить видео</a>
+                {% endif %}
+                <a href="/logout" id="logout-link" class="btn" style="margin-left: 20px;">Выход</a>
+            {% else %}
+                <a href="/login" class="btn" id="login-btn">Вход</a>
+                <span>|</span>
+                <a href="/register" class="btn" id="register-btn">Регистрация</a>
+            {% endif %}
+        </div>
+
     </header>
 
     <main>
@@ -33,58 +49,58 @@
             </div>
             <div class="video-grid" id="videoGrid">
                 <div class="video-card" 
-                     data-title="Введение в базы данных" 
-                     data-description="Основы работы с базами данных." 
-                     data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" 
-                     onclick="openModal('videos/db-intro.mp4', 'Введение в базы данных', 'Основы работы с базами данных.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                     data-title="Введение в Figma" 
+                     data-description="Основы работы с Figma и интерфейс программы." 
+                     data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова" 
+                     onclick="openModal('videos/figma-intro.mp4', 'Введение в Figma', 'Основы работы с Figma и интерфейс программы.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова')">
                     <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Введение в базы данных</h3>
-                    <p>Основы работы с базами данных.</p>
+                    <h3>Введение в Figma</h3>
+                    <p>Основы работы с Figma и интерфейс программы.</p>
                 </div>
                 <div class="video-card" 
-                     data-title="SQL для начинающих" 
-                     data-description="Изучите основы SQL." 
+                     data-title="Создание прототипов" 
+                     data-description="Как создавать интерактивные прототипы в Figma." 
                      data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" 
-                     onclick="openModal('videos/db-sql-basics.mp4', 'SQL для начинающих', 'Изучите основы SQL.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                     onclick="openModal('videos/figma-prototypes.mp4', 'Создание прототипов', 'Как создавать интерактивные прототипы в Figma.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
                     <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>SQL для начинающих</h3>
-                    <p>Изучите основы SQL.</p>
+                    <h3>Создание прототипов</h3>
+                    <p>Как создавать интерактивные прототипы в Figma.</p>
                 </div>
                 <div class="video-card" 
-                     data-title="Проектирование баз данных" 
-                     data-description="Как проектировать эффективные базы данных." 
-                     data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Сидоров" 
-                     onclick="openModal('videos/db-design.mp4', 'Проектирование баз данных', 'Как проектировать эффективные базы данных.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Сидоров')">
+                     data-title="Работа с компонентами" 
+                     data-description="Изучите, как создавать и использовать компоненты в Figma." 
+                     data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов" 
+                     onclick="openModal('videos/figma-components.mp4', 'Работа с компонентами', 'Изучите, как создавать и использовать компоненты в Figma.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов')">
                     <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Проектирование баз данных</h3>
-                    <p>Как проектировать эффективные базы данных.</p>
+                    <h3>Работа с компонентами</h3>
+                    <p>Изучите, как создавать и использовать компоненты в Figma.</p>
                 </div>
                 <div class="video-card" 
-                     data-title="Оптимизация запросов" 
-                     data-description="Советы по оптимизации SQL-запросов." 
-                     data-details="Длительность: 14:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова" 
-                     onclick="openModal('videos/db-query-optimization.mp4', 'Оптимизация запросов', 'Советы по оптимизации SQL-запросов.', 'Длительность: 14:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова')">
+                     data-title="Создание дизайн-системы" 
+                     data-description="Как создать свою дизайн-систему в Figma." 
+                     data-details="Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова" 
+                     onclick="openModal('videos/figma-design-system.mp4', 'Создание дизайн-системы', 'Как создать свою дизайн-систему в Figma.', 'Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова')">
                     <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Оптимизация запросов</h3>
-                    <p>Советы по оптимизации SQL-запросов.</p>
+                    <h3>Создание дизайн-системы</h3>
+                    <p>Как создать свою дизайн-систему в Figma.</p>
                 </div>
                 <div class="video-card" 
-                     data-title="Работа с NoSQL" 
-                     data-description="Основы работы с NoSQL базами данных." 
-                     data-details="Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Дмитрий Смирнов" 
-                     onclick="openModal('videos/db-nosql.mp4', 'Работа с NoSQL', 'Основы работы с NoSQL базами данных.', 'Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Дмитрий Смирнов')">
+                     data-title="Экспорт ресурсов" 
+                     data-description="Научитесь экспортировать ваши ресурсы из Figma." 
+                     data-details="Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков" 
+                     onclick="openModal('videos/figma-export.mp4', 'Экспорт ресурсов', 'Научитесь экспортировать ваши ресурсы из Figma.', 'Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков')">
                     <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Работа с NoSQL</h3>
-                    <p>Основы работы с NoSQL базами данных.</p>
+                    <h3>Экспорт ресурсов</h3>
+                    <p>Научитесь экспортировать ваши ресурсы из Figma.</p>
                 </div>
                 <div class="video-card" 
-                     data-title="Безопасность баз данных" 
-                     data-description="Как защитить свои базы данных." 
-                     data-details="Длительность: 16:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева" 
-                     onclick="openModal('videos/db-security.mp4', 'Безопасность баз данных', 'Как защитить свои базы данных.', 'Длительность: 16:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева')">
+                    data-title="Советы по дизайну" 
+                    data-description="Полезные советы для улучшения вашего дизайна в Figma." 
+                    data-details="Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева" 
+                    onclick="openModal('videos/figma-design-tips.mp4', 'Советы по дизайну', 'Полезные советы для улучшения вашего дизайна в Figma.', 'Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева')">
                     <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Безопасность баз данных</h3>
-                    <p>Как защитить свои базы данных.</p>
+                    <h3>Советы по дизайну</h3>
+                    <p>Полезные советы для улучшения вашего дизайна в Figma.</p>
                 </div>
             </div>
         </div>
@@ -139,3 +155,4 @@
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+

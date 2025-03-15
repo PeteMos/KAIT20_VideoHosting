@@ -16,25 +16,43 @@ body {
 }
 
 header, footer {
-    width: 100%; 
-    margin: 0; 
+    width: 100%;
+    height: 80px; /* Фиксированная высота */
+    margin: 0;
     padding: 10px 0;
-    background-color: #6a0dad; 
+    background-color: #6a0dad;
     color: white;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.index-logo {
+    max-width: 100%; 
+}
+
+.index-logo img {
+    width: 200px; 
+    height: auto; 
+    margin-left: 100px; 
+    max-height: none; 
+}
+
+footer {
+    width: 100%;
+    height: 80px;
+    margin: 0;
+    padding: 10px 0;
+    background-color: #6a0dad;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
     margin: 0;
     font-size: 36px;
-}
-
-.index-logo img {
-    max-width: 50%; 
-    margin: 0 auto; 
-    display: block; 
 }
 
 .container-logo img {
@@ -44,9 +62,24 @@ h1 {
 }
 
 .container {
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.container h1 {
+    font-size: 28px;
+    margin: 0;
+    text-align: center; 
+    overflow: hidden; 
+    white-space: wrap; 
+    padding: 10px 40px;
+}
+
+@media (max-width: 600px) {
+    .container h1 {
+        font-size: 18px; /* Уменьшаем размер шрифта на маленьких экранах */
+    }
 }
 
 .modal {
@@ -168,7 +201,7 @@ h1 {
 .share-button {
     margin-top: 15px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #6a0dad;
     color: white;
     border: none;
     border-radius: 5px;
@@ -179,7 +212,7 @@ h1 {
 }
 
 .share-button:hover {
-    background-color: #0056b3;
+    background-color: #6a0dad;
 }
 
 .comments {
@@ -220,7 +253,7 @@ h1 {
 .submit-comment {
     margin-top: 10px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #6a0dad;
     color: white;
     border: none;
     border-radius: 5px;
@@ -231,7 +264,7 @@ h1 {
 }
 
 .submit-comment:hover {
-    background-color: #0056b3;
+    background-color: #6a0dad;
 }
 
 .error-message {
