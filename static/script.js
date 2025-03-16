@@ -127,7 +127,7 @@ let userVote = null;
         const errorMessage = document.getElementById('error-message');
 
         if (currentUsername === "Гость") {
-            errorMessage.innerHTML = 'Вы должны быть авторизованы для добавления комментариев! Пожалуйста, <a href="#">войдите</a> или <a href="#">зарегистрируйтесь</a>.';
+            errorMessage.innerHTML = 'Вы должны быть авторизованы для добавления комментариев! Пожалуйста, <a href="/login">войдите</a> или <a href="/register">зарегистрируйтесь</a>.';
             return;
         }
 
