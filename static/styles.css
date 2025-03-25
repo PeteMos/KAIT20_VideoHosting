@@ -6,24 +6,24 @@ html, body {
 body {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
+    min-height: 100vh; 
     font-family: 'Roboto', sans-serif;
     background: url('/images/background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #333;
-    padding: 0;
-    overflow-x: hidden;
+    padding: 0; 
+    overflow-x: hidden; 
 }
 
 header, footer {
     width: 100%;
-    height: 80px; /* Фиксированная высота */
+    height: auto; /* Позволяем высоте адаптироваться */
     margin: 0;
-    padding: 10px 0;
+    padding: 10px; /* Уменьшаем отступы */
     background-color: #6a0dad;
     color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Центрируем элементы */
     align-items: center;
 }
 
@@ -34,8 +34,7 @@ header, footer {
 .index-logo img {
     width: 200px; 
     height: auto; 
-    margin-left: 100px; 
-    max-height: none; 
+    margin-left: 40px; 
 }
 
 footer {
@@ -53,16 +52,15 @@ footer {
 .container {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;   
+    margin: 0 auto;
+    padding: 10px; /* Уменьшаем отступы для мобильных устройств */
 }
 
 .container h1 {
     font-size: 28px;
     margin: 0;
     text-align: center; 
-    overflow: hidden; 
-    white-space: wrap;
-    padding: 10px 40px; 
+    padding: 10px 0; 
 }
 
 @media (max-width: 600px) {
@@ -86,15 +84,15 @@ footer {
 .main-nav ul {
     list-style: none;
     padding: 0;
-    display: flex;
+    display: flex; /* Горизонтальное расположение по умолчанию */
 }
 
 .main-nav ul li {
-    margin-right: 20px;
+    margin-right: 20px; /* Отступы между элементами в горизонтальном режиме */
 }
 
 .main-nav ul li:last-child {
-    margin-right: 0;
+    margin-right: 0; /* Убираем отступ у последнего элемента */
 }
 
 .main-nav ul li a {
@@ -114,16 +112,25 @@ footer {
     transform: translateY(-2px);
 }
 
+/* Адаптивные стили для навигации */
 @media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column; /* Вертикальное расположение на мобильных устройствах */
+        align-items: center; /* Центрируем элементы */
+    }
+
     .main-nav ul li {
-        margin-right: 10px;
+        margin: 10px 0; /* Добавляем отступы между элементами */
     }
 
     .main-nav ul li a {
-        padding: 8px 15px; 
+        padding: 10px 15px; /* Увеличиваем область нажатия */
+        width: 100%; /* Устанавливаем ширину на 100% для удобства */
+        text-align: center; /* Центрируем текст */
     }
 }
 
+/* Стили для пользовательской информации */
 .user-info {
     display: flex;
     align-items: center;
@@ -195,6 +202,7 @@ footer {
     height: auto;
 }
 
+/* Стили для кнопок */
 .btn {
     background-color: #6a0dad;
     color: white;
@@ -211,6 +219,7 @@ footer {
     transform: translateY(-3px);
 }
 
+/* Стили для курсов */
 .courses {
     padding: 20px 0;
 }
@@ -281,19 +290,17 @@ footer {
 }
 
 .about, .contact {
-    padding: 40px 20px;
-    background-color: #f9f9f9;
+    padding: 20px; /* Уменьшаем отступы */
+    margin: 10px 0; /* Добавляем отступы между секциями */
+    width: 100%; /* Полная ширина для мобильных */
+    background-color: #f9f9f9; /* Фоновый цвет для секций */
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
+    font-size: 1.5em; /* Уменьшаем размер заголовка */
     color: #6a0dad;
     text-align: center;
-    position: relative;
 }
 
 h2::after {
@@ -308,8 +315,8 @@ h2::after {
 
 .about p, .contact p {
     text-align: left;
-    line-height: 1.6;
-    font-size: 1.1em;
+    font-size: 0.9em; /* Уменьшаем размер текста */
+    line-height: 1.5; /* Увеличиваем межстрочный интервал для удобства чтения */
     color: #333;
     margin-bottom: 15px;
 }
@@ -323,6 +330,119 @@ a {
     text-align: center;
 }
 
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    header, footer {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        height: auto; /* Позволяем высоте адаптироваться */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .container-logo img {
+        max-width: 70%; /* Увеличиваем ширину логотипа на мобильных */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Вертикальное расположение навигации */
+        align-items: center; /* Центрируем элементы */
+    }
+
+    .main-nav ul li a {
+        padding: 8px 15px; 
+        min-width: auto; /* Убираем минимальную ширину на мобильных */
+    }
+
+    .hero {
+        padding: 30px 0; /* Уменьшаем отступы для секции героя */
+    }
+
+    .hero h2 {
+        font-size: 2em; /* Уменьшаем размер заголовка */
+    }
+
+    .hero p {
+        font-size: 1em; /* Уменьшаем размер текста */
+    }
+
+    .course-card {
+        flex: 1 1 calc(50% - 20px); /* Две карточки в ряд на планшетах */
+    }
+
+    .course-card h3 {
+        font-size: 1.2em; /* Уменьшаем размер заголовка карточки */
+    }
+
+    .course-card p {
+        font-size: 0.8em; /* Уменьшаем размер текста в карточке */
+    }
+
+    .about, .contact {
+        padding: 20px; /* Уменьшаем отступы в секциях */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Уменьшаем размер заголовков */
+    }
+
+    .about p, .contact p {
+        font-size: 0.9em; /* Уменьшаем размер текста */
+    }
+
+    .btn {
+        width: 100%; /* Полная ширина для кнопок на мобильных */
+        margin-top: 10px; /* Добавляем отступ сверху */
+    }
+}
+
+@media (max-width: 480px) {
+    .course-card {
+        flex: 1 1 100%; /* Полная ширина для карточек на мобильных */
+    }
+
+    .hero-content {
+        flex-direction: column; /* Вертикальное расположение контента героя */
+        align-items: center; /* Центрируем элементы */
+    }
+
+    .hero-text {
+        padding-right: 0; /* Убираем отступы */
+        text-align: center; /* Центрируем текст */
+    }
+
+    .hero-image {
+        margin-top: 20px; /* Добавляем отступ сверху для изображения */
+    }
+
+    .user-info {
+        flex-direction: column; /* Вертикальное расположение пользовательской информации */
+        margin-right: 0; /* Убираем отступ справа */
+        margin-bottom: 10px; /* Добавляем отступ снизу */
+    }
+
+    .username {
+        font-size: 1em; /* Уменьшаем размер имени пользователя */
+        margin-bottom: 5px; /* Добавляем отступ снизу */
+    }
+
+    .user-info a {
+        width: 100%; /* Полная ширина для ссылки на мобильных */
+        text-align: center; /* Центрируем текст ссылки */
+    }
+
+    .about, .contact {
+        padding: 15px; /* Уменьшаем отступы в секциях для мобильных */
+    }
+
+    .about h2, .contacth2 {
+        font-size: 1.3em; /* Уменьшаем размер заголовков для мобильных */
+    }
+
+    .about p, .contact p {
+        font-size: 0.85em; /* Уменьшаем размер текста для мобильных */
+    }
+}
+
 .back-to-top {
     position: fixed;
     bottom: 20px;
@@ -332,7 +452,7 @@ a {
     border: none;
     padding: 12px 15px;
     border-radius: 8px;
-    display: none;
+    display: none; /* Скрываем кнопку по умолчанию */
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background 0.3s, transform 0.3s;

@@ -17,13 +17,13 @@ body {
 
 header, footer {
     width: 100%;
-    height: 80px; /* Фиксированная высота */
+    height: auto; /* Позволяем высоте адаптироваться */
     margin: 0;
-    padding: 10px 0;
+    padding: 10px; /* Уменьшаем отступы */
     background-color: #6a0dad;
     color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Центрируем элементы */
     align-items: center;
 }
 
@@ -34,8 +34,7 @@ header, footer {
 .index-logo img {
     width: 200px; 
     height: auto; 
-    margin-left: 100px; 
-    max-height: none; 
+    margin-left: 40px; 
 }
 
 footer {
@@ -65,6 +64,7 @@ h1 {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 10px; /* Уменьшаем отступы для мобильных устройств */
 }
 
 .container h1 {
@@ -144,7 +144,53 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s;
-    max-width: 300px; 
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .video-card {
+        flex: 1 1 calc(50% - 10px); /* Уменьшаем ширину карточек для планшетов */
+    }
+}
+
+@media (max-width: 480px) {
+    .video-card {
+        flex: 1 1 calc(100% - 10px); /* Полная ширина для мобильных устройств */
+    }
+
+    header, footer {
+        flex-direction: column; /* Вертикальная ориентация для мобильных */
+        height: auto; /* Позволяем высоте адаптироваться */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .index-logo img {
+        margin-left: 0; /* Убираем отступ для логотипа */
+        max-width: 80%; /* Уменьшаем размер логотипа */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Вертикальное расположение навигации */
+        align-items: center;
+    }
+
+    .btn, .share-button, .submit-comment {
+        width: 100%; /* Полная ширина для кнопок */
+        margin-top: 10px; /* Добавляем отступ сверху */
+    }
+
+    .form-container {
+        margin: 20px; /* Уменьшаем отступы для формы */
+        padding: 20px; /* Уменьшаем внутренние отступы */
+    }
+
+    .search-container {
+        max-width: 100%; /* Увеличиваем ширину контейнера поиска */
+    }
+
+    .search-input {
+        width: 100%; /* Полная ширина для поля поиска */
+    }
 }
 
 .video-card:hover {
