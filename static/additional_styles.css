@@ -1,87 +1,3 @@
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-body {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh; 
-    font-family: 'Roboto', sans-serif;
-    background: url('/images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #333;
-    padding: 0; 
-    overflow-x: hidden; 
-}
-
-header, footer {
-    width: 100%;
-    height: auto; /* Позволяем высоте адаптироваться */
-    margin: 0;
-    padding: 10px; /* Уменьшаем отступы */
-    background-color: #6a0dad;
-    color: white;
-    display: flex;
-    justify-content: center; /* Центрируем элементы */
-    align-items: center;
-}
-
-.index-logo {
-    max-width: 100%; 
-}
-
-.index-logo img {
-    width: 200px; 
-    height: auto; 
-    margin-left: 40px; 
-}
-
-footer {
-    width: 100%;
-    height: 80px;
-    margin: 0;
-    padding: 10px 0;
-    background-color: #6a0dad;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-h1 {
-    margin: 0;
-    font-size: 36px;
-}
-
-.container-logo img {
-    max-width: 40%;
-    margin-right: 10px;
-    transition: none;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px; /* Уменьшаем отступы для мобильных устройств */
-}
-
-.container h1 {
-    font-size: 28px;
-    margin: 0;
-    text-align: center; 
-    overflow: hidden; 
-    white-space: wrap; 
-    padding: 10px 40px;
-}
-
-@media (max-width: 600px) {
-    .container h1 {
-        font-size: 18px; /* Уменьшаем размер шрифта на маленьких экранах */
-    }
-}
-
 .modal {
     display: none;
     position: fixed;
@@ -322,7 +238,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 0;
+    margin: 5px 0;
 }
 
 h2 {
@@ -347,7 +263,7 @@ h2 {
 }
 
 .search-input:focus {
-    border-color: #007bff;
+    border-color: #6a0dad;
     outline: none;
 }
 
@@ -465,7 +381,7 @@ textarea {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     resize: none; /* Запретить изменение размера */
-    font-family: 'Roboto', sans-serif;
+    font-family: "PT Serif Caption", serif;
     font-size: 16px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }

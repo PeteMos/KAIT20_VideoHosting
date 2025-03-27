@@ -7,7 +7,7 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh; 
-    font-family: 'Roboto', sans-serif;
+    font-family: "PT Serif Caption", serif;
     background: url('/images/background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #333;
@@ -63,7 +63,7 @@ footer {
     padding: 10px 0; 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container h1 {
         font-size: 18px; /* Уменьшаем размер шрифта на маленьких экранах */
     }
@@ -166,7 +166,7 @@ footer {
 
 .hero {
     text-align: center;
-    padding: 50px 0;
+    padding: 10px 0;
 }
 
 .hero-content {
@@ -444,7 +444,9 @@ a {
 }
 
 .back-to-top {
+    display: none;
     position: fixed;
+    font-family: "PT Serif Caption", serif;
     bottom: 20px;
     right: 20px;
     background: #3f016b;
@@ -562,6 +564,7 @@ input[type="password"] {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1em;
+    font-family: "PT Serif Caption", serif;
 }
 
 .btn {
@@ -573,6 +576,7 @@ input[type="password"] {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
     font-size: 1.1em;
+    font-family: "PT Serif Caption", serif;
 }
 
 .btn:hover {
@@ -618,6 +622,7 @@ p {
 }
 
 .role-select {
+    font-family: "PT Serif Caption", serif;
     width: 100%;
     padding: 15px;
     margin: 15px 0;
