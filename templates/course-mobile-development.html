@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курс: Разработка мобильных приложений</title>
+    <title>Разработка мобильных приложений</title>
     <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='additional_styles.css') }}">
@@ -12,33 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="index-logo">
-            <a href="/">
-                <img src="{{ url_for('images', filename='container-logo-img.png') }}" alt="Главное изображение"> 
-            </a>
-        </div>
-        <div class="container">
-            <h1>Курс: Разработка мобильных приложений</h1>
-        </div>
-
-        <div class="user-info">
-            <span id="username" class="username">{{ session.get('username', 'Гость') }}</span>
-            {% if session.get('username') %}
-                <span class="user-role" style="margin-left: 10px;">({{ ROLE_TRANSLATIONS[session.get('role')] if session.get('role') in ROLE_TRANSLATIONS else session.get('role') }})</span>
-                {% if session.get('role') == 'teacher' %}
-                    <a href="{{ url_for('add_video') }}" class="btn" id="add-video-btn" style="margin-left: 20px;">Добавить видео</a>
-                {% endif %}
-                <a href="/logout" id="logout-link" class="btn" style="margin-left: 20px;">Выход</a>
-            {% else %}
-                <a href="/login" class="btn" id="login-btn">Вход</a>
-                <span>|</span>
-                <a href="/register" class="btn" id="register-btn">Регистрация</a>
-            {% endif %}
-        </div>
-
-    </header>
-
+    {% include 'header.html' %}
     <main>
         <div class="container">
             <div class="header-container">
@@ -143,15 +117,6 @@
             </div>
         </div>
     </div>    
-
-    <button class="back-to-top" onclick="scrollToTop()">Вернуться наверх</button>
-
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="currentYear"></span> Учебный Видеохостинг ГБПОУ КАИТ20</p>
-        </div>
-    </footer>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    {% include 'footer.html' %}
 </body>
 </html>

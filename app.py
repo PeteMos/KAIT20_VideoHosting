@@ -94,6 +94,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
+@role_required('admin')  # Добавляем проверку роли
 def register():
     if request.method == 'POST':
         username = request.form['username']
@@ -132,9 +133,7 @@ def register():
         try:
             db.session.add(new_user)
             db.session.commit()
-            session['username'] = new_user.username  # Сохраняем имя пользователя в сессии
-            session['role'] = new_user.role  # Сохраняем роль пользователя в сессии
-            flash('Регистрация прошла успешно! Вы успешно вошли в систему.', 'success')
+            flash('Регистрация прошла успешно!', 'success')
             return redirect(url_for('index'))  # Перенаправление на главную страницу
         except Exception as e:
             db.session.rollback()  # Откат транзакции в случае ошибки
@@ -143,6 +142,7 @@ def register():
             return redirect(url_for('register'))
 
     return render_template('register.html')
+
 
 def generate_reset_token(email):
     token = jwt.encode({'reset_password': email, 'exp':
@@ -244,51 +244,63 @@ def allowed_file(filename):
 
 @app.route('/course/programming')
 def course_programming():
-    return render_template('course-programming.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Основы программирования"
+    return render_template('course-programming.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/web-development')
 def course_web_development():
-    return render_template('course-web-development.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Веб-разработка"
+    return render_template('course-web-development.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/design')
 def course_design():
-    return render_template('course-design.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Основы дизайна"
+    return render_template('course-design.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/javascript')
 def course_javascript():
-    return render_template('course-javascript.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Основы JavaScript"
+    return render_template('course-javascript.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/machine-learning')
 def course_machine_learning():
-    return render_template('course-machine-learning.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Введение в машинное обучение"
+    return render_template('course-machine-learning.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/mobile-development')
 def course_mobile_development():
-    return render_template('course-mobile-development.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Разработка мобильных приложений"
+    return render_template('course-mobile-development.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/cybersecurity')
 def course_cybersecurity():
-    return render_template('course-cybersecurity.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Основы кибербезопасности"
+    return render_template('course-cybersecurity.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/database')
 def course_database():
-    return render_template('course-database.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Работа с базами данных"
+    return render_template('course-database.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/ux-ui-design')
 def course_ux_ui_design():
-    return render_template('course-ux-ui-design.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "UX/UI дизайн"
+    return render_template('course-ux-ui-design.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/devops')
 def course_devops():
-    return render_template('course-devops.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Основы DevOps"
+    return render_template('course-devops.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/graphic-design')
 def course_graphic_design():
-    return render_template('course-graphic-design.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Основы графического дизайна"
+    return render_template('course-graphic-design.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/digital-marketing')
 def course_digital_marketing():
-    return render_template('course-digital-marketing.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    course_title = "Основы цифрового маркетинга"
+    return render_template('course-digital-marketing.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 if __name__ == '__main__':
     app.run(debug=True)

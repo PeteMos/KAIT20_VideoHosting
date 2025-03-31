@@ -171,6 +171,7 @@
     width: auto; 
     min-width: 80px; 
     max-width: 150px; 
+    font-family: "PT Serif Caption", serif;
 }
 
 .share-button:hover {
@@ -179,6 +180,7 @@
 
 .comments {
     margin-top: 20px;
+    font-family: "PT Serif Caption", serif;
 }
 
 .comment-list {
@@ -223,6 +225,7 @@
     width: auto; 
     min-width: 80px; 
     max-width: 150px; 
+    font-family: "PT Serif Caption", serif;
 }
 
 .submit-comment:hover {

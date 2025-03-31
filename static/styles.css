@@ -134,7 +134,7 @@ footer {
 .user-info {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 60px;
     text-align: center;
 }
 
@@ -161,7 +161,8 @@ footer {
 
 .user-info span {
     color: white;
-    margin: 0 10px;
+    margin: 0 5px;
+    margin-left: 11px;
 }
 
 .hero {
@@ -224,11 +225,6 @@ footer {
     padding: 20px 0;
 }
 
-.courses h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .course-grid {
     display: flex;
     flex-wrap: wrap;
@@ -242,7 +238,7 @@ footer {
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
-    flex: 1 1 calc(25% - 20px);
+    flex: 1 1 calc(25% - 20px); /* 4 карточки в ряд на больших экранах */
     margin: 10px;
 }
 
@@ -267,7 +263,6 @@ footer {
 }
 
 .course-image img {
-    width: 100%;
     height: auto;
     max-width: 150px;
     border-radius: 5px;
@@ -292,7 +287,6 @@ footer {
 .about, .contact {
     padding: 20px; /* Уменьшаем отступы */
     margin: 10px 0; /* Добавляем отступы между секциями */
-    width: 100%; /* Полная ширина для мобильных */
     background-color: #f9f9f9; /* Фоновый цвет для секций */
     border-radius: 8px;
 }
