@@ -354,6 +354,7 @@ select:focus, input[type="text"]:focus, input[type="file"]:focus {
     outline: none;
 }
 
+
 button {
     padding: 10px 15px; /* Уменьшаем отступы для кнопки */
     background-color: #6a0dad;
@@ -393,4 +394,16 @@ textarea:focus {
     border-color: #6a0dad; /* Цвет рамки при фокусе */
     box-shadow: 0 0 5px rgba(153, 0, 255, 0.5);
     outline: none; /* Убираем стандартный контур */
+}
+
+.styled-label {
+    font-family: "PT Serif Caption", serif;
+}
+
+.styled-select {
+    font-family: "PT Serif Caption", serif;
+}
+
+.add-video {
+    font-family: "PT Serif Caption", serif;
 }

@@ -204,6 +204,7 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
     const title = this.title.value;
     const description = this.description.value;
     const duration = this.duration.value;
+    const course = this.course.value; // Получаем значение курса
     const fileInput = this.video_file;
 
     const videoCard = document.createElement('div');
@@ -215,10 +216,21 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
     videoElement.src = URL.createObjectURL(fileInput.files[0]);
     videoElement.style.width = '100%'; // Устанавливаем ширину видео
 
-    videoCard.innerHTML = `<strong>Название:</strong> ${title}<br>
+    // Добавляем кнопку удаления
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Удалить видео';
+    deleteButton.style.marginTop = '10px'; // Отступ сверху
+    deleteButton.style.fontFamily = '"PT Serif Caption", serif';
+    deleteButton.onclick = function() {
+        videoCard.remove(); // Удаляем карточку видео
+    };
+
+    videoCard.innerHTML = `<strong>Курс:</strong> ${course}<br>
+                        <strong>Название:</strong> ${title}<br>
                         <strong>Описание:</strong> ${description}<br>
                         <strong>Длительность:</strong> ${duration}<br>`;
     videoCard.appendChild(videoElement); // Добавляем видео в карточку
+    videoCard.appendChild(deleteButton); // Добавляем кнопку удаления
 
     document.getElementById('videoList').appendChild(videoCard);
     document.getElementById('uploadedVideos').style.display = 'block'; // Показать список загруженных видео

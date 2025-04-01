@@ -15,39 +15,49 @@
     {% include 'header.html' %} 
     <main>
         <div class="main-container">
-            <div class="form-container">
+            <div class="form-container-add">
                 <form action="{{ url_for('add_video') }}" method="POST" enctype="multipart/form-data" id="videoUploadForm">
-                    <label for="course">Выберите курс:</label>
-                    <select name="course" id="course" required>
+                    <label for="course" class="styled-label">Выберите курс:</label>
+                    <select name="course" id="course" class="styled-select" required>
                         <option value="Основы программирования">Основы программирования</option>
                         <option value="Основы дизайна">Основы дизайна</option>
                         <option value="Основы JavaScript">Основы JavaScript</option>
-                        <option value="Кибербезопасность">Кибербезопасность</option>
-                        <option value="Базы данных">Базы данных</option>
-                        <option value="DevOps">DevOps</option>
-                        <option value="Цифровой маркетинг">Цифровой маркетинг</option>
-                        <option value="Графический дизайн">Графический дизайн</option>
+                        <option value="Основы кибербезопасности">Основы кибербезопасности</option>
+                        <option value="Основы работы с базами данных">Основы работы с базами данных</option>
+                        <option value="Основы DevOps">Основы DevOps</option>
+                        <option value="Основы цифрового маркетинга">Основы цифрового маркетинга</option>
+                        <option value="Основы графического дизайна">Основы графического дизайна</option>
                         <option value="Машинное обучение">Машинное обучение</option>
-                        <option value="Мобильная разработка">Мобильная разработка</option>
+                        <option value="Разработка мобильных приложений">Разработка мобильных приложений</option>
                         <option value="UX/UI дизайн">UX/UI дизайн</option>
                         <option value="Веб-разработка">Веб-разработка</option>
                     </select>
-
+                
                     <input type="text" name="title" placeholder="Название видео" required>
                     <textarea name="description" id="videoDescription" rows="4" placeholder="Описание видео..." required></textarea>
                     <input type="text" name="duration" id="duration" placeholder="Длительность" readonly>
                     <input type="hidden" name="author" id="author" value="{{ current_user.username }}">
                     <input type="file" name="video_file" accept="video/*" required onchange="setDuration(this)">
-                    <button type="submit">Добавить Видео</button>
-                </form>
+                    <button type="submit" class="add-video">Добавить Видео</button>
+                </form>                
             </div>
-            <div id="uploadedVideos">
-                <h2>Загруженные Видео</h2>
-                <div id="videoList"></div>
-            </div>
-        </div>
+            <div id="uploadedVideos" class="uploaded-videos-container">
+                <h2 class="videos-title">Загруженные Видео</h2>
+                <div id="videoList" class="video-list">
+                    {% for video in videos %}
+                        <div class="video-item">
+                            <h3>{{ video.title }}</h3>
+                            <p>{{ video.description }}</p>
+                            <video width="320" height="240" controls>
+                                <source src="{{ url_for('static', filename='uploads/videos/' + video.filename) }}" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>                                    
+        </div>        
     </main>
     {% include 'footer.html' %}
 </body>
 </html>
-
