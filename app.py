@@ -91,7 +91,7 @@ def login():
         else:
             flash('Неверный email или пароль', 'error')
     
-    return render_template('login.html')
+    return render_template('login.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/register', methods=['GET', 'POST'])
 @role_required('admin')  # Добавляем проверку роли
@@ -141,7 +141,7 @@ def register():
             flash('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.', 'error')
             return redirect(url_for('register'))
 
-    return render_template('register.html')
+    return render_template('register.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 
 def generate_reset_token(email):
@@ -172,7 +172,7 @@ def reset_password_request():
         
         return redirect(url_for('login'))
     
-    return render_template('reset-password-request.html')
+    return render_template('reset-password-request.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/reset-password/<token>', methods=['GET', 'POST'])
 def reset_password(token):

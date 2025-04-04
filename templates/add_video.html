@@ -37,7 +37,8 @@
                     <textarea name="description" id="videoDescription" rows="4" placeholder="Описание видео..." required></textarea>
                     <input type="text" name="duration" id="duration" placeholder="Длительность" readonly>
                     <input type="hidden" name="author" id="author" value="{{ current_user.username }}">
-                    <input type="file" name="video_file" accept="video/*" required onchange="setDuration(this)">
+                    <input type="file" name="video_file" accept="video/*" required onchange="setDuration(this); updateFileName(this)" class="file-input" id="video_file">
+                    <input type="text" id="file-name" placeholder="Выберите файл" readonly style="border: 1px solid #ccc; padding: 10px; width: 300px; margin-top: 10px;">
                     <button type="submit" class="add-video">Добавить Видео</button>
                 </form>                
             </div>

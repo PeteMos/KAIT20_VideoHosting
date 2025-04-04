@@ -199,6 +199,32 @@ function setDuration(input) {
     }
 }
 
+document.querySelector('.file-input').addEventListener('change', function() {
+    const label = this.nextElementSibling;
+    if (this.files.length > 0) {
+        label.textContent = this.files[0].name; // Отображаем имя файла
+    } else {
+        label.textContent = 'Выберите файл'; // Сброс текста
+    }
+    
+    // Применяем шрифт к label
+    label.style.fontFamily = '"PT Serif Caption", serif';
+});
+
+function updateFileName(input) {
+    const fileNameInput = document.getElementById('file-name'); // Получаем элемент для отображения имени файла
+    if (input.files.length > 0) {
+        fileNameInput.value = input.files[0].name; // Отображаем имя файла в текстовом поле
+    } else {
+        fileNameInput.value = 'Выберите файл'; // Сброс текста
+    }
+}
+
+// Добавляем обработчик события на текстовое поле, чтобы открыть диалог выбора файла
+document.getElementById('file-name').addEventListener('click', function() {
+    document.getElementById('video_file').click(); // Имитируем клик на скрытом input
+});
+
 document.getElementById('videoUploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const title = this.title.value;
@@ -222,7 +248,10 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
     deleteButton.style.marginTop = '10px'; // Отступ сверху
     deleteButton.style.fontFamily = '"PT Serif Caption", serif';
     deleteButton.onclick = function() {
-        videoCard.remove(); // Удаляем карточку видео
+        // Запрашиваем подтверждение у пользователя
+        if (confirm("Вы уверены, что хотите удалить это видео?")) {
+            videoCard.remove(); // Удаляем карточку видео
+        }
     };
 
     videoCard.innerHTML = `<strong>Курс:</strong> ${course}<br>
@@ -237,3 +266,4 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
 
     this.reset(); // Сброс формы после добавления
 });
+
