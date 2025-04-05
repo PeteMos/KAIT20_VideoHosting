@@ -340,13 +340,11 @@ label {
 }
 
 select, input[type="text"], input[type="file"] {
-    padding: 10px; /* Уменьшаем отступы внутри полей */
-    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1em;
     transition: border-color 0.3s;
-    width: calc(100% - 22px); /* Устанавливаем ширину с учетом отступов */
+    width: calc(100% - 30px); /* Устанавливаем ширину с учетом отступов */
 }
 
 select:focus, input[type="text"]:focus, input[type="file"]:focus {
@@ -367,7 +365,6 @@ button {
 
 button:hover {
     background-color: #5a0a9d;
-    transform: translateY(-2px);
 }
 
 footer {

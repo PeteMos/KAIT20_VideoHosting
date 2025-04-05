@@ -291,6 +291,10 @@ footer {
     border-radius: 8px;
 }
 
+.form-container h2 {
+    color: #6a0dad;
+}
+
 h2 {
     font-size: 1.5em; /* Уменьшаем размер заголовка */
     color: #6a0dad;
@@ -563,7 +567,6 @@ a {
 .form-container-add, .uploaded-videos-container {
     flex: 1;
     max-width: 450px; 
-    margin: 0 10px; 
 }
 
 .uploaded-videos-container {
@@ -623,6 +626,7 @@ input[type="password"] {
 .btn {
     background-color: #6a0dad;
     color: white;
+    margin-top: 10px;
     padding: 12px 20px;
     border: none;
     border-radius: 5px;
@@ -639,39 +643,6 @@ input[type="password"] {
 
 p {
     text-align: center;
-}
-
-.password-container {
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.password-container input {
-    width: 100%; 
-    padding: 20px 40px 20px 16px; /* Отступы: сверху, справа для значка, снизу, слева */
-    box-sizing: border-box; 
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px; 
-    top: 50%; 
-    transform: translateY(-50%);
-    background: transparent; /* Прозрачный фон */
-    border: none; 
-    cursor: pointer; 
-    outline: none; 
-    padding: 0; 
-}
-
-.toggle-password i {
-    font-size: 1.2em;
-    color: #aaa; 
-    transition: color 0.3s ease; /* Плавный переход цвета */
-}
-
-.toggle-password:hover i {
-    color: #6a0dad; 
 }
 
 .role-select {

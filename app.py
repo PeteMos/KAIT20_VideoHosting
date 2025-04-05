@@ -201,6 +201,33 @@ def reset_password(token):
 
     return render_template('reset-password.html', token=token)
 
+@app.route('/change-password', methods=['GET', 'POST'])
+def change_password():
+    # Проверка авторизации пользователя
+    if 'username' not in session:
+        return redirect(url_for('login'))  # Перенаправление на страницу входа, если не авторизован
+
+    if request.method == 'POST':
+        current_password = request.form['current_password']
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+
+        user = User.query.filter_by(username=session.get('username')).first()
+
+        if user and check_password_hash(user.password, current_password):
+            if new_password == confirm_password:
+                user.password = generate_password_hash(new_password)
+                db.session.commit()
+                flash('Пароль успешно изменен!', 'success')
+                return redirect(url_for('index'))  # Возврат после успешного изменения пароля
+            else:
+                flash('Новые пароли не совпадают.', 'error')
+        else:
+            flash('Неверный текущий пароль.', 'error')
+
+    # Возврат шаблона для GET-запроса или после неудачи в POST
+    return render_template('change-password.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)

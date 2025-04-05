@@ -151,15 +151,31 @@ function deleteComment(button) {
 function searchVideos() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
     const videoCards = document.querySelectorAll('.video-card');
+    const gifPlaceholder = document.getElementById('gifPlaceholder');
+
+    let hasVisibleVideos = false; // Флаг для проверки наличия видимых видео
 
     videoCards.forEach(card => {
         const title = card.getAttribute('data-title').toLowerCase();
         const description = card.getAttribute('data-description').toLowerCase();
         const details = card.getAttribute('data-details').toLowerCase();
 
-        card.style.display = (title.includes(searchInput) || description.includes(searchInput) || details.includes(searchInput)) ? '' : 'none';
+        if (title.includes(searchInput) || description.includes(searchInput) || details.includes(searchInput)) {
+            card.style.display = ''; // Показываем видео
+            hasVisibleVideos = true; // Устанавливаем флаг в true
+        } else {
+            card.style.display = 'none'; // Скрываем видео
+        }
     });
+
+    // Если нет видимых видео, показываем GIF
+    if (!hasVisibleVideos) {
+        gifPlaceholder.style.display = 'block'; // Показываем заглушку
+    } else {
+        gifPlaceholder.style.display = 'none'; // Скрываем заглушку
+    }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const videoCount = 6; 

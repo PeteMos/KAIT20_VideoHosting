@@ -25,6 +25,10 @@
                 <a href="{{ url_for('add_video') }}" class="btn" id="add-video-btn" style="margin-left: 20px;">Добавить видео</a>
             {% endif %}
             
+            {% if session.get('role') != 'admin' %}
+                <a href="{{ url_for('change_password') }}" class="btn" style="margin-left: 20px;">Сменить пароль</a>
+            {% endif %}
+            
             <a href="/logout" id="logout-link" class="btn" style="margin-left: 20px;">Выход</a>
         {% else %}
             <a href="/login" class="btn" id="login-btn">Вход</a>
