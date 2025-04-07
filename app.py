@@ -271,64 +271,99 @@ def allowed_file(filename):
 
 @app.route('/course/programming')
 def course_programming():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))  # Перенаправляем на страницу входа
     course_title = "Основы программирования"
     return render_template('course-programming.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/web-development')
 def course_web_development():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Веб-разработка"
     return render_template('course-web-development.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/design')
 def course_design():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Основы дизайна"
     return render_template('course-design.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/javascript')
 def course_javascript():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Основы JavaScript"
     return render_template('course-javascript.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/machine-learning')
 def course_machine_learning():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Введение в машинное обучение"
     return render_template('course-machine-learning.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/mobile-development')
 def course_mobile_development():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Разработка мобильных приложений"
     return render_template('course-mobile-development.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/cybersecurity')
 def course_cybersecurity():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Основы кибербезопасности"
     return render_template('course-cybersecurity.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/database')
 def course_database():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Работа с базами данных"
     return render_template('course-database.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/ux-ui-design')
 def course_ux_ui_design():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "UX/UI дизайн"
     return render_template('course-ux-ui-design.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/devops')
 def course_devops():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Основы DevOps"
     return render_template('course-devops.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/graphic-design')
 def course_graphic_design():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Основы графического дизайна"
     return render_template('course-graphic-design.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/digital-marketing')
 def course_digital_marketing():
+    if 'username' not in session:
+        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        return redirect(url_for('login'))
     course_title = "Основы цифрового маркетинга"
     return render_template('course-digital-marketing.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -21,62 +21,68 @@
                     <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
                 </div>
             </div>
-            <div class="video-grid" id="videoGrid">
-                <div class="video-card" 
-                     data-title="Введение в базы данных" 
-                     data-description="Основы работы с базами данных." 
-                     data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" 
-                     onclick="openModal('video_placeholder.mp4', 'Введение в базы данных', 'Основы работы с базами данных.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
-                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Введение в базы данных</h3>
-                    <p>Основы работы с базами данных.</p>
+            {% if session.get('username') %}
+                <div class="video-grid" id="videoGrid">
+                    <div class="video-card" 
+                        data-title="Введение в базы данных" 
+                        data-description="Основы работы с базами данных." 
+                        data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" 
+                        onclick="openModal('video_placeholder.mp4', 'Введение в базы данных', 'Основы работы с базами данных.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
+                        <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Введение в базы данных</h3>
+                        <p>Основы работы с базами данных.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="SQL для начинающих" 
+                        data-description="Изучите основы SQL." 
+                        data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" 
+                        onclick="openModal('video_placeholder.mp4', 'SQL для начинающих', 'Изучите основы SQL.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                        <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>SQL для начинающих</h3>
+                        <p>Изучите основы SQL.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Проектирование баз данных" 
+                        data-description="Как проектировать эффективные базы данных." 
+                        data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Сидоров" 
+                        onclick="openModal('video_placeholder.mp4', 'Проектирование баз данных', 'Как проектировать эффективные базы данных.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Сидоров')">
+                        <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Проектирование баз данных</h3>
+                        <p>Как проектировать эффективные базы данных.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Оптимизация запросов" 
+                        data-description="Советы по оптимизации SQL-запросов." 
+                        data-details="Длительность: 14:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова" 
+                        onclick="openModal('video_placeholder.mp4', 'Оптимизация запросов', 'Советы по оптимизации SQL-запросов.', 'Длительность: 14:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова')">
+                        <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Оптимизация запросов</h3>
+                        <p>Советы по оптимизации SQL-запросов.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Работа с NoSQL" 
+                        data-description="Основы работы с NoSQL базами данных." 
+                        data-details="Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Дмитрий Смирнов" 
+                        onclick="openModal('video_placeholder.mp4', 'Работа с NoSQL', 'Основы работы с NoSQL базами данных.', 'Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Дмитрий Смирнов')">
+                        <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Работа с NoSQL</h3>
+                        <p>Основы работы с NoSQL базами данных.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Безопасность баз данных" 
+                        data-description="Как защитить свои базы данных." 
+                        data-details="Длительность: 16:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева" 
+                        onclick="openModal('video_placeholder.mp4', 'Безопасность баз данных', 'Как защитить свои базы данных.', 'Длительность: 16:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева')">
+                        <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Безопасность баз данных</h3>
+                        <p>Как защитить свои базы данных.</p>
+                    </div>
                 </div>
-                <div class="video-card" 
-                     data-title="SQL для начинающих" 
-                     data-description="Изучите основы SQL." 
-                     data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" 
-                     onclick="openModal('video_placeholder.mp4', 'SQL для начинающих', 'Изучите основы SQL.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
-                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>SQL для начинающих</h3>
-                    <p>Изучите основы SQL.</p>
+            {% else %}
+                <div class="alert alert-warning">
+                    <p>Вы должны быть авторизованы для просмотра видео. <a href="{{ url_for('login') }}">Войдите здесь</a>!</p>
                 </div>
-                <div class="video-card" 
-                     data-title="Проектирование баз данных" 
-                     data-description="Как проектировать эффективные базы данных." 
-                     data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Сидоров" 
-                     onclick="openModal('video_placeholder.mp4', 'Проектирование баз данных', 'Как проектировать эффективные базы данных.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Сергей Сидоров')">
-                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Проектирование баз данных</h3>
-                    <p>Как проектировать эффективные базы данных.</p>
-                </div>
-                <div class="video-card" 
-                     data-title="Оптимизация запросов" 
-                     data-description="Советы по оптимизации SQL-запросов." 
-                     data-details="Длительность: 14:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова" 
-                     onclick="openModal('video_placeholder.mp4', 'Оптимизация запросов', 'Советы по оптимизации SQL-запросов.', 'Длительность: 14:00, Дата публикации: 04.01.2025, Автор: Ольга Кузнецова')">
-                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Оптимизация запросов</h3>
-                    <p>Советы по оптимизации SQL-запросов.</p>
-                </div>
-                <div class="video-card" 
-                     data-title="Работа с NoSQL" 
-                     data-description="Основы работы с NoSQL базами данных." 
-                     data-details="Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Дмитрий Смирнов" 
-                     onclick="openModal('video_placeholder.mp4', 'Работа с NoSQL', 'Основы работы с NoSQL базами данных.', 'Длительность: 13:00, Дата публикации: 05.01.2025, Автор: Дмитрий Смирнов')">
-                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Работа с NoSQL</h3>
-                    <p>Основы работы с NoSQL базами данных.</p>
-                </div>
-                <div class="video-card" 
-                     data-title="Безопасность баз данных" 
-                     data-description="Как защитить свои базы данных." 
-                     data-details="Длительность: 16:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева" 
-                     onclick="openModal('video_placeholder.mp4', 'Безопасность баз данных', 'Как защитить свои базы данных.', 'Длительность: 16:00, Дата публикации: 06.01.2025, Автор: Анна Сергеева')">
-                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Безопасность баз данных</h3>
-                    <p>Как защитить свои базы данных.</p>
-                </div>
-            </div>
+            {% endif %}
             {% include 'gif-placeholder.html' %}
         </div>
     </main>

@@ -21,62 +21,68 @@
                     <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
                 </div>
             </div>
-            <div class="video-grid" id="videoGrid">
-                <div class="video-card" 
-                     data-title="Введение в Figma" 
-                     data-description="Основы работы с Figma и интерфейс программы." 
-                     data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова" 
-                     onclick="openModal('videos/figma-intro.mp4', 'Введение в Figma', 'Основы работы с Figma и интерфейс программы.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова')">
-                    <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Введение в Figma</h3>
-                    <p>Основы работы с Figma и интерфейс программы.</p>
+            {% if session.get('username') %}
+                <div class="video-grid" id="videoGrid">
+                    <div class="video-card" 
+                        data-title="Введение в Figma" 
+                        data-description="Основы работы с Figma и интерфейс программы." 
+                        data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова" 
+                        onclick="openModal('videos/figma-intro.mp4', 'Введение в Figma', 'Основы работы с Figma и интерфейс программы.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова')">
+                        <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Введение в Figma</h3>
+                        <p>Основы работы с Figma и интерфейс программы.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Создание прототипов" 
+                        data-description="Как создавать интерактивные прототипы в Figma." 
+                        data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" 
+                        onclick="openModal('videos/figma-prototypes.mp4', 'Создание прототипов', 'Как создавать интерактивные прототипы в Figma.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
+                        <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Создание прототипов</h3>
+                        <p>Как создавать интерактивные прототипы в Figma.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Работа с компонентами" 
+                        data-description="Изучите, как создавать и использовать компоненты в Figma." 
+                        data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов" 
+                        onclick="openModal('videos/figma-components.mp4', 'Работа с компонентами', 'Изучите, как создавать и использовать компоненты в Figma.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов')">
+                        <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Работа с компонентами</h3>
+                        <p>Изучите, как создавать и использовать компоненты в Figma.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Создание дизайн-системы" 
+                        data-description="Как создать свою дизайн-систему в Figma." 
+                        data-details="Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова" 
+                        onclick="openModal('videos/figma-design-system.mp4', 'Создание дизайн-системы', 'Как создать свою дизайн-систему в Figma.', 'Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова')">
+                        <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Создание дизайн-системы</h3>
+                        <p>Как создать свою дизайн-систему в Figma.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Экспорт ресурсов" 
+                        data-description="Научитесь экспортировать ваши ресурсы из Figma." 
+                        data-details="Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков" 
+                        onclick="openModal('videos/figma-export.mp4', 'Экспорт ресурсов', 'Научитесь экспортировать ваши ресурсы из Figma.', 'Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков')">
+                        <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Экспорт ресурсов</h3>
+                        <p>Научитесь экспортировать ваши ресурсы из Figma.</p>
+                    </div>
+                    <div class="video-card" 
+                        data-title="Советы по дизайну" 
+                        data-description="Полезные советы для улучшения вашего дизайна в Figma." 
+                        data-details="Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева" 
+                        onclick="openModal('videos/figma-design-tips.mp4', 'Советы по дизайну', 'Полезные советы для улучшения вашего дизайна в Figma.', 'Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева')">
+                        <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>Советы по дизайну</h3>
+                        <p>Полезные советы для улучшения вашего дизайна в Figma.</p>
+                    </div>
                 </div>
-                <div class="video-card" 
-                     data-title="Создание прототипов" 
-                     data-description="Как создавать интерактивные прототипы в Figma." 
-                     data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" 
-                     onclick="openModal('videos/figma-prototypes.mp4', 'Создание прототипов', 'Как создавать интерактивные прототипы в Figma.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
-                    <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Создание прототипов</h3>
-                    <p>Как создавать интерактивные прототипы в Figma.</p>
+            {% else %}
+                <div class="alert alert-warning">
+                    <p>Вы должны быть авторизованы для просмотра видео. <a href="{{ url_for('login') }}">Войдите здесь</a>!</p>
                 </div>
-                <div class="video-card" 
-                     data-title="Работа с компонентами" 
-                     data-description="Изучите, как создавать и использовать компоненты в Figma." 
-                     data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов" 
-                     onclick="openModal('videos/figma-components.mp4', 'Работа с компонентами', 'Изучите, как создавать и использовать компоненты в Figma.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов')">
-                    <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Работа с компонентами</h3>
-                    <p>Изучите, как создавать и использовать компоненты в Figma.</p>
-                </div>
-                <div class="video-card" 
-                     data-title="Создание дизайн-системы" 
-                     data-description="Как создать свою дизайн-систему в Figma." 
-                     data-details="Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова" 
-                     onclick="openModal('videos/figma-design-system.mp4', 'Создание дизайн-системы', 'Как создать свою дизайн-систему в Figma.', 'Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова')">
-                    <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Создание дизайн-системы</h3>
-                    <p>Как создать свою дизайн-систему в Figma.</p>
-                </div>
-                <div class="video-card" 
-                     data-title="Экспорт ресурсов" 
-                     data-description="Научитесь экспортировать ваши ресурсы из Figma." 
-                     data-details="Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков" 
-                     onclick="openModal('videos/figma-export.mp4', 'Экспорт ресурсов', 'Научитесь экспортировать ваши ресурсы из Figma.', 'Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков')">
-                    <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Экспорт ресурсов</h3>
-                    <p>Научитесь экспортировать ваши ресурсы из Figma.</p>
-                </div>
-                <div class="video-card" 
-                    data-title="Советы по дизайну" 
-                    data-description="Полезные советы для улучшения вашего дизайна в Figma." 
-                    data-details="Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева" 
-                    onclick="openModal('videos/figma-design-tips.mp4', 'Советы по дизайну', 'Полезные советы для улучшения вашего дизайна в Figma.', 'Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева')">
-                    <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                    <h3>Советы по дизайну</h3>
-                    <p>Полезные советы для улучшения вашего дизайна в Figma.</p>
-                </div>
-            </div>
+            {% endif %}
             {% include 'gif-placeholder.html' %}
         </div>
     </main>
