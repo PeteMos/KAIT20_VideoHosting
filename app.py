@@ -62,7 +62,10 @@ def role_required(role):
 @app.route('/')
 def index():
     username = session.get('username') or request.cookies.get('username', 'Гость')
-    role = session.get('role') or request.cookies.get('role')
+    role = session.get('role') or request.cookies.get('role', 'Пользователь')
+    if not username or not role:
+        # Логика для обработки отсутствия данных
+        print("Cookies не найдены, используем значения по умолчанию.")
     return render_template('index.html', username=username, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/images/<path:filename>')
