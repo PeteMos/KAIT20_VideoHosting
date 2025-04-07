@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from flask import make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from functools import wraps
@@ -60,8 +61,9 @@ def role_required(role):
 
 @app.route('/')
 def index():
-    full_name = session.get('username')
-    return render_template('index.html', username=full_name, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    username = session.get('username') or request.cookies.get('username', 'Гость')
+    role = session.get('role') or request.cookies.get('role')
+    return render_template('index.html', username=username, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/images/<path:filename>')
 def images(filename):
@@ -80,14 +82,18 @@ def login():
         login = request.form['login']
         password = request.form['password']
         
-        user = get_user_from_db(login)  # Используем новую функцию для получения пользователя
+        user = get_user_from_db(login)
 
-        # Проверяем, существует ли пользователь и правильный ли пароль
         if user and check_password_hash(user.password, password):
             session['username'] = user.username
-            session['role'] = user.role  # Сохраняем роль пользователя в сессии
-            flash('Вы успешно вошли в систему.', 'success')
-            return redirect(url_for('index'))
+            session['role'] = user.role
+
+            # Сохранение в cookies
+            response = make_response(redirect(url_for('index')))
+            response.set_cookie('username', user.username)
+            response.set_cookie('role', user.role)
+            return response
+            
         else:
             flash('Неверный email или пароль', 'error')
     
@@ -231,9 +237,15 @@ def change_password():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    session.pop('role', None)  # Удаляем роль из сессии
+    session.pop('role', None)
+    
+    # Удаление cookies
+    response = make_response(redirect(url_for('index')))
+    response.set_cookie('username', '', expires=0)
+    response.set_cookie('role', '', expires=0)
+    
     flash('Вы вышли из системы.', 'info')
-    return redirect(url_for('index'))
+    return response
 
 @app.route('/add_video', methods=['GET', 'POST'])
 @role_required('teacher')
