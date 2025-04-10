@@ -1,0 +1,150 @@
+.container-test {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    background-color: white; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    margin-bottom: 50px;
+}
+
+.result-image {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto; 
+}
+
+.result-container {
+    text-align: center;
+}
+
+#questions {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+.courseSelect {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; 
+    max-width: 300px; 
+}
+
+.questions_bth {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-family: "PT Serif Caption", serif;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.questions_bth:hover {
+    background-color: #5a0a9d;
+}
+
+.custom-radio {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: 2px solid #6a0a9d;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-radio:hover {
+    background-color: #f0e7ff;
+}
+
+.custom-radio.selected {
+    background-color: #6a0a9d;
+    color: white;
+    border-color: #5a0a9d;
+}
+
+.testTitle {
+    font-size: 28px;
+    color: #333;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.results-title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.result-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 40px;
+    border: 1px solid #6a0a9d;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.result-course,
+.result-score,
+.result-date {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.result-course strong,
+.result-score strong,
+.result-date strong {
+    color: #6a0a9d;
+}
+
+label {
+    display: block; 
+    margin: 5px 0; 
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse; 
+    margin: 0 auto; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    background-color: white; 
+    margin-bottom: 50px;
+}
+
+th, td {
+    padding: 12px; 
+    text-align: center;
+    border: 1px solid #ddd; 
+}
+
+th {
+    background-color: #6a0dad; 
+    color: white; 
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
+tr:hover {
+    background-color: #f1f1f1; 
+}

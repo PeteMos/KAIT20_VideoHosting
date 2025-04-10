@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебный Видеохостинг ГБПОУ КАИТ20</title>
+    <link rel="icon" type="image/png" href="{{ url_for('images', filename='icon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="result-container">
+        <h2>Ваш результат теста</h2>
+
+        {% set score_percentage = (result.score / total_questions) * 100 %}
+        {% if score_percentage < 10 %}
+            <img class="result-image" src="{{ url_for('images', filename='0-9.png') }}" alt="Результат 0-9%">
+        {% elif score_percentage < 40 %}
+            <img class="result-image" src="{{ url_for('images', filename='10-39.png') }}" alt="Результат 10-39%">
+        {% elif score_percentage < 60 %}
+            <img class="result-image" src="{{ url_for('images', filename='40-59.png') }}" alt="Результат 40-59%">
+        {% elif score_percentage < 90 %}
+            <img class="result-image" src="{{ url_for('images', filename='60-89.png') }}" alt="Результат 60-89%">
+        {% else %}
+            <img class="result-image" src="{{ url_for('images', filename='90-100.png') }}" alt="Результат 90-100%">
+        {% endif %}
+
+        <p class="result-course">Курс: <strong>{{ result.course }}</strong></p>
+        <p class="result-score">Вы ответили правильно на <strong>{{ result.score }}</strong> из <strong>{{ total_questions }}</strong> вопросов.</p>
+        <p class="result-date">Дата: <strong>{{ result.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</strong></p>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

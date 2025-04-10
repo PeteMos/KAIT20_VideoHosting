@@ -23,6 +23,11 @@
             
             {% if session.get('role') == 'teacher' %}
                 <a href="{{ url_for('add_video') }}" class="btn" id="add-video-btn" style="margin-left: 20px;">Добавить видео</a>
+                <a href="{{ url_for('results') }}" class="btn" style="margin-left: 20px;">Результаты студентов</a>
+            {% endif %}
+
+            {% if session.get('role') == 'student' %}
+                <a href="{{ url_for('test') }}" class="course-btn" id="test-btn" style="margin-left: 20px;">Пройти тест</a>
             {% endif %}
             
             {% if session.get('role') != 'admin' %}
