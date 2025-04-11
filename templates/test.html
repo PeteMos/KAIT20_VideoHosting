@@ -246,50 +246,60 @@
             let score = 0;
             const selectedTopic = document.getElementById('courseSelect').value;
 
-            if (selectedTopic && questionsData[selectedTopic]) {
-                const questions = questionsData[selectedTopic];
+            // Проверяем, выбрана ли тема
+            if (!selectedTopic || !questionsData[selectedTopic]) {
+                alert("Пожалуйста, выберите тему.");
+                return; // Прекращаем выполнение функции
+            }
 
-                questions.forEach((q, index) => {
-                    const selectedOption = selectedAnswers[index];
-                    if (selectedOption === q.answer) {
-                        score++;
-                    }
-                });
+            const questions = questionsData[selectedTopic];
 
-                console.log('Отправка данных на сервер:', {
+            // Проверяем, отвечены ли все вопросы
+            for (let i = 0; i < questions.length; i++) {
+                if (!selectedAnswers[i]) {
+                    alert("Пожалуйста, ответьте на все вопросы перед отправкой теста.");
+                    return; // Прекращаем выполнение функции
+                }
+            }
+
+            // Если все вопросы отвечены, подсчитываем баллы
+            questions.forEach((q, index) => {
+                const selectedOption = selectedAnswers[index];
+                if (selectedOption === q.answer) {
+                    score++;
+                }
+            });
+
+            console.log('Отправка данных на сервер:', {
+                username: '{{ session.get("username") }}',
+                course: selectedTopic,
+                score: score
+            });
+
+            fetch('/submit_test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
                     username: '{{ session.get("username") }}',
                     course: selectedTopic,
                     score: score
-                });
-
-                fetch('/submit_test', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: '{{ session.get("username") }}',
-                        course: selectedTopic,
-                        score: score
-                    }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Ответ от сервера:", data);
-                    if (data.result_id) {
-                        window.location.href = `/student_result/${data.result_id}`; 
-                    } else {
-                        alert("Не удалось получить ID результата.");
-                    }
-                })
-                .catch((error) => {
-                    console.error('Ошибка:', error);
-                    alert('Произошла ошибка при отправке теста. Пожалуйста, попробуйте еще раз.');
-                });
-
-            } else {
-                alert("Пожалуйста, выберите тему и ответьте на все вопросы.");
-            }
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Ответ от сервера:", data);
+                if (data.result_id) {
+                    window.location.href = `/student_result/${data.result_id}`; 
+                } else {
+                    alert("Не удалось получить ID результата.");
+                }
+            })
+            .catch((error) => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при отправке теста. Пожалуйста, попробуйте еще раз.');
+            });
         }
 
     </script>
