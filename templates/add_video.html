@@ -53,12 +53,16 @@
                                 <source src="{{ url_for('static', filename='uploads/videos/' + video.filename) }}" type="video/mp4">
                                 Ваш браузер не поддерживает видео.
                             </video>
+                            <form action="{{ url_for('delete_video', video_id=video.id) }}" method="POST" style="display: inline;">
+                                <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить это видео?');" class="delete-video">Удалить</button>
+                            </form>
                         </div>
                     {% endfor %}
                 </div>
-            </div>                                    
-        </div>        
-    </main>
-    {% include 'footer.html' %}
+            </div>            
+        </div>
+</main>
+{% include 'footer.html' %}
 </body>
 </html>
+                                
