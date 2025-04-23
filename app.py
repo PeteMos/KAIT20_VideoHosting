@@ -18,6 +18,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['UPLOAD_FOLDER'] = 'uploads/videos'  # Папка для загрузки видео
 db.init_app(app)
 
+def __repr__(self):
+        return f'<Video {self.title}>'
+
 @app.route('/test')
 def test():
     return render_template('test.html', questions_data=questions_data, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
@@ -141,7 +144,6 @@ def register():
 
     return render_template('register.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
-
 def generate_reset_token(email):
     token = jwt.encode({'reset_password': email, 'exp':
     datetime.datetime.utcnow() + datetime.timedelta(hours=1)}, app.config['SECRET_KEY'], algorithm='HS256')
@@ -239,54 +241,51 @@ def logout():
     flash('Вы вышли из системы.', 'info')
     return response
 
+@app.route('/uploads/videos/<path:filename>')
+def uploaded_video(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 @app.route('/add_video', methods=['GET', 'POST'])
-@role_required('teacher')
+@role_required('teacher')  # Проверка роли
 def add_video():
     if request.method == 'POST':
-        video_title = request.form['title']
-        video_description = request.form['description']
-        video_duration = request.form['duration']
-        video_course = request.form['course']
-        video_file = request.files.get('video_file')
+        title = request.form['title']
+        description = request.form['description']
+        duration = request.form['duration']
+        course = request.form['course']
+        video_file = request.files['video_file']  # Получаем файл
 
-        # Проверяем, что файл видео загружен и имеет допустимый формат
+        # Проверяем, что файл загружен и имеет допустимый формат
         if video_file and allowed_file(video_file.filename):
             filename = secure_filename(video_file.filename)
             video_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            video_file.save(video_file_path) 
 
-            # Сохраняем файл видео на сервере
-            video_file.save(video_file_path)
-
-            # Создаем новый объект Video и сохраняем его в базе данных
-            new_video = Video(
-                title=video_title,
-                description=video_description,
-                duration=video_duration,
-                author=session['username'],
-                course=video_course,
-                filename=filename
-            )
+            # Создаем новый объект Video
+            new_video = Video(title=title, description=description, duration=duration, course=course, filename=filename, author=session.get('username'))
             db.session.add(new_video)
             db.session.commit()
-
-            flash('Видео успешно добавлено!', 'success')
-            return redirect(url_for('add_video'))
-
+            try:
+                db.session.commit()  # Сохраняем изменения в базе данных
+                flash('Видео успешно добавлено!', 'success')
+            except Exception as e:
+                db.session.rollback()  # Откатываем изменения в случае ошибки
+                flash(f'Ошибка при добавлении видео: {str(e)}', 'error')
         else:
-            flash('Ошибка: файл не загружен или имеет недопустимый формат.', 'error')
+            flash('Пожалуйста, загрузите файл видео с допустимым форматом.', 'error')
 
-    # Получаем список видео, добавленных текущим пользователем
+    # Извлечение всех видео из базы данных для отображения
     videos = Video.query.filter_by(author=session.get('username')).all()
     return render_template('add_video.html', videos=videos, current_user=session, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/delete_video/<int:video_id>', methods=['POST'])
-@role_required('teacher')
+@role_required('teacher')  # Проверка роли
 def delete_video(video_id):
-    video = Video.query.get(video_id)
-    if video and video.author == session.get('username'):
-        db.session.delete(video)
-        db.session.commit()
-        flash('Видео успешно удалено!', 'success')
+    video = Video.query.get_or_404(video_id)
+    db.session.delete(video)
+    db.session.commit()
+    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], video.filename))
+    flash('Видео успешно удалено!', 'success')
     return redirect(url_for('add_video'))
 
 @app.route('/submit_test', methods=['POST'])
@@ -338,6 +337,15 @@ def delete_result(result_id):
     else:
         flash('Результат не найден.', 'error')
     return redirect(url_for('results'))
+
+# @app.route('/course/programming')
+# def course_programming():
+#     if 'username' not in session:
+#         flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+#         return redirect(url_for('login'))  # Перенаправляем на страницу входа
+#     course_title = "Основы программирования"
+#     videos = Video.query.filter_by(course="Основы программирования").all()  # Получаем видео для курса
+#     return render_template('course-programming.html', videos=videos, page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/programming')
 def course_programming():
@@ -436,8 +444,7 @@ def course_digital_marketing():
     return render_template('course-digital-marketing.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 def allowed_file(filename):
-    allowed_extensions = {'mp4', 'avi', 'mov', 'mkv'}
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'mp4', 'avi', 'mov', 'mkv'}
 
 if __name__ == '__main__':
     app.run(debug=True)

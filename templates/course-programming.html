@@ -27,27 +27,17 @@
             {% if session.get('username') %}
                 <div class="video-grid" id="videoGrid">
                     
-                    {% for video in videos %}
-                    <li>
-                        <h4>{{ video.title }}</h4>
-                        <p>{{ video.description }}</p>
-                        <p>Длительность: {{ video.duration }}</p>
-                        <video width="320" height="240" controls>
-                            <source src="{{ url_for('static', filename='uploads/videos/' + video.filename) }}" type="video/mp4">
-                            Ваш браузер не поддерживает видео.
-                        </video>
-                        <form action="{{ url_for('like_video', video_id=video.id) }}" method="POST" style="display:inline;">
-                            <button type="submit">👍 Лайк</button>
-                        </form>
-                        <form action="{{ url_for('dislike_video', video_id=video.id) }}" method="POST" style="display:inline;">
-                            <button type="submit">👎 Дизлайк</button>
-                        </form>
-                        <form action="{{ url_for('comment_video', video_id=video.id) }}" method="POST" style="display:inline;">
-                            <input type="text" name="comment" placeholder="Ваш комментарий" required>
-                            <button type="submit">Комментировать</button>
-                        </form>
-                    </li>
-                    {% endfor %}
+                    <!-- {% for video in videos %}
+                        <li>
+                            <h4>{{ video.title }}</h4>
+                            <p>{{ video.description }}</p>
+                            <p>Длительность: {{ video.duration }}</p>
+                            <video width="320" height="240" controls>
+                                <source src="{{ url_for('/uploads/videos/' + video.filename) }}" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+                        </li>
+                    {% endfor %} -->
 
                     <div class="video-card" 
                         data-title="Введение в программирование" 

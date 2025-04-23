@@ -196,6 +196,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const videoElement = document.createElement('video');
+        videoElement.src = URL.createObjectURL(file);
+
+        videoElement.onloadedmetadata = function() {
+            const duration = videoElement.duration; // Получаем длительность в секундах
+            const hours = Math.floor(duration / 3600); // Вычисляем часы
+            const minutes = Math.floor((duration % 3600) / 60); // Вычисляем минуты
+            const seconds = Math.floor(duration % 60); // Вычисляем секунды
+
+            // Форматируем длительность в чч:мм:сс
+            const formattedDuration = `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            document.getElementById('duration').value = formattedDuration; // Устанавливаем значение в поле
+        };
+    }
+});
+
 function formatDuration(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -237,16 +256,12 @@ function updateFileName(input) {
 }
 
 // Добавляем обработчик события на текстовое поле, чтобы открыть диалог выбора файла
-document.getElementById('file-name').addEventListener('click', function() {
-    document.getElementById('video_file').click(); // Имитируем клик на скрытом input
-});
-
 document.getElementById('videoUploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const title = this.title.value;
     const description = this.description.value;
-    const duration = this.duration.value;
-    const course = this.course.value; // Получаем значение курса
+    const durationInput = this.description.value;
+    const course = this.course.value; 
     const fileInput = this.video_file;
 
     const videoCard = document.createElement('div');
@@ -254,17 +269,24 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
 
     // Создаем элемент video
     const videoElement = document.createElement('video');
-    videoElement.controls = true; // Добавляем элементы управления
+    videoElement.controls = true;
     videoElement.src = URL.createObjectURL(fileInput.files[0]);
-    videoElement.style.width = '100%'; // Устанавливаем ширину видео
+    videoElement.style.width = '100%';
+
+    // Получаем длительность видео
+    videoElement.onloadedmetadata = function() {
+        const duration = videoElement.duration; // Получаем длительность в секундах
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        durationInput.value = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`; // Форматируем длительность
+    };
 
     // Добавляем кнопку удаления
     const deleteButton = document.createElement('button');
     deleteButton.innerText = 'Удалить видео';
-    deleteButton.style.marginTop = '10px'; // Отступ сверху
+    deleteButton.style.marginTop = '10px'; 
     deleteButton.style.fontFamily = '"PT Serif Caption", serif';
     deleteButton.onclick = function() {
-        // Запрашиваем подтверждение у пользователя
         if (confirm("Вы уверены, что хотите удалить это видео?")) {
             videoCard.remove(); // Удаляем карточку видео
         }
@@ -273,13 +295,12 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
     videoCard.innerHTML = `<strong>Курс:</strong> ${course}<br>
                         <strong>Название:</strong> ${title}<br>
                         <strong>Описание:</strong> ${description}<br>
-                        <strong>Длительность:</strong> ${duration}<br>`;
-    videoCard.appendChild(videoElement); // Добавляем видео в карточку
-    videoCard.appendChild(deleteButton); // Добавляем кнопку удаления
+                        <strong>Длительность:</strong> ${durationInput.value}<br>`;
+    videoCard.appendChild(videoElement);
+    videoCard.appendChild(deleteButton);
 
     document.getElementById('videoList').appendChild(videoCard);
-    document.getElementById('uploadedVideos').style.display = 'block'; // Показать список загруженных видео
+    document.getElementById('uploadedVideos').style.display = 'block';
 
     this.reset(); // Сброс формы после добавления
 });
-
