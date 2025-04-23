@@ -345,8 +345,7 @@ def course_programming():
         flash('Вы должны быть авторизованы для просмотра видео.', 'error')
         return redirect(url_for('login'))  # Перенаправляем на страницу входа
     course_title = "Основы программирования"
-    videos = Video.query.filter_by(course="Основы программирования").all()  # Получаем видео для курса
-    return render_template('course-programming.html', videos=videos, page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+    return render_template('course-programming.html', page_title=course_title, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/course/web-development')
 def course_web_development():
