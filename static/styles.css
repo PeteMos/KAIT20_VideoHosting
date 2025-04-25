@@ -671,3 +671,34 @@ p {
 .role-select option {
     padding: 10px; /* Отступы для опций */
 }
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Центрирование пагинации */
+    margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+.pagination a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #6a0dad; /* Цвет ссылок */
+    padding: 10px 15px; /* Отступы внутри кнопок */
+    margin: 0 5px; /* Отступы между кнопками */
+    border: 1px solid #6a0dad; /* Рамка кнопок */
+    border-radius: 5px; /* Закругленные углы */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход */
+}
+
+.pagination a:hover {
+    background-color: #6a0dad; /* Цвет фона при наведении */
+    color: white; /* Цвет текста при наведении */
+}
+
+.pagination span {
+    padding: 10px 15px; /* Отступы для текста страницы */
+    margin: 0 5px; /* Отступы между текстом и кнопками */
+    border: 1px solid #ccc; /* Рамка для текста страницы */
+    border-radius: 5px; /* Закругленные углы */
+    background-color: #f8f9fa; /* Фоновый цвет для текста страницы */
+    color: #333; /* Цвет текста */
+}
+

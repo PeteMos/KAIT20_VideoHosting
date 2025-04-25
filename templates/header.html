@@ -7,7 +7,7 @@
     <div class="container">
         <h1>
             {% if page_title %}
-                {{ page_title }}
+                {{ page_title | safe }}
             {% else %}
                 Учебный Видеохостинг<br>ГБПОУ КАИТ20
             {% endif %}
@@ -16,14 +16,17 @@
     <div class="user-info">
         <span id="username" class="username">{{ session.get('username', 'Гость') }}</span>
         {% if session.get('username') %}
-        <span class="user-role" style="margin-left: 10px;">({{ ROLE_TRANSLATIONS[session.get('role')] if session.get('role') in ROLE_TRANSLATIONS else session.get('role') }})</span>     
+            <span class="user-role" style="margin-left: 10px;">({{ ROLE_TRANSLATIONS[session.get('role')] if session.get('role') in ROLE_TRANSLATIONS else session.get('role') }})</span>     
+            
             {% if session.get('role') == 'admin' %}
                 <a href="/register" class="btn" id="register-btn" style="margin-left: 20px;">Зарегистрировать<br>пользователя</a>
             {% endif %}
             
             {% if session.get('role') == 'teacher' %}
-                <a href="{{ url_for('add_video') }}" class="btn" id="add-video-btn" style="margin-left: 20px;">Добавить видео</a>
-                <a href="{{ url_for('results') }}" class="btn" style="margin-left: 20px;">Результаты студентов</a>
+                {% if is_home %} 
+                    <a href="{{ url_for('add_video') }}" class="btn" id="add-video-btn" style="margin-left: 20px;">Добавить видео</a>
+                    <a href="{{ url_for('results') }}" class="btn" style="margin-left: 20px;">Результаты студентов</a>
+                {% endif %}
             {% endif %}
 
             {% if session.get('role') == 'student' %}

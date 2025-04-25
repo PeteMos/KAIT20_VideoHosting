@@ -13,117 +13,21 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <main>
-        <div class="container">
-            <div class="header-container">
-                <h2>Видеоуроки</h2>
-                <div class="search-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
-                </div>
-            </div>
-            {% if session.get('username') %}
-                <div class="video-grid" id="videoGrid">
-                    <div class="video-card" 
-                        data-title="Введение в Figma" 
-                        data-description="Основы работы с Figma и интерфейс программы." 
-                        data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова" 
-                        onclick="openModal('videos/figma-intro.mp4', 'Введение в Figma', 'Основы работы с Figma и интерфейс программы.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Анна Иванова')">
-                        <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Введение в Figma</h3>
-                        <p>Основы работы с Figma и интерфейс программы.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Создание прототипов" 
-                        data-description="Как создавать интерактивные прототипы в Figma." 
-                        data-details="Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова" 
-                        onclick="openModal('videos/figma-prototypes.mp4', 'Создание прототипов', 'Как создавать интерактивные прототипы в Figma.', 'Длительность: 12:00, Дата публикации: 02.01.2025, Автор: Мария Петрова')">
-                        <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Создание прототипов</h3>
-                        <p>Как создавать интерактивные прототипы в Figma.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Работа с компонентами" 
-                        data-description="Изучите, как создавать и использовать компоненты в Figma." 
-                        data-details="Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов" 
-                        onclick="openModal('videos/figma-components.mp4', 'Работа с компонентами', 'Изучите, как создавать и использовать компоненты в Figma.', 'Длительность: 15:00, Дата публикации: 03.01.2025, Автор: Алексей Смирнов')">
-                        <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Работа с компонентами</h3>
-                        <p>Изучите, как создавать и использовать компоненты в Figma.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Создание дизайн-системы" 
-                        data-description="Как создать свою дизайн-систему в Figma." 
-                        data-details="Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова" 
-                        onclick="openModal('videos/figma-design-system.mp4', 'Создание дизайн-системы', 'Как создать свою дизайн-систему в Figma.', 'Длительность: 20:00, Дата публикации: 04.01.2025, Автор: Ирина Кузнецова')">
-                        <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Создание дизайн-системы</h3>
-                        <p>Как создать свою дизайн-систему в Figma.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Экспорт ресурсов" 
-                        data-description="Научитесь экспортировать ваши ресурсы из Figma." 
-                        data-details="Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков" 
-                        onclick="openModal('videos/figma-export.mp4', 'Экспорт ресурсов', 'Научитесь экспортировать ваши ресурсы из Figma.', 'Длительность: 8:00, Дата публикации: 05.01.2025, Автор: Дмитрий Волков')">
-                        <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Экспорт ресурсов</h3>
-                        <p>Научитесь экспортировать ваши ресурсы из Figma.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Советы по дизайну" 
-                        data-description="Полезные советы для улучшения вашего дизайна в Figma." 
-                        data-details="Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева" 
-                        onclick="openModal('videos/figma-design-tips.mp4', 'Советы по дизайну', 'Полезные советы для улучшения вашего дизайна в Figma.', 'Длительность: 10:00, Дата публикации: 06.01.2025, Автор: Ольга Сергеева')">
-                        <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Советы по дизайну</h3>
-                        <p>Полезные советы для улучшения вашего дизайна в Figma.</p>
-                    </div>
-                </div>
-            {% else %}
-                <div class="alert alert-warning">
-                    <p>Вы должны быть авторизованы для просмотра видео. <a href="{{ url_for('login') }}">Войдите здесь</a>!</p>
-                </div>
-            {% endif %}
-            {% include 'gif-placeholder.html' %}
-        </div>
-    </main>
 
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <video id="modalVideo" width="100%" controls>
-                <source id="videoSource" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
-            <div class="video-description" id="videoDescription"></div>
-            <div class="video-details" id="videoDetails"></div>
-            <div class="likes-container">
-                <div class="likes">
-                    <span class="like-icon" onclick="likeVideo(event)">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                            <path d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z"/>
-                        </svg>
-                    </span>
-                    <span class="like-count" id="likeCount">0</span>
-                    <span class="dislike-icon" onclick="dislikeVideo(event)">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                            <path d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z"/>
-                        </svg>
-                    </span>
-                    <span class="dislike-count" id="dislikeCount">0</span>
-                </div>
-                <button class="share-button" onclick="shareVideo()">Поделиться</button>
-            </div>
-            <div class="comments">
-                <h4>Комментарии:</h4>
-                <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
-                <button class="submit-comment" onclick="submitComment()">Отправить</button>
-                <div class="error-message" id="error-message"></div>
-                <h4>Все комментарии</h4> 
-                <div id="commentList" class="comment-list"></div>
-            </div>
-        </div>
-    </div>    
+    {% include 'video-container.html' %}
+
+    <div class="pagination">
+        {% if pagination.page > 1 %}
+            <a href="{{ url_for('course_design', page=pagination.page - 1) }}">« Назад</a>
+        {% endif %}
+    
+        <span>Страница {{ pagination.page }} из {{ pagination.total_pages }}</span>
+    
+        {% if pagination.page < pagination.total_pages %}
+            <a href="{{ url_for('course_design', page=pagination.page + 1) }}">Вперед »</a>
+        {% endif %}
+    </div>
+    
     {% include 'footer.html' %}
 </body>
 </html>

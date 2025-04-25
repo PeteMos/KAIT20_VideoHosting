@@ -1,0 +1,38 @@
+<main>   
+    <div class="container">
+        <!-- <div class="title-container">
+            <h2>Основы программирования</h2>
+        </div> -->
+        <div class="header-container">
+            <h2>Видеоуроки</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
+            </div>
+        </div>
+        {% if session.get('username') %}
+            <div class="video-grid" id="videoGrid">
+                
+                {% for video in videos %}
+                    <div class="video-card" 
+                        data-title="{{ video.title }}" 
+                        data-description="{{ video.description }}" 
+                        data-details="Длительность: {{ video.duration }}, Дата публикации: {{ video.timestamp }}, Автор: {{ video.author }}" 
+                        onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title }}', '{{ video.description }}', 'Длительность: {{ video.duration }}, Дата публикации: {{ video.timestamp }}, Автор: {{ video.author }}')">
+                        <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        <h3>{{ video.title }}</h3>
+                        <p>{{ video.description }}</p>
+                    </div>
+                {% endfor %} 
+
+            </div>
+        {% else %}
+            <div class="alert alert-warning">
+                <p>Вы должны быть авторизованы для просмотра видео. <a href="{{ url_for('login') }}">Войдите здесь</a>!</p>
+            </div>
+        {% endif %}       
+
+        {% include 'gif-placeholder.html' %}
+    </div>
+</main>
+
+{% include 'video-modal.html' %}

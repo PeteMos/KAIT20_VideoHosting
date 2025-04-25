@@ -13,117 +13,21 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <main>
-        <div class="container">
-            <div class="header-container">
-                <h2>Видеоуроки</h2>
-                <div class="search-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
-                </div>
-            </div>
-            {% if session.get('username') %}
-                <div class="video-grid" id="videoGrid">
-                    <div class="video-card" 
-                        data-title="Введение в веб-разработку" 
-                        data-description="Создайте свой первый веб-сайт с помощью HTML и CSS." 
-                        data-details="Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов" 
-                        onclick="openModal('videos/web-development-intro.mp4', 'Введение в веб-разработку', 'Создайте свой первый веб-сайт с помощью HTML и CSS.', 'Длительность: 10:00, Дата публикации: 01.01.2025, Автор: Иван Иванов')">
-                        <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Введение в веб-разработку</h3>
-                        <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="CSS для начинающих" 
-                        data-description="Изучите основы CSS для стилизации веб-страниц." 
-                        data-details="Длительность: 15:00, Дата публикации: 01.02.2025, Автор: Анна Петрова" 
-                        onclick="openModal('videos/css_basics.mp4', 'CSS для начинающих', 'Изучите основы CSS для стилизации веб-страниц.', 'Длительность: 15:00, Дата публикации: 01.02.2025, Автор: Анна Петрова')">
-                        <canvas class="video-preview" id="previewCanvas2" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>CSS для начинающих</h3>
-                        <p>Изучите основы CSS для стилизации веб-страниц.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="JavaScript для веб-разработчиков" 
-                        data-description="Научитесь писать скрипты на JavaScript." 
-                        data-details="Длительность: 20:00, Дата публикации: 01.03.2025, Автор: Сергей Смирнов" 
-                        onclick="openModal('videos/javascript_basics.mp4', 'JavaScript для веб-разработчиков', 'Научитесь писать скрипты на JavaScript.', 'Длительность: 20:00, Дата публикации: 01.03.2025, Автор: Сергей Смирнов')">
-                        <canvas class="video-preview" id="previewCanvas3" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>JavaScript для веб-разработчиков</h3>
-                        <p>Научитесь писать скрипты на JavaScript.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Создание адаптивного дизайна" 
-                        data-description="Узнайте, как сделать ваш сайт адаптивным." 
-                        data-details="Длительность: 25:00, Дата публикации: 01.04.2025, Автор: Мария Иванова" 
-                        onclick="openModal('videos/responsive_design.mp4', 'Создание адаптивного дизайна', 'Узнайте, как сделать ваш сайт адаптивным.', 'Длительность: 25:00, Дата публикации: 01.04.2025, Автор: Мария Иванова')">
-                        <canvas class="video-preview" id="previewCanvas4" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Создание адаптивного дизайна</h3>
-                        <p>Узнайте, как сделать ваш сайт адаптивным.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Основы работы с API" 
-                        data-description="Научитесь взаимодействовать с API для получения данных." 
-                        data-details="Длительность: 18:00, Дата публикации: 01.05.2025, Автор: Алексей Кузнецов" 
-                        onclick="openModal('videos/api_basics.mp4', 'Основы работы с API', 'Научитесь взаимодействовать с API для получения данных.', 'Длительность: 18:00, Дата публикации: 01.05.2025, Автор: Алексей Кузнецов')">
-                        <canvas class="video-preview" id="previewCanvas5" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Основы работы с API</h3>
-                        <p>Научитесь взаимодействовать с API для получения данных.</p>
-                    </div>
-                    <div class="video-card" 
-                        data-title="Введение в фреймворк React" 
-                        data-description="Изучите основы работы с фреймворком React." 
-                        data-details="Длительность: 22:00, Дата публикации: 01.06.2025, Автор: Ольга Сидорова" 
-                        onclick="openModal('videos/react_intro.mp4', 'Введение в фреймворк React', 'Изучите основы работы с фреймворком React.', 'Длительность: 22:00, Дата публикации: 01.06.2025, Автор: Ольга Сидорова')">
-                        <canvas class="video-preview" id="previewCanvas6" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
-                        <h3>Введение в фреймворк React</h3>
-                        <p>Изучите основы работы с фреймворком React.</p>
-                    </div>
-                </div>
-            {% else %}
-                <div class="alert alert-warning">
-                    <p>Вы должны быть авторизованы для просмотра видео. <a href="{{ url_for('login') }}">Войдите здесь</a>!</p>
-                </div>
-            {% endif %}
-            {% include 'gif-placeholder.html' %}
-        </div>
-    </main>
 
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <video id="modalVideo" width="100%" controls>
-                <source id="videoSource" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
-            <div class="video-description" id="videoDescription"></div>
-            <div class="video-details" id="videoDetails"></div>
-            <div class="likes-container">
-                <div class="likes">
-                    <span class="like-icon" onclick="likeVideo(event)">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                            <path d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z"/>
-                        </svg>
-                    </span>
-                    <span class="like-count" id="likeCount">0</span>
-                    <span class="dislike-icon" onclick="dislikeVideo(event)">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                            <path d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z"/>
-                        </svg>
-                    </span>
-                    <span class="dislike-count" id="dislikeCount">0</span>
-                </div>
-                <button class="share-button" onclick="shareVideo()">Поделиться</button>
-            </div>
-            <div class="comments">
-                <h4>Комментарии:</h4>
-                <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
-                <button class="submit-comment" onclick="submitComment()">Отправить</button>
-                <div class="error-message" id="error-message"></div>
-                <h4>Все комментарии</h4> 
-                <div id="commentList" class="comment-list"></div>
-            </div>
-        </div>
-    </div>    
+    {% include 'video-container.html' %}
+   
+    <div class="pagination">
+        {% if pagination.page > 1 %}
+            <a href="{{ url_for('course_web_development', page=pagination.page - 1) }}">« Назад</a>
+        {% endif %}
+    
+        <span>Страница {{ pagination.page }} из {{ pagination.total_pages }}</span>
+    
+        {% if pagination.page < pagination.total_pages %}
+            <a href="{{ url_for('course_web_development', page=pagination.page + 1) }}">Вперед »</a>
+        {% endif %}
+    </div>
+
     {% include 'footer.html' %}
 </body>
 </html>
