@@ -414,14 +414,14 @@ textarea:focus {
 
 .file-input + label {
     padding: 10px 20px;
-    background-color: #6f42c1; /* Цвет фона */
-    color: white; /* Цвет текста */
-    font-family: 'PT Serif Caption', serif; /* Шрифт */
-    border-radius: 5px; /* Скругление углов */
-    cursor: pointer; /* Указатель курсора */
+    background-color: #6f42c1;
+    color: white;
+    font-family: 'PT Serif Caption', serif; 
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .file-input:focus + label,
 .file-input + label:hover {
-    background-color: #5a2d9c; /* Цвет фона при наведении */
+    background-color: #5a2d9c;
 }

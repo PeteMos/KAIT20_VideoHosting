@@ -90,6 +90,7 @@
     color: #333;
     font-size: 24px;
     font-weight: bold;
+    margin-bottom: 2px;
 }
 
 .result-container {
@@ -119,6 +120,10 @@
 label {
     display: block; 
     margin: 5px 0; 
+}
+
+.sort-name {
+    margin-bottom: 2px;
 }
 
 table {

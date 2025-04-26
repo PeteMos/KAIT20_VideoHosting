@@ -13,7 +13,55 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <h2 class="results-title">Результаты тестов студентов</h2>
+
+    <h2 class="results-title">Результаты студентов</h2>
+
+    <div class="sorting-controls">
+        <form id="sortForm" class="sort-form" action="{{ url_for('results') }}" method="GET">
+            <div class="sort-name-class">
+                <label for="sortByName">Сортировать по имени:</label>
+                <input type="text" id="sortByName" name="sortByName" class="sort-name-input" placeholder="Введите имя студента" value="{{ request.args.get('sortByName', '') }}">
+            </div>
+            
+            <div>
+                <label for="sortByCourse">Сортировать по курсу:</label>
+                <select id="sortByCourse" name="sortByCourse">
+                    <option value="">Все курсы</option>
+                    <option value="Основы программирования" {% if request.args.get('sortByCourse') == 'Основы программирования' %}selected{% endif %}>Основы программирования</option>
+                    <option value="Основы веб-разработки" {% if request.args.get('sortByCourse') == 'Основы веб-разработки' %}selected{% endif %}>Основы веб-разработки</option>
+                    <option value="Основы дизайна" {% if request.args.get('sortByCourse') == 'Основы дизайна' %}selected{% endif %}>Основы дизайна</option>
+                    <option value="Основы JavaScript" {% if request.args.get('sortByCourse') == 'Основы JavaScript' %}selected{% endif %}>Основы JavaScript</option>
+                    <option value="Основы машинного обучения" {% if request.args.get('sortByCourse') == 'Основы машинного обучения' %}selected{% endif %}>Основы машинного обучения</option>
+                    <option value="Разработка мобильных приложений" {% if request.args.get('sortByCourse') == 'Разработка мобильных приложений' %}selected{% endif %}>Разработка мобильных приложений</option>
+                    <option value="Основы кибербезопасности" {% if request.args.get('sortByCourse') == 'Основы кибербезопасности' %}selected{% endif %}>Основы кибербезопасности</option>
+                    <option value="Основы работы с базами данных" {% if request.args.get('sortByCourse') == 'Основы работы с базами данных' %}selected{% endif %}>Основы работы с базами данных</option>
+                    <option value="Основы UX/UI дизайна" {% if request.args.get('sortByCourse') == 'Основы UX/UI дизайна' %}selected{% endif %}>Основы UX/UI дизайна</option>
+                    <option value="Основы DevOps" {% if request.args.get('sortByCourse') == 'Основы DevOps' %}selected{% endif %}>Основы DevOps</option>
+                    <option value="Основы графического дизайна" {% if request.args.get('sortByCourse') == 'Основы графического дизайна' %}selected{% endif %}>Основы графического дизайна</option>
+                    <option value="Основы цифрового маркетинга" {% if request.args.get('sortByCourse') == 'Основы цифрового маркетинга' %}selected{% endif %}>Основы цифрового маркетинга</option>
+                </select>
+ 
+                <label for="sortByScore">Сортировать по баллам:</label>
+                <select id="sortByScore" name="sortByScore">
+                    <option value="">Не сортировать</option>
+                    <option value="asc" {% if request.args.get('sortByScore') == 'asc' %}selected{% endif %}>От низких к высоким</option>
+                    <option value="desc" {% if request.args.get('sortByScore') == 'desc' %}selected{% endif %}>От высоких к низким</option>
+                </select>
+
+                <label for="sortByDate">Сортировать по дате:</label>
+                <select id="sortByDate" name="sortByDate">
+                    <option value="">Не сортировать</option>
+                    <option value="asc" {% if request.args.get('sortByDate') == 'asc' %}selected{% endif %}>Сначала старые</option>
+                    <option value="desc" {% if request.args.get('sortByDate') == 'desc' %}selected{% endif %}>Сначала новые</option>
+                </select>
+            </div>
+            <div class="button-controls">
+                <button type="submit" class="btn">Применить сортировку</button>
+                <button type="button" class="btn" onclick="resetFilters()">Все результаты</button>
+            </div>
+        </form>
+    </div> 
+
     <table>
         <thead>
             <tr>
@@ -46,6 +94,13 @@
             {% endfor %}
         </tbody>
     </table>
+    <script>
+        const resultsUrl = "{{ url_for('results') }}";
+    
+        function resetFilters() {
+            window.location.href = resultsUrl; // Перезагрузка страницы без параметров
+        }
+    </script>
     {% include 'footer.html' %}
 </body>
 </html>

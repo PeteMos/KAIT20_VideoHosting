@@ -350,9 +350,26 @@ def show_student_result(result_id):
         return redirect(url_for('index'))  # Или на другую страницу
 
 @app.route('/results')
-@role_required('teacher')  # Проверка роли
+@role_required('teacher')
 def results():
-    results = TestResult.query.all()  # Извлечение всех результатов из базы данных
+    sort_by_name = request.args.get('sortByName', '')
+    sort_by_course = request.args.get('sortByCourse', '')
+    sort_by_score = request.args.get('sortByScore', '')
+    sort_by_date = request.args.get('sortByDate', '')
+
+    # Получаем все результаты
+    results = TestResult.query.all()
+
+    # Применяем сортировку
+    if sort_by_name:
+        results = [r for r in results if r.username and sort_by_name.lower() in r.username.lower()]
+    if sort_by_course and sort_by_course != '':
+        results = [r for r in results if r.course == sort_by_course]
+    if sort_by_score:
+        results = sorted(results, key=lambda x: x.score, reverse=(sort_by_score == 'desc'))
+    if sort_by_date:
+        results = sorted(results, key=lambda x: x.timestamp, reverse=(sort_by_date == 'desc'))
+
     return render_template('results.html', results=results, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/delete_result/<int:result_id>', methods=['POST'])
@@ -533,7 +550,7 @@ def course_web_development():
 def course_design():
     if 'username' not in session:
         flash('Вы должны быть авторизованы для просмотра видео.', 'error')
-        return redirect(url_for('login'))  # Перенаправление на страницу входа
+        return redirect(url_for('login'))
 
     page = request.args.get('page', 1, type=int)  # Получаем номер страницы из URL, по умолчанию 1
     per_page = 6

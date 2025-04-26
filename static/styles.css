@@ -686,6 +686,10 @@ p {
     transition: border-color 0.3s; /* Плавный переход цвета границы */
 }
 
+select {
+    font-family: "PT Serif Caption", serif;
+}
+
 .role-select:focus {
     border-color: #6a0dad; /* Цвет границы при фокусе */
     outline: none; /* Убираем стандартный контур */
@@ -717,11 +721,59 @@ p {
 }
 
 .pagination span {
-    padding: 10px 15px; /* Отступы для текста страницы */
-    margin: 0 5px; /* Отступы между текстом и кнопками */
-    border: 1px solid #ccc; /* Рамка для текста страницы */
-    border-radius: 5px; /* Закругленные углы */
-    background-color: #f8f9fa; /* Фоновый цвет для текста страницы */
-    color: #333; /* Цвет текста */
+    padding: 10px 15px; 
+    margin: 0 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #f8f9fa; 
+    color: #333; 
+}
+
+.sorting-controls {
+    transform: scale(0.9); 
+    padding: 10px;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sort-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; 
+    justify-content: center;
+}
+
+.sort-name-class {
+    width: 100%; 
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.sorting-controls div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sorting-controls label {
+    margin-bottom: 5px; 
+}
+
+.sorting-controls input,
+.sorting-controls select {
+    padding: 10px 15px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    width: 100%; 
+    max-width: 250px; 
+    box-sizing: border-box; 
+}
+
+.button-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
