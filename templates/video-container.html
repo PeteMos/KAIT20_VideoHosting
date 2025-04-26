@@ -16,13 +16,23 @@
                     <div class="video-card" 
                         data-title="{{ video.title }}" 
                         data-description="{{ video.description }}" 
-                        data-details="Длительность: {{ video.duration }}, Дата публикации: {{ video.timestamp }}, Автор: {{ video.author }}" 
-                        onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title }}', '{{ video.description }}', 'Длительность: {{ video.duration }}, Дата публикации: {{ video.timestamp }}, Автор: {{ video.author }}')">
-                        <canvas class="video-preview" id="previewCanvas1" data-placeholder="{{ url_for('images', filename='video_placeholder.jpg') }}"></canvas>
+                        data-details="Длительность: {{ video.duration }}, 
+                                    Дата публикации: 
+                                    {% if video.timestamp and video.timestamp is not string %}
+                                        {{ video.timestamp.strftime('%d.%m.%y') }}
+                                    {% else %}
+                                        Не указано
+                                    {% endif %}, 
+                                    Автор: {{ video.author }}" 
+                        onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title|escape }}', '{{ video.description|escape }}', 'Длительность: {{ video.duration }}, Дата публикации: {% if video.timestamp and video.timestamp is not string %}{{ video.timestamp.strftime('%d.%m.%y') }}{% else %}Не указано{% endif %}, Автор: {{ video.author|escape }}')">
+                        
+                        <!-- Используем <img> для отображения превью -->
+                        <img class="video-preview" src="{{ url_for('thumbnails', filename=video.filename ~ '.jpg') }}" alt="Превью видео" onerror="this.onerror=null; this.src='{{ url_for('images', filename='video_placeholder.jpg') }}';">
+                        
                         <h3>{{ video.title }}</h3>
                         <p>{{ video.description }}</p>
                     </div>
-                {% endfor %} 
+                {% endfor %}
 
             </div>
         {% else %}

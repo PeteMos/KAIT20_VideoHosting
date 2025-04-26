@@ -18,6 +18,7 @@ class Video(db.Model):
     author = db.Column(db.String(80), nullable=False)
     course = db.Column(db.String(100), nullable=False)
     filename = db.Column(db.String(150), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 class TestResult(db.Model):
     id = db.Column(db.Integer, primary_key=True)

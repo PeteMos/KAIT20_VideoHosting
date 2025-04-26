@@ -7,6 +7,8 @@ from test import questions_data
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from functools import wraps
+from moviepy import VideoFileClip
+from PIL import Image
 import datetime
 import re
 import jwt
@@ -245,6 +247,21 @@ def logout():
 def uploaded_video(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+@app.route('/thumbnails/<filename>')
+def thumbnails(filename):
+    # Возврат изображения
+    return send_from_directory('uploads/thumbnails', filename)
+
+def extract_frame(video_path, output_path):
+    with VideoFileClip(video_path) as video:
+        # Извлекаем кадр из середины видео
+        frame_time = video.duration / 2
+        frame = video.get_frame(frame_time)
+        
+        # Сохраняем кадр как изображение
+        image = Image.fromarray(frame)
+        image.save(output_path)
+
 @app.route('/add_video', methods=['GET', 'POST'])
 @role_required('teacher')  # Проверка роли
 def add_video():
@@ -259,12 +276,23 @@ def add_video():
         if video_file and allowed_file(video_file.filename):
             filename = secure_filename(video_file.filename)
             video_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            video_file.save(video_file_path) 
+            video_file.save(video_file_path)
+
+            # Извлекаем кадр из видео и сохраняем его как превью
+            thumbnail_path = f'uploads/thumbnails/{filename}.jpg'  # Путь для сохранения превью
+            extract_frame(video_file_path, thumbnail_path)  # Извлечение кадра
 
             # Создаем новый объект Video
-            new_video = Video(title=title, description=description, duration=duration, course=course, filename=filename, author=session.get('username'))
+            new_video = Video(
+                title=title,
+                description=description,
+                duration=duration,
+                course=course,
+                filename=filename,
+                author=session.get('username'),
+                timestamp=datetime.datetime.now()
+            )
             db.session.add(new_video)
-            db.session.commit()
             try:
                 db.session.commit()  # Сохраняем изменения в базе данных
                 flash('Видео успешно добавлено!', 'success')
