@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask import make_response
-from models import db, User, Video, TestResult
+from models import db, User, Video, Comment, TestResult
 from test import questions_data
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -317,6 +317,28 @@ def delete_video(video_id):
     flash('Видео успешно удалено!', 'success')
     return redirect(url_for('add_video'))
 
+@app.route('/submit_comment', methods=['POST'])
+def submit_comment():
+    data = request.get_json()
+    comment = data.get('comment')
+    username = session.get('username') or 'Гость'
+
+    if not comment:
+        return jsonify({"success": False, "error": "Комментарий не может быть пустым."}), 400
+
+    try:
+        # Сохраняем комментарий в базе данных
+        new_comment = Comment(username=username, text=comment)
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return jsonify({"success": True, "username": username, "text": comment}), 200
+    except Exception as e:
+        db.session.rollback()  # Откат транзакции в случае ошибки
+        print(f'Ошибка при сохранении комментария: {e}')
+        return jsonify({"success": False, "error": "Не удалось сохранить комментарий."}), 500
+
+
 @app.route('/submit_test', methods=['POST'])
 def submit_test():
     data = request.get_json()
@@ -329,7 +351,6 @@ def submit_test():
     timestamp = datetime.datetime.now(moscow_tz)  # Получаем текущее московское время
 
     try:
-        # Сохранение результата в базе данных
         new_result = TestResult(username=username, course=course, score=score, timestamp=timestamp)
         db.session.add(new_result)
         db.session.commit()
@@ -347,7 +368,7 @@ def show_student_result(result_id):
         return render_template('student_result.html', result=result, total_questions=total_questions, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
     else:
         flash('Результат не найден.', 'error')
-        return redirect(url_for('index'))  # Или на другую страницу
+        return redirect(url_for('index'))
 
 @app.route('/results')
 @role_required('teacher')

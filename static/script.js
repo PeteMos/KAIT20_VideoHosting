@@ -1,4 +1,15 @@
-let currentUsername = localStorage.getItem("username") || "Гость";
+function getCookie(name) {
+    let cookieArr = document.cookie.split(";");
+    for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if (name === cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+
+let currentUsername = getCookie("username") || "Гость";
 let likeCount = 0;
 let dislikeCount = 0;
 let userVote = null; 
@@ -125,23 +136,44 @@ function submitComment() {
     const commentList = document.getElementById('commentList');
     const errorMessage = document.getElementById('error-message');
 
-    if (currentUsername === "Гость") {
+    if (!currentUsername || currentUsername === "Гость") {
         errorMessage.innerHTML = 'Вы должны войти, чтобы оставлять комментарии и ставить лайки. <a href="/login">Войдите здесь</a>!';
         return;
-    }
+    }    
 
     if (commentInput.value.trim() === '') return;
 
-    const newComment = document.createElement('div');
-    newComment.classList.add('comment');
-    newComment.innerHTML = `
-        <span>${commentInput.value}</span>
-        <button onclick="deleteComment(this)">Удалить</button>
-    `;
-    commentList.appendChild(newComment);
-    commentInput.value = '';
-    errorMessage.innerText = '';
+    // Отправка комментария на сервер
+    fetch('/submit_comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ comment: commentInput.value })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Добавляем новый комментарий на страницу
+            const newComment = document.createElement('div');
+            newComment.classList.add('comment');
+            newComment.innerHTML = `
+                <strong>${data.username}</strong>: <span>${data.text}</span>
+                <button class="delete-button" onclick="deleteComment(this)">Удалить</button>
+            `;
+            commentList.appendChild(newComment);
+            commentInput.value = ''; // Очищаем поле ввода
+            errorMessage.innerText = ''; // Очищаем сообщение об ошибке
+        } else {
+            errorMessage.innerText = data.error; // Показываем ошибку, если она есть
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        errorMessage.innerText = 'Произошла ошибка при отправке комментария.';
+    });
 }
+
 
 function deleteComment(button) {
     const comment = button.parentElement;
