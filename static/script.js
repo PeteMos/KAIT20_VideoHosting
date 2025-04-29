@@ -149,7 +149,7 @@ function submitComment() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ comment: commentInput.value })
+        body: JSON.stringify({ comment: commentInput.value, course: course }) // Используем значение переменной course
     })
     .then(response => response.json())
     .then(data => {
@@ -175,17 +175,24 @@ function submitComment() {
 }
 
 function deleteComment(commentId) {
-    fetch(`/delete_comment/${commentId}`, {
-        method: 'POST',
-    })
-    .then(response => {
-        if (response.ok) {
-            // Удаляем комментарий из DOM
-            document.querySelector(`.comment[data-id="${commentId}"]`).remove();
-        } else {
-            alert('Ошибка при удалении комментария.');
-        }
-    });
+    // Подтверждение удаления комментария
+    if (confirm('Вы уверены, что хотите удалить этот комментарий?')) {
+        fetch(`/delete_comment/${commentId}`, {
+            method: 'POST',
+        })
+        .then(response => {
+            if (response.ok) {
+                // Удаляем комментарий из DOM
+                document.querySelector(`.comment[data-id="${commentId}"]`).remove();
+            } else {
+                alert('Ошибка при удалении комментария.');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при удалении комментария.');
+        });
+    }
 }
 
 function searchVideos() {

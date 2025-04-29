@@ -322,12 +322,13 @@ def submit_comment():
     data = request.get_json()
     comment_text = data.get('comment')
     username = session.get('username') or 'Гость'
+    course = data.get('course')
 
     if not comment_text:
         return jsonify({"success": False, "error": "Комментарий не может быть пустым."}), 400
 
     try:
-        new_comment = Comment(username=username, text=comment_text)
+        new_comment = Comment(username=username, text=comment_text, course=course, timestamp=datetime.datetime.now())  # Сохраняем курс
         db.session.add(new_comment)
         db.session.commit()
         return jsonify({"success": True, "username": username, "text": comment_text}), 200
@@ -420,8 +421,8 @@ def course_programming():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы программирования").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы программирования").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -505,8 +506,8 @@ def course_web_development():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы веб-разработки").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы веб-разработки").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -590,8 +591,8 @@ def course_design():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы дизайна").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы дизайна").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -674,8 +675,8 @@ def course_javascript():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы JavaScript").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы JavaScript").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -759,8 +760,8 @@ def course_machine_learning():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы машинного обучения").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы машинного обучения").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -825,7 +826,7 @@ def course_machine_learning():
     paginated_videos = all_videos[start:end]
 
     return render_template('course-machine-learning.html', 
-                           page_title="Основы<br>vашинного обучения", 
+                           page_title="Основы<br>машинного обучения", 
                            videos=paginated_videos, 
                            comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
@@ -844,8 +845,8 @@ def course_mobile_development():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Разработка мобильных приложений").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Разработка мобильных приложений").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -929,8 +930,8 @@ def course_cybersecurity():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы кибербезопасности").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы кибербезопасности").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1014,8 +1015,8 @@ def course_database():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы работы с базами данных").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы работы с базами данных").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1097,10 +1098,10 @@ def course_ux_ui_design():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="UX/UI Дизайн").all()
+    videos_from_db = Video.query.filter_by(course="Основы UX/UI дизайна").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы UX/UI дизайна").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1184,8 +1185,8 @@ def course_devops():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы DevOps").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы DevOps").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1269,8 +1270,8 @@ def course_graphic_design():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы графического дизайна").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы графического дизайна").all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1354,8 +1355,8 @@ def course_digital_marketing():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы цифрового маркетинга").all()
 
-     # Получаем все комментарии для данного курса
-    comments = Comment.query.all()
+    # Получаем все комментарии для данного курса
+    comments = Comment.query.filter_by(course="Основы цифрового маркетинга").all()
 
     # Вручную добавленные видео
     manual_videos = [
