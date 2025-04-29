@@ -320,24 +320,27 @@ def delete_video(video_id):
 @app.route('/submit_comment', methods=['POST'])
 def submit_comment():
     data = request.get_json()
-    comment = data.get('comment')
+    comment_text = data.get('comment')
     username = session.get('username') or 'Гость'
 
-    if not comment:
+    if not comment_text:
         return jsonify({"success": False, "error": "Комментарий не может быть пустым."}), 400
 
     try:
-        # Сохраняем комментарий в базе данных
-        new_comment = Comment(username=username, text=comment)
+        new_comment = Comment(username=username, text=comment_text)
         db.session.add(new_comment)
         db.session.commit()
-
-        return jsonify({"success": True, "username": username, "text": comment}), 200
+        return jsonify({"success": True, "username": username, "text": comment_text}), 200
     except Exception as e:
-        db.session.rollback()  # Откат транзакции в случае ошибки
-        print(f'Ошибка при сохранении комментария: {e}')
+        db.session.rollback()
         return jsonify({"success": False, "error": "Не удалось сохранить комментарий."}), 500
-
+    
+@app.route('/delete_comment/<int:comment_id>', methods=['POST'])
+def delete_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    return jsonify({"success": True}), 200
 
 @app.route('/submit_test', methods=['POST'])
 def submit_test():
@@ -417,6 +420,9 @@ def course_programming():
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы программирования").all()
 
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
+
     # Вручную добавленные видео
     manual_videos = [
         {
@@ -482,6 +488,7 @@ def course_programming():
     return render_template('course-programming.html', 
                            page_title="Основы<br>программирования", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -497,6 +504,9 @@ def course_web_development():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы веб-разработки").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -563,6 +573,7 @@ def course_web_development():
     return render_template('course-web-development.html', 
                            page_title="Основы<br>веб-разработки", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -578,6 +589,9 @@ def course_design():
     
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы дизайна").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -644,6 +658,7 @@ def course_design():
     return render_template('course-design.html', 
                            page_title="Основы<br>дизайна", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -658,6 +673,9 @@ def course_javascript():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы JavaScript").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -724,6 +742,7 @@ def course_javascript():
     return render_template('course-javascript.html', 
                            page_title="Основы<br>JavaScript", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -739,6 +758,9 @@ def course_machine_learning():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы машинного обучения").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -805,6 +827,7 @@ def course_machine_learning():
     return render_template('course-machine-learning.html', 
                            page_title="Основы<br>vашинного обучения", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -820,6 +843,9 @@ def course_mobile_development():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Разработка мобильных приложений").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -886,6 +912,7 @@ def course_mobile_development():
     return render_template('course-mobile-development.html', 
                            page_title="Разработка<br>мобильных приложений", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -901,6 +928,9 @@ def course_cybersecurity():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы кибербезопасности").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -967,6 +997,7 @@ def course_cybersecurity():
     return render_template('course-cybersecurity.html', 
                            page_title="Основы<br>кибербезопасности", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -982,6 +1013,9 @@ def course_database():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы работы с базами данных").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1048,6 +1082,7 @@ def course_database():
     return render_template('course-database.html', 
                            page_title="Основы работы<br>с базами данных", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -1063,6 +1098,9 @@ def course_ux_ui_design():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="UX/UI Дизайн").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1129,6 +1167,7 @@ def course_ux_ui_design():
     return render_template('course-ux-ui-design.html', 
                            page_title="Основы<br>UX/UI дизайна", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -1144,6 +1183,9 @@ def course_devops():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы DevOps").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1210,6 +1252,7 @@ def course_devops():
     return render_template('course-devops.html', 
                            page_title="Основы<br>DevOps", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -1225,6 +1268,9 @@ def course_graphic_design():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы графического дизайна").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1291,6 +1337,7 @@ def course_graphic_design():
     return render_template('course-graphic-design.html', 
                            page_title="Основы<br>графического дизайна", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
@@ -1306,6 +1353,9 @@ def course_digital_marketing():
 
     # Получаем видео из базы данных
     videos_from_db = Video.query.filter_by(course="Основы цифрового маркетинга").all()
+
+     # Получаем все комментарии для данного курса
+    comments = Comment.query.all()
 
     # Вручную добавленные видео
     manual_videos = [
@@ -1372,6 +1422,7 @@ def course_digital_marketing():
     return render_template('course-digital-marketing.html', 
                            page_title="Основы<br>цифрового маркетинга", 
                            videos=paginated_videos, 
+                           comments=comments,
                            pagination={'page': page, 'total_pages': total_pages}, 
                            ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 

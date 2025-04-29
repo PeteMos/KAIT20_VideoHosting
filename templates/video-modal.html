@@ -26,12 +26,20 @@
             <button class="share-button" onclick="shareVideo()">Поделиться</button>
         </div>
         <div class="comments">
-            <h4>Комментарии:</h4>
             <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
             <button class="submit-comment" onclick="submitComment()">Отправить</button>
             <div class="error-message" id="error-message"></div>
-            <h4>Все комментарии</h4> 
-            <div id="commentList" class="comment-list"></div>
-        </div>
+            <h4>Все комментарии:</h4>
+            <div id="commentList" class="comment-list">
+                {% for comment in comments %}
+                    <div class="comment" data-id="{{ comment.id }}">
+                        <strong>{{ comment.username }}</strong>: <span>{{ comment.text }}</span>
+                        {% if comment.username == session.get('username') %}
+                            <button class="delete-button" onclick="deleteComment({{ comment.id }})">Удалить</button>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>                
     </div>
 </div>

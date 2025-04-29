@@ -174,10 +174,18 @@ function submitComment() {
     });
 }
 
-
-function deleteComment(button) {
-    const comment = button.parentElement;
-    comment.remove();
+function deleteComment(commentId) {
+    fetch(`/delete_comment/${commentId}`, {
+        method: 'POST',
+    })
+    .then(response => {
+        if (response.ok) {
+            // Удаляем комментарий из DOM
+            document.querySelector(`.comment[data-id="${commentId}"]`).remove();
+        } else {
+            alert('Ошибка при удалении комментария.');
+        }
+    });
 }
 
 function searchVideos() {
