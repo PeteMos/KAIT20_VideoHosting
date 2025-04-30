@@ -12,7 +12,7 @@ function getCookie(name) {
 let currentUsername = getCookie("username") || "Гость";
 let likeCount = 0;
 let dislikeCount = 0;
-let userVote = null; 
+let userVote = null;
 
 function togglePassword(passwordFieldId) {
     const passwordField = document.getElementById(passwordFieldId);
@@ -40,9 +40,24 @@ function openModal(videoSrc, title, description, details) {
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('videoDescription').innerText = description;
     document.getElementById('videoDetails').innerText = details;
-    document.getElementById('videoModal').style.display = "block";
 
-    userVote = null;
+    // Запрос количества лайков и дизлайков
+    fetch('/video/votes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: title })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('likeCount').innerText = data.likes;
+        document.getElementById('dislikeCount').innerText = data.dislikes;
+    });
+
+    document.getElementById('videoModal').style.display = "block";
+    
+    userVote = null; // Обнуляем голос пользователя
     updateVoteButtons();
 }
 
@@ -53,36 +68,77 @@ function closeModal() {
     document.getElementById('videoModal').style.display = "none";
 }
 
+function vote(title, voteType) {
+    fetch('/video/vote', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: title, vote_type: voteType })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Обновить интерфейс при успешном голосовании
+            updateVoteCounts(title);
+        } else {
+            alert(data.error);
+        }
+    });
+}
+
 function likeVideo(event) {
     if (userVote === 'like') {
+        // Убираем лайк
         likeCount = 0; 
         userVote = null; 
+        vote(document.getElementById('modalTitle').innerText, null); // Убираем голос
     } else {
         likeCount = 1; 
         dislikeCount = 0; 
         userVote = 'like'; 
+        vote(document.getElementById('modalTitle').innerText, 'like'); // Ставим лайк
     }
     updateVoteButtons();
 }
 
 function dislikeVideo(event) {
     if (userVote === 'dislike') {
+        // Убираем дизлайк
         dislikeCount = 0; 
         userVote = null; 
+        vote(document.getElementById('modalTitle').innerText, null); // Убираем голос
     } else {
         dislikeCount = 1; 
         likeCount = 0; 
         userVote = 'dislike'; 
+        vote(document.getElementById('modalTitle').innerText, 'dislike'); // Ставим дизлайк
     }
     updateVoteButtons();
+}
+
+
+function updateVoteCounts(title) {
+    fetch('/video/votes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: title })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('likeCount').innerText = data.likes;
+        document.getElementById('dislikeCount').innerText = data.dislikes;
+    });
 }
 
 function updateVoteButtons() {
     document.getElementById('likeCount').innerText = likeCount;
     document.getElementById('dislikeCount').innerText = dislikeCount;
 
-    const likeButton = document.getElementById('likeButton');
-    const dislikeButton = document.getElementById('dislikeButton');
+    const likeButton = document.getElementsByClassName('like-icon')[0];
+    const dislikeButton = document.getElementsByClassName('dislike-icon')[0];
 
     if (userVote === 'like') {
         likeButton.style.backgroundColor = '#28a745'; 

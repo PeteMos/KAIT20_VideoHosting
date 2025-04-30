@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask import make_response
-from models import db, User, Video, Comment, TestResult
+from models import db, User, Video, Comment, VideoVote, TestResult
 from test import questions_data
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -316,6 +316,53 @@ def delete_video(video_id):
     os.remove(os.path.join(app.config['UPLOAD_FOLDER'], video.filename))
     flash('Видео успешно удалено!', 'success')
     return redirect(url_for('add_video'))
+
+@app.route('/video/vote', methods=['POST'])
+def vote_video():
+    if 'username' not in session:
+        return jsonify({"error": "Вы должны быть авторизованы."}), 403
+
+    title = request.json.get('title')  # Получаем название видео
+    vote_type = request.json.get('vote_type')  # 'like', 'dislike' или None
+    username = session['username']
+
+    if vote_type not in ['like', 'dislike', None]:
+        return jsonify({"error": "Некорректный тип голоса."}), 400
+
+    # Проверяем, проголосовал ли пользователь ранее
+    existing_vote = VideoVote.query.filter_by(video_title=title, username=username).first()
+    
+    if existing_vote:
+        if vote_type is None:
+            # Убираем голос
+            db.session.delete(existing_vote)
+            db.session.commit()
+        else:
+            # Обновляем голос
+            existing_vote.vote_type = vote_type
+            db.session.commit()
+    else:
+        if vote_type is not None:
+            new_vote = VideoVote(username=username, video_title=title, vote_type=vote_type, timestamp=datetime.datetime.now())
+            db.session.add(new_vote)
+            db.session.commit()
+
+    return jsonify({"success": True}), 200
+
+@app.route('/video/votes', methods=['POST'])
+def get_video_votes():
+    title = request.json.get('title')  # Используем название видео
+    if not title:
+        return jsonify({"error": "Название видео не указано."}), 400
+
+    likes_count = VideoVote.query.filter_by(video_title=title, vote_type='like').count()
+    dislikes_count = VideoVote.query.filter_by(video_title=title, vote_type='dislike').count()
+
+    return jsonify({
+        "likes": likes_count,
+        "dislikes": dislikes_count
+    })
+
 
 @app.route('/submit_comment', methods=['POST'])
 def submit_comment():
