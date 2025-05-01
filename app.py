@@ -18,6 +18,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['UPLOAD_FOLDER'] = 'uploads/videos'  # Папка для загрузки видео
+app.config['THUMBNAIL_FOLDER'] = 'uploads/thumbnails'  # Папка для превью видео
+
+def create_folders():
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+    os.makedirs(app.config['THUMBNAIL_FOLDER'], exist_ok=True)
+
+create_folders()
+
 db.init_app(app)
 
 def __repr__(self):
@@ -250,7 +258,7 @@ def uploaded_video(filename):
 @app.route('/thumbnails/<filename>')
 def thumbnails(filename):
     # Возврат изображения
-    return send_from_directory('uploads/thumbnails', filename)
+    return send_from_directory(app.config['THUMBNAIL_FOLDER'], filename)
 
 def extract_frame(video_path, output_path):
     with VideoFileClip(video_path) as video:
@@ -261,6 +269,23 @@ def extract_frame(video_path, output_path):
         # Сохраняем кадр как изображение
         image = Image.fromarray(frame)
         image.save(output_path)
+
+@app.route('/edit_video/<int:video_id>', methods=['POST'])
+@role_required('teacher')  # Проверка роли
+def edit_video(video_id):
+    video = Video.query.get_or_404(video_id)
+    data = request.get_json()
+
+    # Обновляем заголовок и описание видео
+    video.title = data['title']
+    video.description = data['description']
+
+    try:
+        db.session.commit()
+        return jsonify({"success": True})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"success": False, "error": str(e)})
 
 @app.route('/add_video', methods=['GET', 'POST'])
 @role_required('teacher')  # Проверка роли
@@ -279,7 +304,7 @@ def add_video():
             video_file.save(video_file_path)
 
             # Извлекаем кадр из видео и сохраняем его как превью
-            thumbnail_path = f'uploads/thumbnails/{filename}.jpg'  # Путь для сохранения превью
+            thumbnail_path = os.path.join(app.config['THUMBNAIL_FOLDER'], f'{filename}.jpg')
             extract_frame(video_file_path, thumbnail_path)  # Извлечение кадра
 
             # Создаем новый объект Video

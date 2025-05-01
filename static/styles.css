@@ -589,7 +589,7 @@ a {
     gap: 20px;
 }
 
-.form-container-add, .uploaded-videos-container {
+.form-container-add {
     flex: 1;
     max-width: 450px; 
 }
@@ -602,8 +602,10 @@ a {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     display: flex;
     flex-direction: column; 
+    flex: 1;
     justify-content: flex-start; 
     max-height: 600px; 
+    max-width: 600px; 
     overflow-y: auto; 
 }
 
@@ -627,8 +629,60 @@ a {
     transition: transform 0.2s;
 }
 
+.video-item h3 {
+    text-align: center;
+}
+
+.video-item p strong {
+    color: #6a0dad;
+    padding: 5px;
+    border-radius: 3px;
+}
+
 .video-item:hover {
     transform: scale(1.02); 
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.action-button {
+    font-family: "PT Serif Caption", serif;
+    margin: 0 10px;
+    padding: 10px 15px;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background-color: #5b0c9e;
+}
+
+.save-change-button {
+    font-family: "PT Serif Caption", serif;
+    padding: 10px 20px;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.save-change-button:hover {
+    background-color: #5b0c9e;
 }
 
 form {

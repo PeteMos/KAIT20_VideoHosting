@@ -68,6 +68,76 @@ function closeModal() {
     document.getElementById('videoModal').style.display = "none";
 }
 
+function openEditModal(videoId, title, description) {
+    document.getElementById('editVideoId').value = videoId;
+    document.getElementById('editTitle').value = title;
+    document.getElementById('editDescription').value = description;
+    document.getElementById('editModal').style.display = "block";
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').style.display = "none";
+}
+
+function submitEdit() {
+    const videoId = document.getElementById('editVideoId').value;
+    const title = document.getElementById('editTitle').value;
+    const description = document.getElementById('editDescription').value;
+
+    fetch(`/edit_video/${videoId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: title, description: description })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Обновляем заголовок и описание в интерфейсе
+            const videoItem = document.querySelector(`.video-item[data-id="${videoId}"]`); // Предполагается, что у вас есть атрибут data-id
+            videoItem.querySelector('h3').innerText = title;
+            videoItem.querySelector('p:nth-of-type(1) span').innerText = description; // Обновляем описание
+            closeEditModal(); // Закрываем модальное окно
+        } else {
+            alert(data.error);
+        }
+    });
+}
+
+
+function filterVideos() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toLowerCase();
+    const videoList = document.getElementById('videoList');
+    const videos = videoList.getElementsByClassName('video-item');
+    const gifPlaceholder = document.getElementById('gifPlaceholder');
+    let hasVisibleVideos = false;
+
+    for (let i = 0; i < videos.length; i++) {
+        const title = videos[i].getElementsByTagName('h3')[0];
+        const description = videos[i].getElementsByTagName('p')[0];
+        if (title || description) {
+            const titleText = title.textContent || title.innerText;
+            const descriptionText = description.textContent || description.innerText;
+
+            if (titleText.toLowerCase().indexOf(filter) > -1 || descriptionText.toLowerCase().indexOf(filter) > -1) {
+                videos[i].style.display = "";
+                hasVisibleVideos = true; // Найдено подходящее видео
+            } else {
+                videos[i].style.display = "none";
+            }
+        }
+    }
+
+    // Управляем видимостью GIF в зависимости от наличия видео
+    if (hasVisibleVideos) {
+        gifPlaceholder.style.display = "none";
+    } else {
+        gifPlaceholder.style.display = "block"; // Показываем GIF, если нет видео
+    }
+}
+
 function vote(title, voteType) {
     fetch('/video/vote', {
         method: 'POST',

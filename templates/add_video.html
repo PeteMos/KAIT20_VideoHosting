@@ -44,25 +44,48 @@
 
             <div id="uploadedVideos" class="uploaded-videos-container">
                 <h2 class="videos-title">Загруженные Видео</h2>
+                <input type="text" id="searchInput" placeholder="Поиск по видео..." class="search-input" onkeyup="filterVideos()">
                 <div id="videoList" class="video-list">
                     {% for video in videos %}
-                    <div class="video-item">
+                    <div class="video-item" data-id="{{ video.id }}">
                         <h3>{{ video.title }}</h3>
-                        <p>{{ video.description }}</p>
-                        <video width="320" height="240" controls>
-                            <source src="{{ url_for('uploaded_video', filename=video.filename) }}" type="video/mp4">
-                            Ваш браузер не поддерживает видео.
-                        </video>
-                        <form action="{{ url_for('delete_video', video_id=video.id) }}" method="POST" style="display:inline;">
-                            <button type="submit" 
-                                    onclick="return confirm('Вы уверены, что хотите удалить это видео?');">
-                                Удалить
-                            </button>
-                        </form>
+                        <p><strong>Описание:</strong> {{ video.description }}</p>
+                        <p><strong>Курс:</strong> {{ video.course }}</p>
+                        <p><strong>Длительность:</strong> {{ video.duration }}</p>
+                        
+                        <div class="video-container">
+                            <video width="320" height="240" controls>
+                                <source src="{{ url_for('uploaded_video', filename=video.filename) }}" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+                        </div>
+                    
+                        <div class="button-container">
+                            <form action="{{ url_for('delete_video', video_id=video.id) }}" method="POST">
+                                <button type="submit" class="action-button" onclick="return confirm('Вы уверены, что хотите удалить это видео?');">Удалить</button>
+                            </form>
+                            <button class="action-button" onclick="openEditModal('{{ video.id }}', '{{ video.title }}', '{{ video.description }}')">Изменить</button>
+                        </div>
                     </div>
                     {% endfor %}
-                </div>
-            </div>                                    
+                </div>                                 
+                <div id="editModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeEditModal()">&times;</span>
+                        <h2>Изменить видео</h2>
+                        <input type="hidden" id="editVideoId">
+                        <label for="editTitle">Заголовок:</label>
+                        <input type="text" id="editTitle" required>
+                        <label for="editDescription">Описание:</label>
+                        <textarea id="editDescription" required></textarea>
+                        <div class="button-container">
+                            <button data-style="secondary" class="save-change-button" onclick="submitEdit()">Сохранить изменения</button>
+                        </div>
+                    </div>
+                </div>  
+                {% include 'gif-placeholder.html' %}                             
+            </div>
+                                                            
         </div>        
     </main>
     {% include 'footer.html' %}
