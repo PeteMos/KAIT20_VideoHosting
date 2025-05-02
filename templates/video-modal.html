@@ -27,11 +27,11 @@
         </div>
         <div class="comments">
             <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
-            <button class="submit-comment" onclick="submitComment()">Отправить</button>
+            <button class="submit-comment" onclick="submitComment('{{ video.title }}')">Отправить</button>
             <div class="error-message" id="error-message"></div>
             <h4>Все комментарии:</h4>
             <div id="commentList" class="comment-list">
-                {% for comment in comments %}
+                {% for comment in comments[video.title] %}
                     <div class="comment" data-id="{{ comment.id }}">
                         <strong>{{ comment.username }}</strong>: <span>{{ comment.text }}</span>
                         {% if comment.username == session.get('username') %}
@@ -39,7 +39,7 @@
                         {% endif %}
                     </div>
                 {% endfor %}
-            </div>
-        </div>                
+            </div>            
+        </div>                       
     </div>
 </div>

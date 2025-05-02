@@ -33,13 +33,14 @@ function openModal(videoSrc, title, description, details) {
     const modalVideo = document.getElementById('modalVideo');
     const videoSource = document.getElementById('videoSource');
 
-    videoSource.src = videoSrc;
-    modalVideo.load();
-    modalVideo.play();
+    videoSource.src = videoSrc;  // Устанавливаем источник видео
+    modalVideo.load();            // Загружаем новое видео
+    modalVideo.play();            // Запускаем воспроизведение видео
 
-    document.getElementById('modalTitle').innerText = title;
-    document.getElementById('videoDescription').innerText = description;
-    document.getElementById('videoDetails').innerText = details;
+    document.getElementById('modalTitle').innerText = title;          // Устанавливаем заголовок
+    document.getElementById('videoDescription').innerText = description; // Устанавливаем описание
+    document.getElementById('videoDetails').innerText = details;       // Устанавливаем детали
+    document.getElementById('commentList').innerHTML = '';             // Очищаем список комментариев
 
     // Запрос количества лайков и дизлайков
     fetch('/video/votes', {
@@ -55,8 +56,26 @@ function openModal(videoSrc, title, description, details) {
         document.getElementById('dislikeCount').innerText = data.dislikes;
     });
 
-    document.getElementById('videoModal').style.display = "block";
-    
+    document.getElementById('videoModal').style.display = 'block'; // Открываем модальное окно
+    // Загружаем комментарии для данного видео
+    fetch(`/get_comments/${title}`)
+        .then(response => response.json())
+        .then(comments => {
+            const commentList = document.getElementById('commentList');
+            comments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('comment');
+                commentDiv.setAttribute('data-id', comment.id);
+                commentDiv.innerHTML = `
+                    <strong>${comment.username}</strong>: <span>${comment.text}</span>
+                    <button class="delete-button" onclick="deleteComment(${comment.id})">Удалить</button>
+                `;
+                commentList.appendChild(commentDiv);
+            });
+        });
+        
+    document.getElementById('videoModal').style.display = 'block'; // Открываем модальное окно
+
     userVote = null; // Обнуляем голос пользователя
     updateVoteButtons();
 }
@@ -187,7 +206,6 @@ function dislikeVideo(event) {
     updateVoteButtons();
 }
 
-
 function updateVoteCounts(title) {
     fetch('/video/votes', {
         method: 'POST',
@@ -257,25 +275,24 @@ function copyToClipboard() {
     alert("Ссылка скопирована в буфер обмена!");
 }
 
-function submitComment() {
+function submitComment(videoTitle) {
     const commentInput = document.getElementById('commentInput');
-    const commentList = document.getElementById('commentList');
-    const errorMessage = document.getElementById('error-message');
+    const commentText = commentInput.value.trim();
 
-    if (!currentUsername || currentUsername === "Гость") {
-        errorMessage.innerHTML = 'Вы должны войти, чтобы оставлять комментарии и ставить лайки. <a href="/login">Войдите здесь</a>!';
+    if (commentText === '') {
+        document.getElementById('error-message').innerText = 'Комментарий не может быть пустым!';
         return;
-    }    
+    }
 
-    if (commentInput.value.trim() === '') return;
-
-    // Отправка комментария на сервер
     fetch('/submit_comment', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ comment: commentInput.value, course: course }) // Используем значение переменной course
+        body: JSON.stringify({
+            video_title: videoTitle,  // Убедитесь, что это 'video_title'
+            comment: commentText      // Убедитесь, что это 'comment'
+        })
     })
     .then(response => response.json())
     .then(data => {
@@ -285,20 +302,21 @@ function submitComment() {
             newComment.classList.add('comment');
             newComment.innerHTML = `
                 <strong>${data.username}</strong>: <span>${data.text}</span>
-                <button class="delete-button" onclick="deleteComment(this)">Удалить</button>
+                <button class="delete-button" onclick="deleteComment(${data.comment_id})">Удалить</button>
             `;
-            commentList.appendChild(newComment);
+            document.getElementById('commentList').appendChild(newComment);
             commentInput.value = ''; // Очищаем поле ввода
-            errorMessage.innerText = ''; // Очищаем сообщение об ошибке
+            document.getElementById('error-message').innerText = ''; // Очищаем сообщение об ошибке
         } else {
-            errorMessage.innerText = data.error; // Показываем ошибку, если она есть
+            document.getElementById('error-message').innerText = data.error; // Показываем ошибку, если она есть
         }
     })
     .catch(error => {
         console.error('Ошибка:', error);
-        errorMessage.innerText = 'Произошла ошибка при отправке комментария.';
+        document.getElementById('error-message').innerText = 'Произошла ошибка при отправке комментария.';
     });
 }
+
 
 function deleteComment(commentId) {
     // Подтверждение удаления комментария

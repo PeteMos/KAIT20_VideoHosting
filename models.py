@@ -31,7 +31,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False)
     text = db.Column(db.String(500), nullable=False)
-    course = db.Column(db.String(100), nullable=False)
+    video_title = db.Column(db.String(100), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 class TestResult(db.Model):
