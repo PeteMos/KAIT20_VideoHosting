@@ -10,33 +10,31 @@
             </div>
         </div>
         {% if session.get('username') %}
-            <div class="video-grid" id="videoGrid">
-                
-                {% for video in videos %}
-                    <div class="video-card" 
-                        data-title="{{ video.title }}" 
-                        data-description="{{ video.description }}" 
-                        data-details="Длительность: {{ video.duration }}, 
-                                    Дата публикации: 
-                                    {% if video.timestamp and video.timestamp is not string %}
-                                        {{ video.timestamp.strftime('%d.%m.%y') }}
-                                    {% else %}
-                                        Не указано
-                                    {% endif %}, 
-                                    Автор: {{ video.author }}" 
-                        onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title|escape }}', '{{ video.description|escape }}', 'Длительность: {{ video.duration }}, Дата публикации: {% if video.timestamp and video.timestamp is not string %}{{ video.timestamp.strftime('%d.%m.%y') }}{% else %}Не указано{% endif %}, Автор: {{ video.author|escape }}')">
-            
-
-                        <img class="video-preview" src="{{ url_for('thumbnails', filename=video.filename ~ '.jpg') }}" alt="Превью видео" onerror="this.onerror=null; this.src='{{ url_for('images', filename='video_placeholder.jpg') }}';">
-                        
-                        <h3>{{ video.title }}</h3>
-                        <p>{{ video.description }}</p>
-                    </div>
-
-                    {% include 'video-modal.html' %}
-                {% endfor %}
-
-            </div>
+        <div class="video-grid" id="videoGrid">
+            {% for video in videos %}
+                <div class="video-card" 
+                    data-title="{{ video.title }}" 
+                    data-description="{{ video.description }}" 
+                    data-details="Длительность: {{ video.duration }}, 
+                                Дата публикации: 
+                                {% if video.timestamp and video.timestamp is not string %}
+                                    {{ video.timestamp.strftime('%d.%m.%y') }}
+                                {% else %}
+                                    Не указано
+                                {% endif %}, 
+                                Автор: {{ video.author }}" 
+                    onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title|escape }}', '{{ video.description|escape }}', '...')">
+                    
+                    <img class="video-preview" src="{{ url_for('thumbnails', filename=video.filename ~ '.jpg') }}" alt="Превью видео" onerror="this.onerror=null; this.src='{{ url_for('images', filename='video_placeholder.jpg') }}';">
+                    
+                    <h3>{{ video.title }}</h3>
+                    <p>{{ video.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        
+        {% include 'video-modal.html' %}
+        
         {% else %}
             <div class="alert alert-warning">
                 <p>Вы должны быть авторизованы для просмотра видео. <a href="{{ url_for('login') }}">Войдите здесь</a>!</p>

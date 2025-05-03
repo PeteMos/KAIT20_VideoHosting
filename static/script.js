@@ -30,17 +30,12 @@ function togglePassword(passwordFieldId) {
 }
 
 function openModal(videoSrc, title, description, details) {
-    const modalVideo = document.getElementById('modalVideo');
-    const videoSource = document.getElementById('videoSource');
-
-    videoSource.src = videoSrc;  // Устанавливаем источник видео
-    modalVideo.load();            // Загружаем новое видео
-    modalVideo.play();            // Запускаем воспроизведение видео
-
-    document.getElementById('modalTitle').innerText = title;          // Устанавливаем заголовок
-    document.getElementById('videoDescription').innerText = description; // Устанавливаем описание
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("videoDescription").innerText = description;
+    document.getElementById("videoSource").src = videoSrc;
     document.getElementById('videoDetails').innerText = details;       // Устанавливаем детали
     document.getElementById('commentList').innerHTML = '';             // Очищаем список комментариев
+    document.getElementById("modalVideo").load();        // Запускаем воспроизведение видео
 
     // Запрос количества лайков и дизлайков
     fetch('/video/votes', {
@@ -62,16 +57,18 @@ function openModal(videoSrc, title, description, details) {
         .then(response => response.json())
         .then(comments => {
             const commentList = document.getElementById('commentList');
+            commentList.innerHTML = ''; // Очищаем список перед добавлением новых комментариев
             comments.forEach(comment => {
                 const commentDiv = document.createElement('div');
                 commentDiv.classList.add('comment');
                 commentDiv.setAttribute('data-id', comment.id);
                 commentDiv.innerHTML = `
-                    <strong>${comment.username}</strong>: <span>${comment.text}</span>
-                    <button class="delete-button" onclick="deleteComment(${comment.id})">Удалить</button>
+                    <strong>${comment.username}</strong>: <span class="comment-text">${comment.text}</span>
+                    ${comment.is_owner ? `<button class="delete-button" onclick="deleteComment(${comment.id})">Удалить</button>` : ''}
+                    ${comment.is_owner ? `<button class="edit-button" onclick="openEditCommentModal(${comment.id}, '${comment.text.replace(/'/g, "\\'")}')">Изменить</button>` : ''}
                 `;
                 commentList.appendChild(commentDiv);
-            });
+            });            
         });
         
     document.getElementById('videoModal').style.display = 'block'; // Открываем модальное окно
@@ -81,6 +78,7 @@ function openModal(videoSrc, title, description, details) {
 }
 
 function closeModal() {
+    console.log("closeModal вызвана");
     const modalVideo = document.getElementById('modalVideo');
     modalVideo.pause();
     modalVideo.currentTime = 0;
@@ -96,6 +94,49 @@ function openEditModal(videoId, title, description) {
 
 function closeEditModal() {
     document.getElementById('editModal').style.display = "none";
+}
+
+function openEditModal(videoId, title, description) {
+    document.getElementById('editVideoId').value = videoId;
+    document.getElementById('editTitle').value = title;
+    document.getElementById('editDescription').value = description;
+    document.getElementById('editModal').style.display = "block";
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').style.display = "none";
+}
+
+function openEditCommentModal(commentId, currentText) {
+    currentCommentId = commentId;
+    document.getElementById('editCommentInput').value = currentText;
+    document.getElementById('editCommentModal').style.display = 'block';
+}
+
+function closeEditCommentModal() {
+    document.getElementById('editCommentModal').style.display = 'none';
+}
+
+function submitEditComment() {
+    const updatedText = document.getElementById('editCommentInput').value;
+
+    fetch(`/edit_comment/${currentCommentId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: updatedText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const commentDiv = document.querySelector(`.comment[data-id="${currentCommentId}"] .comment-text`);
+            commentDiv.innerText = updatedText;
+            closeEditCommentModal();
+        } else {
+            alert(data.error);
+        }
+    });
 }
 
 function submitEdit() {
@@ -275,12 +316,12 @@ function copyToClipboard() {
     alert("Ссылка скопирована в буфер обмена!");
 }
 
-function submitComment(videoTitle) {
-    const commentInput = document.getElementById('commentInput');
-    const commentText = commentInput.value.trim();
+function submitComment() {
+    const commentInput = document.getElementById("commentInput").value;
+    const videoTitle = document.getElementById("modalTitle").innerText; // Получаем название видео из модального окна
 
-    if (commentText === '') {
-        document.getElementById('error-message').innerText = 'Комментарий не может быть пустым!';
+    if (!commentInput || !videoTitle) {
+        alert("Название видео или текст комментария отсутствует.");
         return;
     }
 
@@ -291,7 +332,7 @@ function submitComment(videoTitle) {
         },
         body: JSON.stringify({
             video_title: videoTitle,  // Убедитесь, что это 'video_title'
-            comment: commentText      // Убедитесь, что это 'comment'
+            comment: commentInput      // Используйте commentInput вместо commentText
         })
     })
     .then(response => response.json())
@@ -300,12 +341,14 @@ function submitComment(videoTitle) {
             // Добавляем новый комментарий на страницу
             const newComment = document.createElement('div');
             newComment.classList.add('comment');
+            newComment.setAttribute('data-id', data.comment_id); // Устанавливаем ID комментария для редактирования
             newComment.innerHTML = `
-                <strong>${data.username}</strong>: <span>${data.text}</span>
+                <strong>${data.username}</strong>: <span class="comment-text">${data.text}</span>
                 <button class="delete-button" onclick="deleteComment(${data.comment_id})">Удалить</button>
+                <button class="edit-button" onclick="openEditCommentModal(${data.comment_id}, '${data.text.replace(/'/g, "\\'")}')">Изменить</button>
             `;
             document.getElementById('commentList').appendChild(newComment);
-            commentInput.value = ''; // Очищаем поле ввода
+            document.getElementById("commentInput").value = ''; // Очищаем поле ввода
             document.getElementById('error-message').innerText = ''; // Очищаем сообщение об ошибке
         } else {
             document.getElementById('error-message').innerText = data.error; // Показываем ошибку, если она есть

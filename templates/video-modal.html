@@ -27,19 +27,20 @@
         </div>
         <div class="comments">
             <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
-            <button class="submit-comment" onclick="submitComment('{{ video.title }}')">Отправить</button>
+            <button class="submit-comment" onclick="submitComment()">Отправить</button>
             <div class="error-message" id="error-message"></div>
             <h4>Все комментарии:</h4>
-            <div id="commentList" class="comment-list">
-                {% for comment in comments[video.title] %}
-                    <div class="comment" data-id="{{ comment.id }}">
-                        <strong>{{ comment.username }}</strong>: <span>{{ comment.text }}</span>
-                        {% if comment.username == session.get('username') %}
-                            <button class="delete-button" onclick="deleteComment({{ comment.id }})">Удалить</button>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>            
-        </div>                       
+            <div id="commentList" class="comment-list"></div>                        
+        </div>        
+        <div id="editCommentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeEditCommentModal()">&times;</span>
+                <h2>Редактировать комментарий</h2>
+                <textarea id="editCommentInput" rows="4"></textarea>
+                <div class="button-container">
+                    <button class="save-change-button" onclick="submitEditComment()">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>                
     </div>
 </div>
