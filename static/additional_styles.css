@@ -62,13 +62,6 @@
     transition: transform 0.2s;
 }
 
-/* Адаптивные стили для мобильных устройств */
-@media (max-width: 768px) {
-    .video-card {
-        flex: 1 1 calc(50% - 10px); /* Уменьшаем ширину карточек для планшетов */
-    }
-}
-
 @media (max-width: 480px) {
     .video-card {
         flex: 1 1 calc(100% - 10px); /* Полная ширина для мобильных устройств */
@@ -221,6 +214,81 @@
     background-color: #6a0dad;
 }
 
+.comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s; 
+}
+
+.comment:hover {
+    background-color: #f0f0f0;
+}
+
+.username {
+    margin-right: 10px;
+    font-weight: bold; 
+}
+
+.comment-content {
+    display: flex;
+    align-items: center;
+}
+
+.comment-content .username {
+    padding-right: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-content .comment-text {
+    display: block;
+    word-wrap: break-word;
+    margin-left: 15px;
+    padding-left: 2px; 
+    max-width: 100%;
+}
+
+.comment .delete-button,
+.comment .edit-button {
+    padding: 8px 12px;
+    font-size: 1em;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+    max-width: 100px;
+    text-align: center;
+    display: inline-block;
+}
+
+.comment .delete-button:hover,
+.comment .edit-button:hover {
+    background-color: #5a0c9a;
+}
+
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .delete-button,
+    .edit-button {
+        max-width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
 .error-message {
     color: red;
     margin-top: 10px;
@@ -313,7 +381,7 @@ main {
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     margin: 50px auto;
-    max-width: 450px; /* Уменьшаем максимальную ширину */
+    max-width: 450px;
     width: 100%;
 }
 

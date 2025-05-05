@@ -504,6 +504,34 @@ def results():
 
     return render_template('results.html', results=results, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
+@app.route('/results_for_student')
+@role_required('student')
+def results_for_student():
+    username = session.get('username')  # Получаем имя пользователя из сессии
+    if not username:
+        flash('Вы не авторизованы.', 'error')
+        return redirect(url_for('login'))  # Перенаправляем на страницу входа, если не авторизованы
+
+    sort_by_course = request.args.get('sortByCourse', '')
+    sort_by_score = request.args.get('sortByScore', '')
+    sort_by_date = request.args.get('sortByDate', '')
+
+    # Получаем результаты только для текущего пользователя по имени
+    results = TestResult.query.filter_by(username=username).all()
+
+    # Применяем сортировку
+    if sort_by_course and sort_by_course != '':
+        results = [r for r in results if r.course == sort_by_course]
+    
+    if sort_by_score:
+        results = sorted(results, key=lambda x: x.score, reverse=(sort_by_score == 'desc'))
+    
+    if sort_by_date:
+        results = sorted(results, key=lambda x: x.timestamp, reverse=(sort_by_date == 'desc'))
+
+    return render_template('results-for-student.html', results=results, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+
+
 @app.route('/delete_result/<int:result_id>', methods=['POST'])
 @role_required('teacher')  # Проверка роли
 def delete_result(result_id):

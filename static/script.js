@@ -1,3 +1,17 @@
+function toggleMenu() {
+    const navList = document.getElementById('nav-list');
+    navList.classList.toggle('active'); // Переключаем класс active
+}
+
+// Закрываем меню при клике на пункт
+document.querySelectorAll('#nav-list a').forEach(item => {
+    item.addEventListener('click', () => {
+        const navList = document.getElementById('nav-list');
+        navList.classList.remove('active'); // Убираем класс active
+    });
+});
+
+
 function getCookie(name) {
     let cookieArr = document.cookie.split(";");
     for (let i = 0; i < cookieArr.length; i++) {
@@ -63,12 +77,17 @@ function openModal(videoSrc, title, description, details) {
                 commentDiv.classList.add('comment');
                 commentDiv.setAttribute('data-id', comment.id);
                 commentDiv.innerHTML = `
-                    <strong>${comment.username}</strong>: <span class="comment-text">${comment.text}</span>
-                    ${comment.is_owner ? `<button class="delete-button" onclick="deleteComment(${comment.id})">Удалить</button>` : ''}
-                    ${comment.is_owner ? `<button class="edit-button" onclick="openEditCommentModal(${comment.id}, '${comment.text.replace(/'/g, "\\'")}')">Изменить</button>` : ''}
+                    <div class="comment-content">
+                        <span class="username">${comment.username}</span>: 
+                        <span class="comment-text">${comment.text}</span>
+                    </div>
+                    <div class="button-container">
+                        ${comment.is_owner ? `<button class="delete-button" onclick="deleteComment(${comment.id})">Удалить</button>` : ''}
+                        ${comment.is_owner ? `<button class="edit-button" onclick="openEditCommentModal(${comment.id}, '${comment.text.replace(/'/g, "\\'")}')">Изменить</button>` : ''}
+                    </div>
                 `;
                 commentList.appendChild(commentDiv);
-            });            
+            });                       
         });
         
     document.getElementById('videoModal').style.display = 'block'; // Открываем модальное окно

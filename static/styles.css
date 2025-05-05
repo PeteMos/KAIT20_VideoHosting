@@ -17,13 +17,13 @@ body {
 
 header, footer {
     width: 100%;
-    height: auto; /* Позволяем высоте адаптироваться */
+    height: auto;
     margin: 0;
-    padding: 10px; /* Уменьшаем отступы */
+    padding: 10px;
     background-color: #6a0dad;
     color: white;
     display: flex;
-    justify-content: center; /* Центрируем элементы */
+    justify-content: center;
     align-items: center;
 }
 
@@ -51,9 +51,9 @@ footer {
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 90%;
     margin: 0 auto;
-    padding: 10px; /* Уменьшаем отступы для мобильных устройств */
+    padding: 20px;
 }
 
 .container h1 {
@@ -64,8 +64,48 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .container h1 {
-        font-size: 18px; /* Уменьшаем размер шрифта на маленьких экранах */
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        padding: 10px; 
+    }
+
+    .video-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+
+    .course-card {
+        flex: 1 1 calc(100% - 20px);
+        margin: 10px 0;
+    }
+
+    .hero h2 {
+        font-size: 2em;
+    }
+
+    .course-card {
+        flex: 1 1 calc(100% - 20px);
+        margin: 10px 0;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-container-add,
+    .uploaded-videos-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 10px 0;
+    }
+
+    .video-item {
+        margin-bottom: 15px;
     }
 }
 
@@ -78,17 +118,17 @@ footer {
 .main-nav {
     display: flex;
     justify-content: center;
-    margin: 10px 0;
+    margin-top: 25px;
 }
 
 .main-nav ul {
     list-style: none;
     padding: 0;
-    display: flex; /* Горизонтальное расположение по умолчанию */
+    display: flex;
 }
 
 .main-nav ul li {
-    margin-right: 20px; /* Отступы между элементами в горизонтальном режиме */
+    margin-right: 20px;
 }
 
 .main-nav ul li:last-child {
@@ -102,9 +142,6 @@ footer {
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.3s;
-    font-size: 1em; 
-    min-width: 120px;
-    text-align: center; 
 }
 
 .main-nav ul li a:hover {
@@ -112,15 +149,44 @@ footer {
     transform: translateY(-2px);
 }
 
+.menu-toggle {
+    font-size: 24px;
+    color: #3f016b;
+    font-weight: bold;
+    cursor: pointer;
+    display: none;
+}
+
+/* Стили для списка навигации */
+#nav-list {
+    list-style: none; /* Убираем маркеры */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Горизонтальное расположение на больших экранах */
+}
+
+#nav-list li {
+    margin: 0 15px; /* Отступы между пунктами */
+}
+
+#nav-list a {
+    color: white; /* Цвет ссылок */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
 /* Адаптивные стили для навигации */
 @media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+    }
+
     .main-nav ul {
-        flex-direction: column; /* Вертикальное расположение на мобильных устройствах */
-        align-items: center; /* Центрируем элементы */
+        flex-direction: column;
+        align-items: center;
     }
 
     .main-nav ul li {
-        margin: 10px 0; /* Добавляем отступы между элементами */
+        margin: 10px 0;
     }
 
     .main-nav ul li a {
@@ -129,6 +195,95 @@ footer {
         text-align: center; /* Центрируем текст */
     }
 }
+
+@media (max-width: 1083px) {
+    .menu-toggle {
+        display: block; /* Показываем кнопку на мобильных */
+    }
+
+    #nav-list {
+        background-color: white;
+        display: none; /* Скрываем список по умолчанию */
+        flex-direction: column; /* Вертикальное расположение */
+        width: 100%; /* Полная ширина */
+        position: absolute; /* Позиционирование */
+        top: 60px; /* Располагаем ниже кнопки */
+        left: 0; /* Прикрепляем к левому краю */
+        z-index: 1000; /* Убедимся, что меню поверх других элементов */
+    }
+
+    #nav-list.active {
+        display: flex; /* Показываем меню при активном классе */
+    }
+
+    #nav-list li {
+        margin: 10px 0; /* Отступы между пунктами в вертикальном меню */
+    }
+}
+
+/* Для мобильных устройств */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%; /* Ширина модального окна на мобильных устройствах */
+        padding: 10px; /* Уменьшение отступов */
+    }
+
+    .likes-container {
+        flex-direction: column; /* Переводим кнопки в колонку на мобильных */
+        align-items: flex-start; /* Выравниваем кнопки по левому краю */
+    }
+
+    .action-button, .share-button, .submit-comment, .delete-button, .edit-button {
+        width: 100%;
+        margin: 5px 0; /* Убираем боковые отступы и оставляем только вертикальные */
+    }
+
+    .action-button, .share-button, .submit-comment {
+        font-size: 1em; /* Размер шрифта */
+        padding: 10px; /* Отступы внутри кнопки */
+    }
+
+    .comment-input {
+        font-size: 14px; /* Уменьшение размера шрифта */
+        padding: 8px; /* Уменьшение отступов */
+    }
+
+    .error-message {
+        font-size: 12px; /* Уменьшение размера шрифта для ошибок */
+    }
+}
+
+/* Для планшетов */
+@media (min-width: 601px) and (max-width: 900px) {
+    .modal-content {
+        width: 80%; /* Ширина модального окна на планшетах */
+    }
+
+    .likes-container {
+        flex-direction: row; /* Горизонтальное расположение элементов */
+    }
+
+    .share-button, .submit-comment, .save-change-button {
+        width: auto; /* Кнопки имеют автоматическую ширину */
+        margin-left: 10px; /* Отступ между кнопками */
+    }
+}
+
+/* Для десктопов */
+@media (min-width: 901px) {
+    .modal-content {
+        width: 50%; /* Ширина модального окна на десктопах */
+    }
+
+    .likes-container {
+        flex-direction: row; /* Горизонтальное расположение элементов */
+    }
+
+    .share-button, .submit-comment, .save-change-button {
+        width: auto; /* Кнопки имеют автоматическую ширину */
+    }
+}
+
 
 /* Стили для пользовательской информации */
 .user-info {
@@ -158,7 +313,6 @@ footer {
 .username-role {
     display: flex;
     flex-direction: column; 
-    align-items: flex-start; 
     margin-left: 40px; 
 }
 
@@ -195,9 +349,9 @@ footer {
 
 .hero-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    padding: 10px;
 }
 
 .hero-text {
@@ -218,7 +372,7 @@ footer {
 .hero-image {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
 }
 
 .hero-image img {
@@ -351,6 +505,58 @@ a {
     text-align: center;
 }
 
+.action-button, .edit-button {
+    width: 100%;
+    min-width: 150px;
+    margin: 5px 0;
+}
+
+.delete-form {
+    display: flex;
+    flex: 1; 
+    margin: 0;
+}
+
+.delete-button-video,
+.action-button-video {
+    flex: 1;
+    margin: 5px;
+    padding: 10px;
+    background-color: #6a0dad;
+    font-family: "PT Serif Caption", serif;
+    color: white;
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; 
+}
+
+.delete-button-video:hover,
+.action-button-video:hover {
+    background-color: #5a0a9d;
+    transform: translateY(-2px);
+}
+
+.action-button, .share-button, .submit-comment, .delete-button, .edit-button {
+    background-color: #6a0dad;
+    font-family: "PT Serif Caption", serif;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1em;
+    flex: 1;
+    margin: 5px;
+    min-width: 100px;
+}
+
+/* Эффект при наведении */
+.action-button:hover, .share-button:hover, .submit-comment:hover, .delete-button:hover, .edit-button:hover {
+    background-color: #5a0a9d;
+    transform: translateY(-2px); /* Легкий подъем кнопки */
+}
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
@@ -375,6 +581,20 @@ a {
 
     .hero {
         padding: 30px 0; /* Уменьшаем отступы для секции героя */
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-text {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .hero-image {
+        margin-top: 20px;
     }
 
     .hero h2 {
@@ -409,13 +629,64 @@ a {
         font-size: 0.9em; /* Уменьшаем размер текста */
     }
 
-    .btn {
-        width: 100%; /* Полная ширина для кнопок на мобильных */
-        margin-top: 10px; /* Добавляем отступ сверху */
+    .user-info {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        align-items: center; /* Центрируем элементы */
+        margin: 0; /* Убираем отступы */
+    }
+
+    .user-actions {
+        justify-content: center; /* Центрируем кнопки */
+        margin-top: 10px; /* Отступ сверху для кнопок */
+        width: 100%; /* Устанавливаем ширину на 100% для кнопок */
+    }
+
+    .username-role {
+        align-items: center; /* Центрируем имя и роль */
+        margin: 10px 0; /* Отступ сверху и снизу */
+    }
+
+    .user-actions a {
+        margin: 5px;
+        text-align: center;
+        padding: 10px 15px;
+        max-width: 150px; /* Максимальная ширина кнопок */
+        width: 100%; 
+        box-sizing: border-box; /* Учитываем отступы в ширине */
+    }
+
+    .btn, .course-btn {
+        font-size: 1em;
     }
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 5px; /* Уменьшаем отступы */
+    }
+
+    header, footer {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Вертикальное расположение навигации */
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%; /* Полная ширина для кнопок */
+    }
+
+    .video-card {
+        flex: 1 1 100%; /* Полная ширина для карточек на мобильных */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Уменьшаем размер заголовков */
+    }
+
     .course-card {
         flex: 1 1 100%; /* Полная ширина для карточек на мобильных */
     }
@@ -547,7 +818,7 @@ a {
 }
 
 .modal button {
-    width: 20%;
+    width: 50%;
     justify-content: right;
     font-family: "PT Serif Caption", serif;
     padding: 10px;
@@ -582,11 +853,15 @@ a {
 }
 
 .main-container {
-    display: flex; 
-    justify-content: center;
-    align-items: stretch;
-    padding: 20px; 
-    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.form-container-add,
+.uploaded-videos-container {
+    flex: 1;
+    margin: 10px;
 }
 
 .form-container-add {
@@ -649,10 +924,25 @@ a {
     margin: 10px 0;
 }
 
+.video-container video {
+    width: 100%;
+    height: auto;
+}
+
+.likes-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 10px;
 }
 
 .action-button {
@@ -833,28 +1123,9 @@ select {
     margin-bottom: 20px;
 }
 
-.comment {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.styled-select,
+.styled-label,
+.add-video {
+    width: 100%;
     margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    transition: background-color 0.3s; 
-}
-
-.comment:hover {
-    background-color: #f0f0f0;
-}
-
-.username {
-    margin-right: 10px;
-    font-weight: bold; 
-}
-
-.comment-text {
-    margin: 0 20px;
 }

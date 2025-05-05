@@ -13,15 +13,25 @@
 <body>
     {% include 'header.html' %}
     <nav class="main-nav">
-        <ul>
-            <li><a href="#home">Главная</a></li>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul id="nav-list">
+            <!-- <li><a href="#home">Главная</a></li> -->
             <li><a href="#trending">В тренде</a></li>
             <li><a href="#new-courses">Новые курсы</a></li>
             <li><a href="#recommended">Рекомендуемые курсы</a></li>
             <li><a href="#about">О проекте</a></li>
             <li><a href="#contact">Контакты</a></li>
+            {% if session.get('role') == 'student' %}
+                <li><a href="{{ url_for('results_for_student') }}">Мои результаты</a></li>
+            {% endif %}
+            {% if session.get('role') == 'teacher' %}
+                <li><a href="{{ url_for('results') }}">Результаты студентов</a></li>
+            {% endif %}
+            {% if session.get('role') == 'admin' %}
+                <li><a href="{{ url_for('register') }}">Зарегистрировать пользователя</a></li>
+            {% endif %}
         </ul>
-    </nav>
+    </nav>       
 
     <main>
         <section id="home" class="hero">
