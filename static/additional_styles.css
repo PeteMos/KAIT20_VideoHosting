@@ -62,46 +62,6 @@
     transition: transform 0.2s;
 }
 
-@media (max-width: 480px) {
-    .video-card {
-        flex: 1 1 calc(100% - 10px); /* Полная ширина для мобильных устройств */
-    }
-
-    header, footer {
-        flex-direction: column; /* Вертикальная ориентация для мобильных */
-        height: auto; /* Позволяем высоте адаптироваться */
-        padding: 10px; /* Уменьшаем отступы */
-    }
-
-    .index-logo img {
-        margin-left: 0; /* Убираем отступ для логотипа */
-        max-width: 80%; /* Уменьшаем размер логотипа */
-    }
-
-    .main-nav ul {
-        flex-direction: column; /* Вертикальное расположение навигации */
-        align-items: center;
-    }
-
-    .btn, .share-button, .submit-comment {
-        width: 100%; /* Полная ширина для кнопок */
-        margin-top: 10px; /* Добавляем отступ сверху */
-    }
-
-    .form-container {
-        margin: 20px; /* Уменьшаем отступы для формы */
-        padding: 20px; /* Уменьшаем внутренние отступы */
-    }
-
-    .search-container {
-        max-width: 100%; /* Увеличиваем ширину контейнера поиска */
-    }
-
-    .search-input {
-        width: 100%; /* Полная ширина для поля поиска */
-    }
-}
-
 .video-card:hover {
     transform: translateY(-5px);
 }
@@ -273,20 +233,6 @@
 .comment .delete-button:hover,
 .comment .edit-button:hover {
     background-color: #5a0c9a;
-}
-
-@media (max-width: 600px) {
-    .button-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .delete-button,
-    .edit-button {
-        max-width: 100%;
-        margin-left: 0;
-        margin-top: 5px;
-    }
 }
 
 .error-message {

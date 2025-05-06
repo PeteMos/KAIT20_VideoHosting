@@ -170,38 +170,3 @@ tr:hover {
 .delete-button:hover {
     background-color: #3f016b;
 }
-
-@media (max-width: 768px) {
-    table, tbody, tr, td {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    th {
-        display: none;
-    }
-
-    td {
-        position: relative;
-        padding-left: 50%;
-        text-align: left;
-        border: none;
-        margin-bottom: 10px;
-    }
-
-    td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        font-weight: bold;
-        text-align: left;
-    }
-}

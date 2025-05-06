@@ -1,0 +1,424 @@
+@media (max-width: 768px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        padding: 10px; 
+    }
+
+    .video-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+
+    .course-card {
+        flex: 1 1 calc(100% - 20px);
+        margin: 10px 0;
+    }
+
+    .hero h2 {
+        font-size: 2em;
+    }
+
+    .course-card {
+        flex: 1 1 calc(100% - 20px);
+        margin: 10px 0;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-container-add,
+    .uploaded-videos-container {
+        width: 95%;
+        max-width: 600px;
+        margin: 10px 0;
+    }
+
+    .container-test,
+    .result-container {
+        width: 85%;
+    }
+
+    .video-item {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-nav ul li {
+        margin: 10px 0;
+    }
+
+    .main-nav ul li a {
+        padding: 10px 15px; /* Увеличиваем область нажатия */
+        width: 100%; /* Устанавливаем ширину на 100% для удобства */
+        text-align: center; /* Центрируем текст */
+    }
+}
+
+@media (max-width: 1083px) {
+    .menu-toggle {
+        display: block; /* Показываем кнопку на мобильных */
+    }
+
+    #nav-list {
+        background-color: white;
+        display: none; /* Скрываем список по умолчанию */
+        flex-direction: column; /* Вертикальное расположение */
+        width: 100%; /* Полная ширина */
+        position: absolute; /* Позиционирование */
+        top: 100px; /* Располагаем ниже кнопки */
+        left: 0; /* Прикрепляем к левому краю */
+        z-index: 1000; /* Убедимся, что меню поверх других элементов */
+    }
+
+    #nav-list.active {
+        display: flex; /* Показываем меню при активном классе */
+    }
+
+    #nav-list li {
+        margin: 10px 0; /* Отступы между пунктами в вертикальном меню */
+    }
+}
+
+/* Для мобильных устройств */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%; /* Ширина модального окна на мобильных устройствах */
+        padding: 10px; /* Уменьшение отступов */
+    }
+
+    .likes-container {
+        flex-direction: column; /* Переводим кнопки в колонку на мобильных */
+        align-items: flex-start; /* Выравниваем кнопки по левому краю */
+    }
+
+    .action-button, .share-button, .submit-comment, .delete-button, .edit-button {
+        width: 100%;
+        margin: 5px 0; /* Убираем боковые отступы и оставляем только вертикальные */
+    }
+
+    .action-button, .share-button, .submit-comment {
+        font-size: 1em; /* Размер шрифта */
+        padding: 10px; /* Отступы внутри кнопки */
+    }
+
+    .comment-input {
+        font-size: 14px; /* Уменьшение размера шрифта */
+        padding: 8px; /* Уменьшение отступов */
+    }
+
+    .error-message {
+        font-size: 12px; /* Уменьшение размера шрифта для ошибок */
+    }
+}
+
+/* Для планшетов */
+@media (min-width: 601px) and (max-width: 900px) {
+    .modal-content {
+        width: 80%; /* Ширина модального окна на планшетах */
+    }
+
+    .likes-container {
+        flex-direction: row; /* Горизонтальное расположение элементов */
+    }
+
+    .share-button, .submit-comment, .save-change-button {
+        width: auto; /* Кнопки имеют автоматическую ширину */
+        margin-left: 10px; /* Отступ между кнопками */
+    }
+}
+
+/* Для десктопов */
+@media (min-width: 901px) {
+    .modal-content {
+        width: 50%; /* Ширина модального окна на десктопах */
+    }
+
+    .likes-container {
+        flex-direction: row; /* Горизонтальное расположение элементов */
+    }
+
+    .share-button, .submit-comment, .save-change-button {
+        width: auto; /* Кнопки имеют автоматическую ширину */
+    }
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    header, footer {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .container-logo img {
+        max-width: 70%; /* Увеличиваем ширину логотипа на мобильных */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-nav ul li a {
+        padding: 8px 15px; 
+        min-width: auto; /* Убираем минимальную ширину на мобильных */
+    }
+
+    .hero {
+        padding: 30px 0; /* Уменьшаем отступы для секции героя */
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-text {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .hero-image {
+        margin-top: 20px;
+    }
+
+    .hero h2 {
+        font-size: 2em; /* Уменьшаем размер заголовка */
+    }
+
+    .hero p {
+        font-size: 1em; /* Уменьшаем размер текста */
+    }
+
+    .course-card {
+        flex: 1 1 calc(50% - 20px); /* Две карточки в ряд на планшетах */
+    }
+
+    .course-card h3 {
+        font-size: 1.2em; /* Уменьшаем размер заголовка карточки */
+    }
+
+    .course-card p {
+        font-size: 0.8em; /* Уменьшаем размер текста в карточке */
+    }
+
+    .about, .contact {
+        padding: 20px; /* Уменьшаем отступы в секциях */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Уменьшаем размер заголовков */
+    }
+
+    .about p, .contact p {
+        font-size: 0.9em; /* Уменьшаем размер текста */
+    }
+
+    .user-info {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        align-items: center; /* Центрируем элементы */
+        margin: 0; /* Убираем отступы */
+    }
+
+    .user-actions {
+        justify-content: center; /* Центрируем кнопки */
+        margin-top: 10px; /* Отступ сверху для кнопок */
+        width: 100%; /* Устанавливаем ширину на 100% для кнопок */
+    }
+
+    .username-role {
+        align-items: center; /* Центрируем имя и роль */
+        margin: 10px 0; /* Отступ сверху и снизу */
+    }
+
+    .user-actions a {
+        margin: 5px;
+        text-align: center;
+        padding: 10px 15px;
+        max-width: 150px; /* Максимальная ширина кнопок */
+        width: 100%; 
+        box-sizing: border-box; /* Учитываем отступы в ширине */
+    }
+
+    .btn, .course-btn {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 5px; /* Уменьшаем отступы */
+    }
+
+    header, footer {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Вертикальное расположение навигации */
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%; /* Полная ширина для кнопок */
+    }
+
+    .video-card {
+        flex: 1 1 100%; /* Полная ширина для карточек на мобильных */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Уменьшаем размер заголовков */
+    }
+
+    .course-card {
+        flex: 1 1 100%; /* Полная ширина для карточек на мобильных */
+    }
+
+    .hero-content {
+        flex-direction: column; /* Вертикальное расположение контента героя */
+        align-items: center; /* Центрируем элементы */
+    }
+
+    .hero-text {
+        padding-right: 0; /* Убираем отступы */
+        text-align: center; /* Центрируем текст */
+    }
+
+    .hero-image {
+        margin-top: 20px; /* Добавляем отступ сверху для изображения */
+    }
+
+    .user-info {
+        flex-direction: column; /* Вертикальное расположение пользовательской информации */
+        margin-right: 0; /* Убираем отступ справа */
+        margin-bottom: 10px; /* Добавляем отступ снизу */
+    }
+
+    .username {
+        font-size: 1em; /* Уменьшаем размер имени пользователя */
+        margin-bottom: 5px; /* Добавляем отступ снизу */
+    }
+
+    .user-info a {
+        width: 100%; /* Полная ширина для ссылки на мобильных */
+        text-align: center; /* Центрируем текст ссылки */
+    }
+
+    .about, .contact {
+        padding: 15px; /* Уменьшаем отступы в секциях для мобильных */
+    }
+
+    .about h2, .contacth2 {
+        font-size: 1.3em; /* Уменьшаем размер заголовков для мобильных */
+    }
+
+    .about p, .contact p {
+        font-size: 0.85em; /* Уменьшаем размер текста для мобильных */
+    }
+}
+
+@media (max-width: 480px) {
+    .video-card {
+        flex: 1 1 calc(100% - 10px); /* Полная ширина для мобильных устройств */
+    }
+
+    header, footer {
+        flex-direction: column; /* Вертикальная ориентация для мобильных */
+        height: auto; /* Позволяем высоте адаптироваться */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .index-logo img {
+        margin-left: 0; /* Убираем отступ для логотипа */
+        max-width: 80%; /* Уменьшаем размер логотипа */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Вертикальное расположение навигации */
+        align-items: center;
+    }
+
+    .btn, .share-button, .submit-comment {
+        width: 100%; /* Полная ширина для кнопок */
+        margin-top: 10px; /* Добавляем отступ сверху */
+    }
+
+    .form-container {
+        margin: 20px; /* Уменьшаем отступы для формы */
+        padding: 20px; /* Уменьшаем внутренние отступы */
+    }
+
+    .search-container {
+        max-width: 100%; /* Увеличиваем ширину контейнера поиска */
+    }
+
+    .search-input {
+        width: 100%; /* Полная ширина для поля поиска */
+    }
+}
+
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .delete-button,
+    .edit-button {
+        max-width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    table, tbody, tr, td {
+        display: block;
+        width: 95%;
+        box-sizing: border-box;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    th {
+        display: none;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+        border: none;
+        margin-bottom: 10px;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}

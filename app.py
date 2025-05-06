@@ -238,6 +238,33 @@ def change_password():
     # Возврат шаблона для GET-запроса или после неудачи в POST
     return render_template('change-password.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
+@app.route('/change-email', methods=['GET', 'POST'])
+def change_email():
+    # Проверка авторизации пользователя
+    if 'username' not in session:
+        return redirect(url_for('login'))  # Перенаправление на страницу входа, если не авторизован
+
+    if request.method == 'POST':
+        current_email = request.form['current_email']
+        new_email = request.form['new_email']
+        confirm_email = request.form['confirm_email']
+
+        user = User.query.filter_by(username=session.get('username')).first()
+
+        if user and user.email == current_email:
+            if new_email == confirm_email:
+                user.email = new_email
+                db.session.commit()
+                flash('Email успешно изменен!', 'success')
+                return redirect(url_for('index'))  # Возврат после успешного изменения Email
+            else:
+                flash('Новые Email не совпадают.', 'error')
+        else:
+            flash('Неверный текущий Email.', 'error')
+
+    # Возврат шаблона для GET-запроса или после неудачи в POST
+    return render_template('change-email.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)

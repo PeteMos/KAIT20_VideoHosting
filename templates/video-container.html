@@ -23,7 +23,7 @@
                                     Не указано
                                 {% endif %}, 
                                 Автор: {{ video.author }}" 
-                    onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title|escape }}', '{{ video.description|escape }}', '...')">
+                    onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title|escape }}', '{{ video.description|escape }}', 'Длительность: {{ video.duration }}, Дата публикации: {% if video.timestamp and video.timestamp is not string %}{{ video.timestamp.strftime('%d.%m.%y') }}{% else %}Не указано{% endif %}, Автор: {{ video.author|escape }}')">
                     
                     <img class="video-preview" src="{{ url_for('thumbnails', filename=video.filename ~ '.jpg') }}" alt="Превью видео" onerror="this.onerror=null; this.src='{{ url_for('images', filename='video_placeholder.jpg') }}';">
                     
