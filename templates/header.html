@@ -16,33 +16,37 @@
     <div class="user-info">
         <div class="user-actions">
             {% if session.get('username') %}
-                {% if session.get('role') == 'admin' %}
-                    <a href="{{ url_for('change_password') }}" class="btn">Сменить пароль</a>
-                    <a href="{{ url_for('change_email') }}" class="btn">Сменить Email</a>
-                {% endif %}
-                
-                {% if session.get('role') == 'teacher' %}
-                    <a href="{{ url_for('change_password') }}" class="btn">Сменить пароль</a>
-                    <a href="{{ url_for('change_email') }}" class="btn">Сменить Email</a>
-                {% endif %}
-        
-                {% if session.get('role') == 'student' %}
-                    <a href="{{ url_for('change_password') }}" class="btn">Сменить пароль</a>
-                    <a href="{{ url_for('change_email') }}" class="btn">Сменить Email</a>
-                {% endif %}
-    
-                <div class="username-role">
+                <div class="username-role" style="text-align: center;">
                     <span id="username" class="username">{{ session.get('username', 'Гость') }}</span>
                     {% if session.get('username') %}
-                        <span class="user-role" style="display: block; margin-top: 5px;">{{ ROLE_TRANSLATIONS[session.get('role')] if session.get('role') in ROLE_TRANSLATIONS else session.get('role') }}</span>
+                        <span class="user-role" style="display: block; margin-top: 5px;">
+                            {{ ROLE_TRANSLATIONS[session.get('role')] if session.get('role') in ROLE_TRANSLATIONS else session.get('role') }}
+                        </span>
                     {% endif %}
+                    <div class="user-links">
+                        {% if session.get('role') == 'admin' %}
+                            <a class="change-password" href="{{ url_for('change_password') }}">Сменить пароль</a>
+                            <a class="change-email" href="{{ url_for('change_email') }}">Сменить Email</a>
+                        {% endif %}
+
+                        {% if session.get('role') == 'teacher' %}
+                            <a class="change-password" href="{{ url_for('change_password') }}">Сменить пароль</a>
+                            <a class="change-email" href="{{ url_for('change_email') }}">Сменить Email</a>
+                        {% endif %}
+
+                        {% if session.get('role') == 'student' %}
+                            <a class="change-password" href="{{ url_for('change_password') }}">Сменить пароль</a>
+                            <a class="change-email" href="{{ url_for('change_email') }}">Сменить Email</a>
+                        {% endif %}
+                    </div>                       
                 </div>
-                
-                <a href="/logout" id="logout-link" class="btn">Выход</a>
             {% else %}
                 <span id="username" class="username">{{ session.get('username', 'Гость') }}</span>   
                 <a href="/login" class="btn" id="login-btn">Вход</a>
             {% endif %}
         </div>
+        {% if session.get('username') %}
+            <a href="/logout" id="logout-link" class="btn">Выход</a>
+        {% endif %}
     </div>            
 </header>

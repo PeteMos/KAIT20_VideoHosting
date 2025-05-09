@@ -363,9 +363,23 @@ def add_video():
 @role_required('teacher')  # Проверка роли
 def delete_video(video_id):
     video = Video.query.get_or_404(video_id)
+    
+    # Получаем путь к видео и превью
+    video_path = os.path.join(app.config['UPLOAD_FOLDER'], video.filename)
+    thumbnail_path = os.path.join(app.config['THUMBNAIL_FOLDER'], f'{video.filename}.jpg')
+
+    # Удаляем видео из базы данных
     db.session.delete(video)
     db.session.commit()
-    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], video.filename))
+
+    # Удаляем видео файл
+    if os.path.exists(video_path):
+        os.remove(video_path)
+
+    # Удаляем превью, если оно существует
+    if os.path.exists(thumbnail_path):
+        os.remove(thumbnail_path)
+
     flash('Видео успешно удалено!', 'success')
     return redirect(url_for('add_video'))
 
@@ -405,7 +419,7 @@ def vote_video():
 def get_video_votes():
     title = request.json.get('title')  # Используем название видео
     if not title:
-        return jsonify({"error": "Название видео не указано."}), 400
+        return jsonify({"error": "Название видео не указано"}), 400
 
     likes_count = VideoVote.query.filter_by(video_title=title, vote_type='like').count()
     dislikes_count = VideoVote.query.filter_by(video_title=title, vote_type='dislike').count()
@@ -423,7 +437,7 @@ def submit_comment():
     username = session.get('username')  # Предполагается, что имя пользователя хранится в сессии
 
     if not video_title or not comment:
-        return jsonify({'success': False, 'error': 'Название видео и текст комментария обязательны.'})
+        return jsonify({'success': False, 'error': 'Название видео и текст комментария обязательны'})
 
     # Сохраните комментарий в базе данных (замените на свой код)
     new_comment = Comment(video_title=video_title, text=comment, username=username)
@@ -441,7 +455,7 @@ def get_comments(video_title):
         'id': comment.id,
         'username': comment.username,
         'text': comment.text,
-        'is_owner': comment.username == username  # Проверяем, является ли текущий пользователь владельцем комментария
+        'is_owner': comment.username == username
     } for comment in comments])
 
 @app.route('/edit_comment/<int:comment_id>', methods=['POST'])
@@ -451,7 +465,7 @@ def edit_comment(comment_id):
     username = session.get('username')  # Получаем имя пользователя из сессии
 
     if comment.username != username:  # Проверяем, является ли пользователь владельцем комментария
-        return jsonify({"success": False, "error": "Вы не можете редактировать этот комментарий."}), 403
+        return jsonify({"success": False, "error": "Вы не можете редактировать этот комментарий"}), 403
 
     comment.text = data['text']
 
@@ -464,18 +478,10 @@ def edit_comment(comment_id):
     
 @app.route('/delete_comment/<int:comment_id>', methods=['POST'])
 def delete_comment(comment_id):
-    comment = Comment.query.get(comment_id)
-    username = session.get('username')  # Получаем имя пользователя из сессии
-
-    if comment:
-        if comment.username != username:  # Проверяем, является ли пользователь владельцем комментария
-            return jsonify({'success': False, 'error': 'Вы не можете удалить этот комментарий.'}), 403
-
-        db.session.delete(comment)
-        db.session.commit()
-        return jsonify({'success': True})
-
-    return jsonify({'success': False, 'error': 'Комментарий не найден.'}), 404
+    comment = Comment.query.get_or_404(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    return jsonify({"success": True}), 200
 
 @app.route('/submit_test', methods=['POST'])
 def submit_test():

@@ -76,13 +76,10 @@
     }
 
     #nav-list {
-        background-color: white;
         display: none; /* Скрываем список по умолчанию */
         flex-direction: column; /* Вертикальное расположение */
+        align-items: center;
         width: 100%; /* Полная ширина */
-        position: absolute; /* Позиционирование */
-        top: 100px; /* Располагаем ниже кнопки */
-        left: 0; /* Прикрепляем к левому краю */
         z-index: 1000; /* Убедимся, что меню поверх других элементов */
     }
 
@@ -230,29 +227,40 @@
     }
 
     .user-info {
-        flex-direction: column; /* Вертикальное расположение для мобильных */
-        align-items: center; /* Центрируем элементы */
-        margin: 0; /* Убираем отступы */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
     }
 
     .user-actions {
-        justify-content: center; /* Центрируем кнопки */
-        margin-top: 10px; /* Отступ сверху для кнопок */
-        width: 100%; /* Устанавливаем ширину на 100% для кнопок */
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%;
     }
 
     .username-role {
-        align-items: center; /* Центрируем имя и роль */
-        margin: 10px 0; /* Отступ сверху и снизу */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .user-actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%;
     }
 
     .user-actions a {
-        margin: 5px;
+        margin: 5px 0;
         text-align: center;
         padding: 10px 15px;
-        max-width: 150px; /* Максимальная ширина кнопок */
-        width: 100%; 
-        box-sizing: border-box; /* Учитываем отступы в ширине */
+        box-sizing: border-box;
     }
 
     .btn, .course-btn {

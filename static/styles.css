@@ -93,18 +93,24 @@ footer {
 }
 
 .main-nav ul li {
-    margin: 0 15px;
+    width: 150px;
+    height: 50px;
+    text-align: center;
 }
 
 .main-nav ul li:last-child {
-    margin-right: 0; /* Убираем отступ у последнего элемента */
+    margin-right: 0;
 }
 
 .main-nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0;
+    text-decoration: none;
     background-color: #6a0dad;
     color: white;
-    text-decoration: none;
-    padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.3s;
 }
@@ -147,6 +153,7 @@ footer {
     align-items: center;
     margin-right: 60px;
     text-align: center;
+    justify-content: center;
 }
 
 .username {
@@ -167,15 +174,13 @@ footer {
 }
 
 .username-role {
-    display: flex;
-    flex-direction: column; 
-    margin-left: 40px; 
+    margin-bottom: 10px;
 }
 
 .user-actions {
-    display: flex;
-    flex-direction: row;
+    display: flex; 
     align-items: center; 
+    flex-grow: 1;
 }
 
 .user-info a {
@@ -187,15 +192,35 @@ footer {
     transition: background-color 0.3s, transform 0.3s; 
 }
 
+.user-actions .change-password,
+.user-actions .change-email{
+    background: none;
+    color: white;
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+    transition: none;
+    font-size: 0.8em;
+}
+
+.user-links {
+    margin-top: 10px; 
+    display: flex; 
+    gap: 10px;
+}
+
 .user-info a:hover {
     background-color: rgba(208, 172, 255, 0.918);
     transform: translateY(-3px); 
 }
 
+#logout-link {
+    margin-left: 15px;
+}
+
 .user-info span {
     color: white;
-    margin: 0 5px;
-    margin-left: 11px;
+    margin: 10px 0;
 }
 
 .hero {
@@ -221,7 +246,6 @@ footer {
 
 .hero p {
     font-size: 1.2em;
-    margin-bottom: 35px;
 }
 
 .hero-image {
@@ -305,10 +329,12 @@ footer {
     color: white;
     padding: 10px;
     text-decoration: none;
+    text-align: center;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.3s;
-    display: inline-block;
-    margin-top: 10px;
+    display: block;
+    margin-top: auto;
+    width: 150px;
 }
 
 .course-btn:hover {
