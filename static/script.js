@@ -82,15 +82,13 @@ function openModal(videoSrc, title, description, details) {
                         <span class="comment-text">${comment.text}</span>
                     </div>
                     <div class="button-container">
-                        ${comment.is_owner ? `<button class="delete-button" onclick="deleteComment(${comment.id})">Удалить</button>` : ''}
+                        ${comment.is_owner || comment.is_admin ? `<button class="delete-button" onclick="deleteComment(${comment.id})">Удалить</button>` : ''}
                         ${comment.is_owner ? `<button class="edit-button" onclick="openEditCommentModal(${comment.id}, '${comment.text.replace(/'/g, "\\'")}')">Изменить</button>` : ''}
                     </div>
                 `;
                 commentList.appendChild(commentDiv);
             });                       
         });
-        
-    document.getElementById('videoModal').style.display = 'block'; // Открываем модальное окно
 
     userVote = null; // Обнуляем голос пользователя
     updateVoteButtons();

@@ -55,7 +55,7 @@ def role_required(role):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if 'username' not in session or session.get('role') != role:
-                flash('У вас нет прав для доступа к этой странице.', 'error')
+                flash('У вас нет прав для доступа к этой странице', 'error')
                 return redirect(url_for('index'))
             return f(*args, **kwargs)
         return decorated_function
@@ -67,7 +67,7 @@ def index():
     role = session.get('role') or request.cookies.get('role', 'Пользователь')
     if not username or not role:
         # Логика для обработки отсутствия данных
-        print("Cookies не найдены, используем значения по умолчанию.")
+        print("Cookies не найдены, используем значения по умолчанию")
     return render_template('index.html', page_title=None, is_home=True, username=username, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
 
 @app.route('/images/<path:filename>')
@@ -116,7 +116,7 @@ def register():
 
         # Проверка на пустые поля
         if not username:
-            flash('Имя пользователя не может быть пустым.', 'error')
+            flash('Имя пользователя не может быть пустым', 'error')
             return redirect(url_for('register'))
 
         if not login or not re.match(r"[^@]+@[^@]+\.[^@]+", login):
@@ -124,16 +124,16 @@ def register():
             return redirect(url_for('register'))
 
         if not password or not password_confirm:
-            flash('Пароль и подтверждение пароля обязательны.', 'error')
+            flash('Пароль и подтверждение пароля обязательны', 'error')
             return redirect(url_for('register'))
 
         if password != password_confirm:
-            flash('Пароли не совпадают. Пожалуйста, попробуйте снова.', 'error')
+            flash('Пароли не совпадают. Пожалуйста, попробуйте снова', 'error')
             return redirect(url_for('register'))
 
         existing_user = User.query.filter((User .email == login) | (User .username == username)).first()
         if existing_user:
-            flash('Пользователь с указанным email или именем пользователя уже существует. Пожалуйста, используйте другой.', 'error')
+            flash('Пользователь с указанным email или именем пользователя уже существует. Пожалуйста, используйте другой', 'error')
             return redirect(url_for('register'))
 
         hashed_password = generate_password_hash(password)
@@ -144,12 +144,12 @@ def register():
         try:
             db.session.add(new_user)
             db.session.commit()
-            flash('Регистрация прошла успешно!', 'success')
+            flash('Регистрация прошла успешно', 'success')
             return redirect(url_for('index'))  # Перенаправление на главную страницу
         except Exception as e:
             db.session.rollback()  # Откат транзакции в случае ошибки
             print(f'Ошибка при регистрации: {e}')  # Вывод ошибки в консоль
-            flash('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.', 'error')
+            flash('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже', 'error')
             return redirect(url_for('register'))
 
     return render_template('register.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
@@ -176,9 +176,9 @@ def reset_password_request():
         if user:
             token = generate_reset_token(user.email)
             # Здесь можно добавить код для отправки email с токеном
-            flash('Инструкции по сбросу пароля отправлены на ваш email.', 'info')
+            flash('Инструкции по сбросу пароля отправлены на ваш email', 'info')
         else:
-            flash('Если такой email существует в нашей базе, вы получите инструкции по сбросу пароля.', 'info')
+            flash('Если такой email существует в нашей базе, вы получите инструкции по сбросу пароля', 'info')
         
         return redirect(url_for('login'))
     
@@ -196,17 +196,17 @@ def reset_password(token):
         confirm_password = request.form['confirm_password']
 
         if new_password != confirm_password:
-            flash('Пароли не совпадают. Пожалуйста, попробуйте снова.', 'error')
+            flash('Пароли не совпадают. Пожалуйста, попробуйте снова', 'error')
             return redirect(url_for('reset_password', token=token))
 
         user = User.query.filter_by(email=email).first()
         if user:
             user.password = generate_password_hash(new_password)
             db.session.commit()
-            flash('Пароль успешно сброшен!', 'success')
+            flash('Пароль успешно сброшен', 'success')
             return redirect(url_for('login'))
         else:
-            flash('Пользователь не найден.', 'error')
+            flash('Пользователь не найден', 'error')
             return redirect(url_for('login'))
 
     return render_template('reset-password.html', token=token)
@@ -228,12 +228,12 @@ def change_password():
             if new_password == confirm_password:
                 user.password = generate_password_hash(new_password)
                 db.session.commit()
-                flash('Пароль успешно изменен!', 'success')
+                flash('Пароль успешно изменен', 'success')
                 return redirect(url_for('index'))  # Возврат после успешного изменения пароля
             else:
-                flash('Новые пароли не совпадают.', 'error')
+                flash('Новые пароли не совпадают', 'error')
         else:
-            flash('Неверный текущий пароль.', 'error')
+            flash('Неверный текущий пароль', 'error')
 
     # Возврат шаблона для GET-запроса или после неудачи в POST
     return render_template('change-password.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
@@ -255,12 +255,12 @@ def change_email():
             if new_email == confirm_email:
                 user.email = new_email
                 db.session.commit()
-                flash('Email успешно изменен!', 'success')
+                flash('Email успешно изменен', 'success')
                 return redirect(url_for('index'))  # Возврат после успешного изменения Email
             else:
-                flash('Новые Email не совпадают.', 'error')
+                flash('Новые Email не совпадают', 'error')
         else:
-            flash('Неверный текущий Email.', 'error')
+            flash('Неверный текущий Email', 'error')
 
     # Возврат шаблона для GET-запроса или после неудачи в POST
     return render_template('change-email.html', ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
@@ -275,7 +275,7 @@ def logout():
     response.set_cookie('username', '', expires=0)
     response.set_cookie('role', '', expires=0)
     
-    flash('Вы вышли из системы.', 'info')
+    flash('Вы вышли из системы', 'info')
     return response
 
 @app.route('/uploads/videos/<path:filename>')
@@ -347,13 +347,13 @@ def add_video():
             db.session.add(new_video)
             try:
                 db.session.commit()  # Сохраняем изменения в базе данных
-                flash('Видео успешно добавлено!', 'success')
+                flash('Видео успешно добавлено', 'success')
                 return redirect(url_for(f'course_{course.lower().replace(" ", "_")}'))
             except Exception as e:
                 db.session.rollback()  # Откатываем изменения в случае ошибки
                 flash(f'Ошибка при добавлении видео: {str(e)}', 'error')
         else:
-            flash('Пожалуйста, загрузите файл видео с допустимым форматом.', 'error')
+            flash('Пожалуйста, загрузите файл видео с допустимым форматом', 'error')
 
     # Извлечение всех видео из базы данных для отображения
     videos = Video.query.filter_by(author=session.get('username')).all()
@@ -380,20 +380,20 @@ def delete_video(video_id):
     if os.path.exists(thumbnail_path):
         os.remove(thumbnail_path)
 
-    flash('Видео успешно удалено!', 'success')
+    flash('Видео успешно удалено', 'success')
     return redirect(url_for('add_video'))
 
 @app.route('/video/vote', methods=['POST'])
 def vote_video():
     if 'username' not in session:
-        return jsonify({"error": "Вы должны быть авторизованы."}), 403
+        return jsonify({"error": "Вы должны быть авторизованы"}), 403
 
     title = request.json.get('title')  # Получаем название видео
     vote_type = request.json.get('vote_type')  # 'like', 'dislike' или None
     username = session['username']
 
     if vote_type not in ['like', 'dislike', None]:
-        return jsonify({"error": "Некорректный тип голоса."}), 400
+        return jsonify({"error": "Некорректный тип голоса"}), 400
 
     # Проверяем, проголосовал ли пользователь ранее
     existing_vote = VideoVote.query.filter_by(video_title=title, username=username).first()
@@ -417,7 +417,7 @@ def vote_video():
 
 @app.route('/video/votes', methods=['POST'])
 def get_video_votes():
-    title = request.json.get('title')  # Используем название видео
+    title = request.json.get('title')
     if not title:
         return jsonify({"error": "Название видео не указано"}), 400
 
@@ -434,12 +434,11 @@ def submit_comment():
     data = request.get_json()
     video_title = data.get('video_title')
     comment = data.get('comment')
-    username = session.get('username')  # Предполагается, что имя пользователя хранится в сессии
+    username = session.get('username')
 
     if not video_title or not comment:
         return jsonify({'success': False, 'error': 'Название видео и текст комментария обязательны'})
 
-    # Сохраните комментарий в базе данных (замените на свой код)
     new_comment = Comment(video_title=video_title, text=comment, username=username)
     db.session.add(new_comment)
     db.session.commit()
@@ -449,20 +448,22 @@ def submit_comment():
 @app.route('/get_comments/<video_title>', methods=['GET'])
 def get_comments(video_title):
     comments = Comment.query.filter_by(video_title=video_title).all()
-    username = session.get('username')  # Получаем имя пользователя из сессии
+    username = session.get('username')
+    user_role = session.get('role')
 
     return jsonify([{
         'id': comment.id,
         'username': comment.username,
         'text': comment.text,
-        'is_owner': comment.username == username
+        'is_owner': comment.username == username,
+        'is_admin': user_role == 'admin'
     } for comment in comments])
 
 @app.route('/edit_comment/<int:comment_id>', methods=['POST'])
 def edit_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
     data = request.get_json()
-    username = session.get('username')  # Получаем имя пользователя из сессии
+    username = session.get('username')
 
     if comment.username != username:  # Проверяем, является ли пользователь владельцем комментария
         return jsonify({"success": False, "error": "Вы не можете редактировать этот комментарий"}), 403
@@ -479,9 +480,17 @@ def edit_comment(comment_id):
 @app.route('/delete_comment/<int:comment_id>', methods=['POST'])
 def delete_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
+    username = session.get('username')
+    user_role = session.get('role')
+
+    # Проверка, является ли пользователь администратором или владельцем комментария
+    if user_role != 'admin' and comment.username != username:
+        return jsonify({"success": False, "error": "У вас нет прав для удаления этого комментария."}), 403
+
     db.session.delete(comment)
     db.session.commit()
     return jsonify({"success": True}), 200
+
 
 @app.route('/submit_test', methods=['POST'])
 def submit_test():
@@ -572,15 +581,15 @@ def delete_result(result_id):
     if result:
         db.session.delete(result)
         db.session.commit()
-        flash('Результат успешно удален!', 'success')
+        flash('Результат успешно удален', 'success')
     else:
-        flash('Результат не найден.', 'error')
+        flash('Результат не найден', 'error')
     return redirect(url_for('results'))
 
 @app.route('/course/programming')
 def course_programming():
     if 'username' not in session:
-        flash('Вы должны быть авторизованы для просмотра видео.', 'error')
+        flash('Вы должны быть авторизованы для просмотра видео', 'error')
         return redirect(url_for('login'))  # Перенаправляем на страницу входа
 
     page = request.args.get('page', 1, type=int)  # Получаем номер страницы из URL, по умолчанию 1
