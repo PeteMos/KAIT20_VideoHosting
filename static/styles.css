@@ -200,7 +200,7 @@ footer {
     padding: 0;
     border: none;
     transition: none;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .user-links {
@@ -466,28 +466,34 @@ a {
     transform: translateY(1px);
 }
 
+/* Стили для общего модального окна */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
+    display: flex;
+    justify-content: center; /* Центрирование модального окна по горизонтали */
+    align-items: center; /* Центрирование модального окна по вертикали */
+    position: fixed; /* Фиксированное позиционирование */
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    z-index: 1000; /* Над другими элементами */
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 10% auto;
+/* Стили для модального окна "Поделиться" */
+.share-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    max-width: 90%;
+    margin: 0 auto;
 }
+
 
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -524,7 +530,6 @@ a {
 
 .modal button {
     width: 50%;
-    justify-content: right;
     font-family: "PT Serif Caption", serif;
     padding: 10px;
     background-color: #6a0dad;
@@ -533,6 +538,36 @@ a {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px; /* Отступы сверху для кнопок */
+}
+
+/* Уникальные стили для кнопки copy-button */
+.copy-button {
+    background-color: #ff5722; /* Другой цвет фона */
+    width: 80%; /* Можно сделать шире или уже */
+    margin-top: 20px; /* Отступ сверху для отделения от других кнопок */
+}
+
+.copy-button:hover {
+    background-color: #e64a19; /* Цвет при наведении для copy-button */
+}
+
+#editDescription {
+    width: 100%;
+    height: 100px;
+    overflow-y: auto;
+    resize: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#shareLink {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 .modal button:hover {
@@ -610,6 +645,7 @@ a {
 }
 
 .video-item h3 {
+    color: #6a0dad;
     text-align: center;
 }
 
@@ -742,33 +778,33 @@ select {
 }
 
 .role-select:focus {
-    border-color: #6a0dad; /* Цвет границы при фокусе */
-    outline: none; /* Убираем стандартный контур */
+    border-color: #6a0dad;
+    outline: none;
 }
 
 .role-select option {
-    padding: 10px; /* Отступы для опций */
+    padding: 10px;
 }
 
 .pagination {
     display: flex;
-    justify-content: center; /* Центрирование пагинации */
+    justify-content: center;
     margin-bottom: 40px;
 }
 
 .pagination a {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: #6a0dad; /* Цвет ссылок */
+    text-decoration: none;
+    color: #6a0dad;
     padding: 10px 15px; /* Отступы внутри кнопок */
     margin: 0 5px; /* Отступы между кнопками */
-    border: 1px solid #6a0dad; /* Рамка кнопок */
-    border-radius: 5px; /* Закругленные углы */
-    transition: background-color 0.3s, color 0.3s; /* Плавный переход */
+    border: 1px solid #6a0dad;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination a:hover {
-    background-color: #6a0dad; /* Цвет фона при наведении */
-    color: white; /* Цвет текста при наведении */
+    background-color: #6a0dad;
+    color: white;
 }
 
 .pagination span {
@@ -834,3 +870,93 @@ select {
     width: 100%;
     margin: 10px 0;
 }
+
+.social-buttons a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 15px;
+    background-color: #6a0dad;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.social-buttons a:hover {
+    background-color: #5a0a9d;
+}
+
+video {
+    width: 100%;
+    border-radius: 15px;
+    outline: none;
+    background-color: #000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); /* Тень для видео */
+    opacity: 1;
+}
+
+/* Стили для контейнера контролов */
+video::-webkit-media-controls-enclosure {
+    padding: 2px;
+}
+
+/* Стили для кнопки воспроизведения */
+video::-webkit-media-controls-play-button {
+    background-color: #6a0dad;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+video::-webkit-media-controls-play-button:hover {
+    background-color: #8a2be2;
+    transform: scale(1.1);
+}
+
+/* Стили для ползунка громкости */
+video::-webkit-media-controls-volume-slider {
+    border-radius: 10px;
+    height: 2px;
+}
+
+/* Стили для дорожки прогресса */
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+    color: #fff;
+    font-weight: bold;
+    font-family: "PT Serif Caption", serif;
+    border-radius: 5px;
+    padding: 0px 5px;
+    display: inline-block; /* Выравнивание по горизонтали */
+    margin: 0 5px; /* Отступы для выравнивания */
+}
+
+/* Стили для кнопки полного экрана */
+video::-webkit-media-controls-fullscreen-button {
+    background-color: #6a0dad;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+video::-webkit-media-controls-fullscreen-button:hover {
+    background-color: #8a2be2;
+    transform: scale(1.1);
+}
+
+/* Стили для трех точек (меню) */
+video::-webkit-media-controls-more-button {
+    background-color: #6a0dad; /* Цвет кнопки меню */
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+video::-webkit-media-controls-more-button:hover {
+    background-color: #8a2be2; /* Цвет при наведении */
+    transform: scale(1.1);
+}
+
+/* Стили для дорожки прогресса */
+video::-webkit-media-controls-timeline {
+    margin-top: 10px;
+    height: 2px;
+}
+

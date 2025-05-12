@@ -383,7 +383,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    resize: none; /* Запретить изменение размера */
+    resize: none;
     font-family: "PT Serif Caption", serif;
     font-size: 16px;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -408,11 +408,12 @@ textarea:focus {
 }
 
 .file-input {
-    display: none; /* Скрываем стандартный элемент */
+    display: none;
 }
 
 #file-name {
-    cursor: pointer; /* Указатель на текстовом поле */
+    font-family: "PT Serif Caption", serif;
+    cursor: pointer;
 }
 
 .file-input + label {

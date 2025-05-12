@@ -47,9 +47,9 @@ function openModal(videoSrc, title, description, details) {
     document.getElementById("modalTitle").innerText = title;
     document.getElementById("videoDescription").innerText = description;
     document.getElementById("videoSource").src = videoSrc;
-    document.getElementById('videoDetails').innerText = details;       // Устанавливаем детали
-    document.getElementById('commentList').innerHTML = '';             // Очищаем список комментариев
-    document.getElementById("modalVideo").load();        // Запускаем воспроизведение видео
+    document.getElementById('videoDetails').innerText = details;
+    document.getElementById('commentList').innerHTML = '';
+    document.getElementById("modalVideo").load();
 
     // Запрос количества лайков и дизлайков
     fetch('/video/votes', {
@@ -66,12 +66,13 @@ function openModal(videoSrc, title, description, details) {
     });
 
     document.getElementById('videoModal').style.display = 'block'; // Открываем модальное окно
+
     // Загружаем комментарии для данного видео
     fetch(`/get_comments/${title}`)
         .then(response => response.json())
         .then(comments => {
             const commentList = document.getElementById('commentList');
-            commentList.innerHTML = ''; // Очищаем список перед добавлением новых комментариев
+            commentList.innerHTML = '';
             comments.forEach(comment => {
                 const commentDiv = document.createElement('div');
                 commentDiv.classList.add('comment');
@@ -87,7 +88,7 @@ function openModal(videoSrc, title, description, details) {
                     </div>
                 `;
                 commentList.appendChild(commentDiv);
-            });                       
+            });
         });
 
     userVote = null; // Обнуляем голос пользователя
@@ -95,7 +96,6 @@ function openModal(videoSrc, title, description, details) {
 }
 
 function closeModal() {
-    console.log("closeModal вызвана");
     const modalVideo = document.getElementById('modalVideo');
     modalVideo.pause();
     modalVideo.currentTime = 0;
@@ -299,38 +299,35 @@ function updateVoteButtons() {
 }
 
 function shareVideo() {
-    const videoTitle = document.getElementById('modalTitle').innerText;
-    const videoUrl = window.location.href;
+    const videoUrl = document.getElementById('videoSource').src; // Получаем URL видео
+    const shareLinkInput = document.getElementById('shareLink');
+    shareLinkInput.value = videoUrl; // Устанавливаем значение в поле ввода
 
-    const shareOptions = `
-        <div style="text-align:center; margin:20px; background-color: #6f42c1; color: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
-            <h3 style="margin-bottom: 15px;">Поделитесь видео "${videoTitle}"</h3>
-            <p>Ссылка: <input type="text" value="${videoUrl}" id="shareLink" readonly style="width: 80%; margin-bottom: 15px; border-radius: 5px; padding: 5px;"></p>
-            <button onclick="copyToClipboard()" style="margin-bottom: 15px; padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Копировать ссылку</button>
-            <h4 style="margin-bottom: 10px;">Поделиться в:</h4>
-            <div style="display: flex; justify-content: center; gap: 10px;">
-                <a href="https://vk.com/share.php?url=${encodeURIComponent(videoUrl)}" target="_blank">
-                    <img src="https://infostart.ru/upload/iblock/707/707682290371aa2f184f45f41c5b1a20.png" alt="ВКонтакте" style="width: 40px; height: 40px; border-radius: 5px;">
-                </a>
-                <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(videoUrl)}" target="_blank">
-                    <img src="https://static.vecteezy.com/system/resources/previews/023/986/589/original/whatsapp-logo-whatsapp-logo-transparent-whatsapp-icon-transparent-free-free-png.png" alt="WhatsApp" style="width: 40px; height: 40px; border-radius: 5px;">
-                </a>
-                <a href="https://t.me/share/url?url=${encodeURIComponent(videoUrl)}" target="_blank">
-                    <img src="https://www.leocdn.ru/uploadsForSiteId/200722/content/dfa2aedc-4c48-428e-bb7e-bb04ede78076.png" alt="Telegram" style="width: 40px; height: 40px; border-radius: 5px;">
-                </a>
-            </div>
-        </div>
-    `;
-    const shareWindow = window.open("", "Поделиться", "width=400,height=300");
-    shareWindow.document.write(shareOptions);
-    shareWindow.document.close();
+    // Обновляем ссылки для социальных сетей
+    document.getElementById('vkShareLink').href = `https://vk.com/share.php?url=${encodeURIComponent(videoUrl)}`;
+    document.getElementById('whatsappShareLink').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(videoUrl)}`;
+    document.getElementById('telegramShareLink').href = `https://t.me/share/url?url=${encodeURIComponent(videoUrl)}`;
+
+    const shareModal = document.getElementById('shareModal');
+    shareModal.style.display = 'block'; // Открываем модальное окно дележа
+}
+
+function closeShareModal() {
+    const shareModal = document.getElementById('shareModal');
+    shareModal.style.display = 'none'; // Закрываем модальное окно
 }
 
 function copyToClipboard() {
     const shareLink = document.getElementById('shareLink');
-    shareLink.select();
-    document.execCommand("copy");
-    alert("Ссылка скопирована в буфер обмена!");
+    
+    navigator.clipboard.writeText(shareLink.value)
+        .then(() => {
+            alert("Ссылка скопирована в буфер обмена!"); // Уведомление о копировании
+        })
+        .catch(err => {
+            console.error('Ошибка при копировании: ', err);
+            alert("Не удалось скопировать ссылку."); // Обработка ошибки
+        });
 }
 
 function submitComment() {
@@ -338,7 +335,7 @@ function submitComment() {
     const videoTitle = document.getElementById("modalTitle").innerText; // Получаем название видео из модального окна
 
     if (!commentInput || !videoTitle) {
-        alert("Название видео или текст комментария отсутствует.");
+        alert("Комментарии не может быть пустым!");
         return;
     }
 
@@ -445,6 +442,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Ошибка загрузки изображения:', placeholderUrl);
         };
     }
+    document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+    const videoParam = new URLSearchParams(hash.substring(1)).get('video');
+
+    if (videoParam) {
+        openModal(videoParam); // Откройте модальное окно с видео, используя ID
+    }
+});
 });
 
 document.querySelector('input[type="file"]').addEventListener('change', function(event) {

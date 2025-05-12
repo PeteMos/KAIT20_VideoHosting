@@ -437,7 +437,7 @@ def submit_comment():
     username = session.get('username')
 
     if not video_title or not comment:
-        return jsonify({'success': False, 'error': 'Название видео и текст комментария обязательны'})
+        return jsonify({'success': False, 'error': 'Текст комментария обязателен'})
 
     new_comment = Comment(video_title=video_title, text=comment, username=username)
     db.session.add(new_comment)
@@ -485,7 +485,7 @@ def delete_comment(comment_id):
 
     # Проверка, является ли пользователь администратором или владельцем комментария
     if user_role != 'admin' and comment.username != username:
-        return jsonify({"success": False, "error": "У вас нет прав для удаления этого комментария."}), 403
+        return jsonify({"success": False, "error": "У вас нет прав для удаления этого комментария"}), 403
 
     db.session.delete(comment)
     db.session.commit()
@@ -511,7 +511,7 @@ def submit_test():
     except Exception as e:
         db.session.rollback()  # Откат транзакции в случае ошибки
         print(f'Ошибка при сохранении результата: {e}')  # Вывод ошибки в консоль
-        return jsonify({"error": "Не удалось сохранить результат."}), 500
+        return jsonify({"error": "Не удалось сохранить результат"}), 500
 
 @app.route('/student_result/<int:result_id>')
 def show_student_result(result_id):
@@ -520,7 +520,7 @@ def show_student_result(result_id):
         total_questions = len(questions_data[result.course])  # Получаем общее количество вопросов для курса
         return render_template('student_result.html', result=result, total_questions=total_questions, ROLE_TRANSLATIONS=ROLE_TRANSLATIONS)
     else:
-        flash('Результат не найден.', 'error')
+        flash('Результат не найден', 'error')
         return redirect(url_for('index'))
 
 @app.route('/results')
@@ -551,7 +551,7 @@ def results():
 def results_for_student():
     username = session.get('username')  # Получаем имя пользователя из сессии
     if not username:
-        flash('Вы не авторизованы.', 'error')
+        flash('Вы не авторизованы', 'error')
         return redirect(url_for('login'))  # Перенаправляем на страницу входа, если не авторизованы
 
     sort_by_course = request.args.get('sortByCourse', '')

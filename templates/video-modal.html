@@ -24,6 +24,20 @@
                 <span class="dislike-count" id="dislikeCount">0</span>
             </div>
             <button class="share-button" onclick="shareVideo()">Поделиться</button>
+            <div id="shareModal" class="modal">
+                <div class="share-modal-content">
+                    <span class="close" onclick="closeShareModal()">&times;</span>
+                    <h2>Поделитесь видео</h2>
+                    <input type="text" id="shareLink" readonly>
+                    <button class="copy-button" onclick="copyToClipboard()">Копировать ссылку</button>
+                    <h4>Поделиться в:</h4>
+                    <div class="social-buttons">
+                        <a href="https://vk.com/share.php?url=" target="_blank" id="vkShareLink">VK</a>
+                        <a href="https://api.whatsapp.com/send?text=" target="_blank" id="whatsappShareLink">WhatsApp</a>
+                        <a href="https://t.me/share/url?url=" target="_blank" id="telegramShareLink">Telegram</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="comments">
             <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
