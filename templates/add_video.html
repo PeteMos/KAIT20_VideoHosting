@@ -17,7 +17,14 @@
     <main>
         <div class="main-container">
             <div class="form-container-add">
-                <form action="{{ url_for('add_video') }}" method="POST" enctype="multipart/form-data">
+                <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <div class="progress-bar">
+                        <div id="progress" class="progress"></div>
+                    </div>
+                    <div id="progressText">0%</div>
+                </div> 
+                <form id="videoForm" action="{{ url_for('add_video') }}" method="POST" enctype="multipart/form-data">
                     <label for="course" class="styled-label">Выберите курс:</label>
                     <select name="course" id="course" class="styled-select" required>
                         <option value="Основы программирования">Основы программирования</option>
@@ -33,14 +40,14 @@
                         <option value="Основы UX/UI дизайна">Основы UX/UI дизайна</option>
                         <option value="Основы веб-разработки">Основы веб-разработки</option>
                     </select>
-                
+
                     <input type="text" name="title" placeholder="Название видео" required>
                     <textarea name="description" id="videoDescription" rows="4" placeholder="Описание видео..." required></textarea>
                     <input type="text" name="duration" id="duration" placeholder="Длительность" readonly>
                     <input type="hidden" name="author" id="author" value="{{ current_user.username }}" required>
                     <input type="file" name="video_file" id="file-name" placeholder="Выберите файл" required style="border: 1px solid #ccc; padding: 10px; width: 300px; margin-top: 10px; margin-bottom: 20px;">
                     <button type="submit" class="add-video">Добавить Видео</button>
-                </form>                
+                </form>              
             </div>
 
             <div id="uploadedVideos" class="uploaded-videos-container">
@@ -90,5 +97,58 @@
         </div>        
     </main>
     {% include 'footer.html' %}
+    <script>
+    document.querySelector('#videoForm').addEventListener('submit', function(event) {
+        // Отменяем стандартное поведение формы
+        event.preventDefault();
+
+        // Получаем форму и создаем FormData
+        const form = this;
+        const formData = new FormData(form);
+
+        // Скрываем форму
+        form.style.display = 'none';
+
+        // Показываем индикатор загрузки
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        loadingIndicator.style.display = 'flex';
+
+        // Создаем XMLHttpRequest для загрузки
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', form.action, true);
+
+        // Обновляем индикатор загрузки
+        xhr.upload.addEventListener('progress', function(e) {
+            if (e.lengthComputable) {
+                const percentComplete = (e.loaded / e.total) * 100;
+                document.getElementById('progress').style.width = percentComplete + '%';
+                document.getElementById('progressText').innerText = Math.round(percentComplete) + '%';
+            }
+        });
+
+        // Обработка завершения загрузки
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Загрузка завершена, можно скрыть индикатор
+                loadingIndicator.style.display = 'none';
+                // Показываем форму снова
+                form.style.display = 'block';
+                // Здесь можно добавить логику для обработки ответа сервера
+                window.location.reload(); // Перезагружаем страницу или выполняем другие действия
+            } else {
+                // Если произошла ошибка
+                alert('Произошла ошибка при загрузке видео');
+                loadingIndicator.style.display = 'none';
+                // Показываем форму снова
+                form.style.display = 'block';
+            }
+        };
+
+        // Отправляем FormData
+        xhr.send(formData);
+    });
+</script>
+
 </body>
 </html>

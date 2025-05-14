@@ -596,7 +596,7 @@ def course_programming():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы программирования").all()
+    videos_from_db = Video.query.filter_by(course="Основы программирования").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -688,7 +688,7 @@ def course_web_development():
     per_page = 6
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы веб-разработки").all()
+    videos_from_db = Video.query.filter_by(course="Основы веб-разработки").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -780,7 +780,7 @@ def course_design():
     per_page = 6
     
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы дизайна").all()
+    videos_from_db = Video.query.filter_by(course="Основы дизайна").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -871,7 +871,7 @@ def course_javascript():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы JavaScript").all()
+    videos_from_db = Video.query.filter_by(course="Основы JavaScript").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -963,7 +963,7 @@ def course_machine_learning():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы машинного обучения").all()
+    videos_from_db = Video.query.filter_by(course="Основы машинного обучения").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -1055,7 +1055,7 @@ def course_mobile_development():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Разработка мобильных приложений").all()
+    videos_from_db = Video.query.filter_by(course="Разработка мобильных приложений").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -1147,7 +1147,7 @@ def course_cybersecurity():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы кибербезопасности").all()
+    videos_from_db = Video.query.filter_by(course="Основы кибербезопасности").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -1239,7 +1239,7 @@ def course_database():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы работы с базами данных").all()
+    videos_from_db = Video.query.filter_by(course="Основы работы с базами данных").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -1331,7 +1331,7 @@ def course_ux_ui_design():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы UX/UI дизайна").all()
+    videos_from_db = Video.query.filter_by(course="Основы UX/UI дизайна").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -1423,7 +1423,7 @@ def course_devops():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы DevOps").all()
+    videos_from_db = Video.query.filter_by(course="Основы DevOps").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -1515,7 +1515,7 @@ def course_graphic_design():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы графического дизайна").all()
+    videos_from_db = Video.query.filter_by(course="Основы графического дизайна").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()
@@ -1607,7 +1607,7 @@ def course_digital_marketing():
     per_page = 6  # Количество видео на странице
 
     # Получаем видео из базы данных
-    videos_from_db = Video.query.filter_by(course="Основы цифрового маркетинга").all()
+    videos_from_db = Video.query.filter_by(course="Основы цифрового маркетинга").order_by(Video.timestamp.desc()).all()
 
     # Получаем все комментарии для данного курса
     comments = Comment.query.filter(Comment.video_title.in_([video.title for video in videos_from_db])).all()

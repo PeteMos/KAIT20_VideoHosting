@@ -171,8 +171,8 @@ function submitEdit() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Обновляем заголовок и описание в интерфейсе
-            const videoItem = document.querySelector(`.video-item[data-id="${videoId}"]`); // Предполагается, что у вас есть атрибут data-id
+            // Обновите заголовок и описание в интерфейсе
+            const videoItem = document.querySelector(`.video-item[data-id="${videoId}"]`);
             videoItem.querySelector('h3').innerText = title;
             videoItem.querySelector('p:nth-of-type(1) span').innerText = description; // Обновляем описание
             closeEditModal(); // Закрываем модальное окно
