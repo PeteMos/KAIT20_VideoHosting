@@ -1,3 +1,19 @@
+/* Анимация появления элементов */
+.animate {
+  animation: appear 1s ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -464,6 +480,14 @@ a {
 
 .back-to-top:active {
     transform: translateY(1px);
+}
+
+.desktop-text {
+    display: inline; /* Показываем текст на десктопах */
+}
+
+.mobile-icon {
+    display: none; /* Скрываем стрелку на десктопах */
 }
 
 /* Стили для общего модального окна */

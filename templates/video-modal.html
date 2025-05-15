@@ -6,9 +6,9 @@
             <source id="videoSource" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
-        <div class="video-description" id="videoDescription"></div>
-        <div class="video-details" id="videoDetails"></div>
-        <div class="likes-container">
+        <div class="video-description animate" id="videoDescription"></div>
+        <div class="video-details animate" id="videoDetails"></div>
+        <div class="likes-container animate">
             <div class="likes">
                 <span class="like-icon" onclick="likeVideo(event)">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -23,15 +23,15 @@
                 </span>
                 <span class="dislike-count" id="dislikeCount">0</span>
             </div>
-            <button class="share-button" onclick="shareVideo()">Поделиться</button>
+            <button class="share-button animate" onclick="shareVideo()">Поделиться</button>
             <div id="shareModal" class="modal">
                 <div class="share-modal-content">
                     <span class="close" onclick="closeShareModal()">&times;</span>
                     <h2>Поделитесь видео</h2>
                     <input type="text" id="shareLink" readonly>
-                    <button class="copy-button" onclick="copyToClipboard()">Копировать ссылку</button>
+                    <button class="copy-button animate" onclick="copyToClipboard()">Копировать ссылку</button>
                     <h4>Поделиться в:</h4>
-                    <div class="social-buttons">
+                    <div class="social-buttons animate">
                         <a href="https://vk.com/share.php?url=" target="_blank" id="vkShareLink">VK</a>
                         <a href="https://api.whatsapp.com/send?text=" target="_blank" id="whatsappShareLink">WhatsApp</a>
                         <a href="https://t.me/share/url?url=" target="_blank" id="telegramShareLink">Telegram</a>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="comments">
+        <div class="comments animate">
             <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..."></textarea>
             <button class="submit-comment" onclick="submitComment()">Отправить</button>
             <div class="error-message" id="error-message"></div>
@@ -51,7 +51,7 @@
                 <span class="close" onclick="closeEditCommentModal()">&times;</span>
                 <h2>Редактировать комментарий</h2>
                 <textarea id="editCommentInput" rows="4"></textarea>
-                <div class="button-container">
+                <div class="button-container animate">
                     <button class="save-change-button" onclick="submitEditComment()">Сохранить изменения</button>
                 </div>
             </div>

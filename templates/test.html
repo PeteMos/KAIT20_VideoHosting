@@ -15,8 +15,8 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <h2 id="testTitle" class="testTitle">Выберите тему для теста</h2>
-    <div class="container-test">
+    <h2 id="testTitle" class="testTitle animate">Выберите тему для теста</h2>
+    <div class="container-test animate">
             <select id="courseSelect" class="courseSelect" onchange="loadQuestions()">
             <option value="" disabled selected>Выберите тему</option>
             <option value="Основы программирования">Основы программирования</option>
@@ -32,6 +32,13 @@
             <option value="Основы UX/UI дизайна">Основы UX/UI дизайна</option>
             <option value="Основы веб-разработки">Основы веб-разработки</option>
         </select>
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <div class="progress-bar">
+                <div id="progress" class="progress"></div>
+            </div>
+            <div id="progressText">0%</div>
+        </div>
         <div id="questions"></div>
         <button onclick="submitTest()" class="questions_bth">Отправить</button>
         <div id="result"></div>
@@ -244,64 +251,72 @@
         }
 
         function submitTest() {
-            let score = 0;
-            const selectedTopic = document.getElementById('courseSelect').value;
+        let score = 0;
+        const selectedTopic = document.getElementById('courseSelect').value;
 
-            // Проверяем, выбрана ли тема
-            if (!selectedTopic || !questionsData[selectedTopic]) {
-                alert("Пожалуйста, выберите тему.");
+        // Проверяем, выбрана ли тема
+        if (!selectedTopic || !questionsData[selectedTopic]) {
+            alert("Пожалуйста, выберите тему.");
+            return; // Прекращаем выполнение функции
+        }
+
+        const questions = questionsData[selectedTopic];
+
+        // Проверяем, отвечены ли все вопросы
+        for (let i = 0; i < questions.length; i++) {
+            if (!selectedAnswers[i]) {
+                alert("Пожалуйста, ответьте на все вопросы перед отправкой теста.");
                 return; // Прекращаем выполнение функции
             }
+        }
 
-            const questions = questionsData[selectedTopic];
-
-            // Проверяем, отвечены ли все вопросы
-            for (let i = 0; i < questions.length; i++) {
-                if (!selectedAnswers[i]) {
-                    alert("Пожалуйста, ответьте на все вопросы перед отправкой теста.");
-                    return; // Прекращаем выполнение функции
-                }
+        // Если все вопросы отвечены, подсчитываем баллы
+        questions.forEach((q, index) => {
+            const selectedOption = selectedAnswers[index];
+            if (selectedOption === q.answer) {
+                score++;
             }
+        });
 
-            // Если все вопросы отвечены, подсчитываем баллы
-            questions.forEach((q, index) => {
-                const selectedOption = selectedAnswers[index];
-                if (selectedOption === q.answer) {
-                    score++;
-                }
-            });
+        // Показываем индикатор загрузки
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        loadingIndicator.style.display = 'flex';
 
-            console.log('Отправка данных на сервер:', {
+        console.log('Отправка данных на сервер:', {
+            username: '{{ session.get("username") }}',
+            course: selectedTopic,
+            score: score
+        });
+
+        fetch('/submit_test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
                 username: '{{ session.get("username") }}',
                 course: selectedTopic,
                 score: score
-            });
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadingIndicator.style.display = 'none'; // Скрываем индикатор загрузки
 
-            fetch('/submit_test', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: '{{ session.get("username") }}',
-                    course: selectedTopic,
-                    score: score
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Ответ от сервера:", data);
-                if (data.result_id) {
-                    window.location.href = `/student_result/${data.result_id}`; 
-                } else {
-                    alert("Не удалось получить ID результата.");
-                }
-            })
-            .catch((error) => {
-                console.error('Ошибка:', error);
-                alert('Произошла ошибка при отправке теста. Пожалуйста, попробуйте еще раз.');
-            });
-        }
+            console.log("Ответ от сервера:", data);
+            if (data.result_id) {
+                // Перенаправляем на страницу результатов
+                window.location.href = `/student_result/${data.result_id}`; 
+            } else {
+                alert("Не удалось получить ID результата.");
+            }
+        })
+        .catch((error) => {
+            loadingIndicator.style.display = 'none'; // Скрываем индикатор загрузки
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при отправке теста. Пожалуйста, попробуйте еще раз.');
+        });
+    }
 
     </script>
 {% include 'footer.html' %}

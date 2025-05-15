@@ -10,7 +10,7 @@
             </div>
         </div>
         {% if session.get('username') %}
-        <div class="video-grid" id="videoGrid">
+        <div class="video-grid animate" id="videoGrid">
             {% for video in videos %}
                 <div class="video-card" 
                     data-title="{{ video.title }}" 
@@ -36,7 +36,7 @@
         {% include 'video-modal.html' %}
         
         {% else %}
-            <div class="alert alert-warning">
+            <div class="alert alert-warning animate">
                 <p>Вы должны быть авторизованы для просмотра видео. <a href="{{ url_for('login') }}">Войдите здесь</a>!</p>
             </div>
         {% endif %}       

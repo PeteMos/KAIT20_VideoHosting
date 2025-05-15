@@ -76,15 +76,16 @@
     }
 
     #nav-list {
-        display: none; /* Скрываем список по умолчанию */
-        flex-direction: column; /* Вертикальное расположение */
-        align-items: center;
-        width: 100%; /* Полная ширина */
-        z-index: 1000; /* Убедимся, что меню поверх других элементов */
+        display: none; /* Скрываем меню по умолчанию */
+        opacity: 0; /* Начальная непрозрачность */
+        transition: opacity 0.5s ease, transform 0.5s ease; /* Плавные переходы */
+        transform: translateY(-20px); /* Начальное смещение */
     }
 
     #nav-list.active {
         display: flex; /* Показываем меню при активном классе */
+        opacity: 1; /* Конечная непрозрачность */
+        transform: translateY(0); /* Конечное смещение */
     }
 
     #nav-list li {
@@ -428,5 +429,26 @@
         left: 10px;
         font-weight: bold;
         text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        font-weight: bolder;
+        padding: 0px 15px;
+        width: 50px;
+        height: 50px;
+        display: flex; 
+        align-items: center; /* Вертикальное центрирование */
+        justify-content: center; /* Горизонтальное центрирование */
+    }
+
+    .desktop-text {
+        display: none; /* Скрываем текст на мобильных */
+    }
+
+    .mobile-icon {
+        display: inline; /* Показываем стрелку на мобильных */
+        font-size: 1.5em; /* Увеличиваем размер стрелки, если нужно */
     }
 }

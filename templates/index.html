@@ -13,8 +13,8 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <nav class="main-nav">
-        <div class="menu-toggle" onclick="toggleMenu()">☰ Меню</div>
+    <nav class="main-nav animate">
+        <div class="menu-toggle animate" onclick="toggleMenu()">☰ Меню</div>
         <ul id="nav-list">
             <li><a href="#trending">В тренде</a></li>
             <li><a href="#new-courses">Новые курсы</a></li>
@@ -50,7 +50,7 @@
             
 
     <main>
-        <section id="home" class="hero">
+        <section id="home" class="hero animate">
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
@@ -70,11 +70,11 @@
             </div>
         </section>
         
-        <section id="trending" class="courses">
+        <section id="trending" class="courses animate">
             <div class="container">
                 <h2>В тренде</h2>
                 <div class="course-grid">
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <div class="course-image">
                             <img src="{{ url_for('images', filename='python.png') }}" alt="Логотип Python">
                         </div>
@@ -82,7 +82,7 @@
                         <p>Изучите основы программирования на Python.</p>
                         <a href="{{ url_for('course_programming') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <div class="course-image">
                             <img src="{{ url_for('images', filename='web-development.png') }}" alt="Логотип Веб-разработки">
                         </div>
@@ -90,7 +90,7 @@
                         <p>Создайте свой первый веб-сайт с помощью HTML и CSS.</p>
                         <a href="{{ url_for('course_web_development') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <div class="course-image">
                             <img src="{{ url_for('images', filename='design.png') }}" alt="Логотип Дизайна">
                         </div>
@@ -98,7 +98,7 @@
                         <p>Изучите принципы дизайна и создайте привлекательные интерфейсы.</p>
                         <a href="{{ url_for('course_design') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <div class="course-image">
                             <img src="{{ url_for('images', filename='javascript.png') }}" alt="Логотип JS">
                         </div>
@@ -110,26 +110,26 @@
             </div>
         </section>
 
-        <section id="new-courses" class="courses">
+        <section id="new-courses" class="courses animate">
             <div class="container">
                 <h2>Новые курсы</h2>
                 <div class="course-grid">
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Основы машинного обучения</h3>
                         <p>Познакомьтесь с основами машинного обучения и его применениями.</p>
                         <a href="{{ url_for('course_machine_learning') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Разработка мобильных приложений</h3>
                         <p>Создайте свое первое мобильное приложение на React Native.</p>
                         <a href="{{ url_for('course_mobile_development') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Основы кибербезопасности</h3>
                         <p>Узнайте, как защитить свои данные и устройства.</p>
                         <a href="{{ url_for('course_cybersecurity') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Основы работы с базами данных</h3>
                         <p>Изучите SQL и управление базами данных.</p>
                         <a href="{{ url_for('course_database') }}" class="course-btn">Смотреть видео</a>
@@ -138,26 +138,26 @@
             </div>
         </section>
 
-        <section id="recommended" class="courses">
+        <section id="recommended" class="courses animate">
             <div class="container">
                 <h2>Рекомендуемые курсы</h2>
                 <div class="course-grid">
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Основы UX/UI дизайна</h3>
                         <p>Создание пользовательского интерфейса и улучшение пользовательского опыта.</p>
                         <a href="{{ url_for('course_ux_ui_design') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Основы DevOps</h3>
                         <p>Изучите практики DevOps и автоматизацию процессов разработки.</p>
                         <a href="{{ url_for('course_devops') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Основы графического дизайна</h3>
                         <p>Научитесь основам графического дизайна и работе с Adobe Photoshop.</p>
                         <a href="{{ url_for('course_graphic_design') }}" class="course-btn">Смотреть видео</a>
                     </div>
-                    <div class="course-card">
+                    <div class="course-card animate">
                         <h3>Основы цифрового маркетинга</h3>
                         <p>Изучите стратегии и инструменты цифрового маркетинга.</p>
                         <a href="{{ url_for('course_digital_marketing') }}" class="course-btn">Смотреть видео</a>
@@ -166,7 +166,7 @@
             </div>
         </section>
 
-        <section id="about" class="about">
+        <section id="about" class="about animate">
             <div class="container">
                 <h2>О проекте</h2>
                 <p>Этот проект создан для студентов <strong>ГБПОУ КАИТ20</strong> с целью предоставления доступа к учебным видео и материалам. Мы стремимся сделать процесс обучения более доступным и увлекательным.</p>
@@ -176,7 +176,7 @@
             </div>
         </section>
         
-        <section id="contact" class="contact">
+        <section id="contact" class="contact animate">
             <div class="container">
                 <h2>Контакты</h2>
                 <p>Email: <a href="mailto:info@kait20.ru">info@kait20.ru</a></p>

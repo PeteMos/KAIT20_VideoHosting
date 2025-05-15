@@ -15,8 +15,8 @@
 <body>
     {% include 'header.html' %} 
     <main>
-        <div class="main-container">
-            <div class="form-container-add">
+        <div class="main-container animate">
+            <div class="form-container-add animate">
                 <div id="loadingIndicator" class="loading-indicator" style="display: none;">
                     <div class="spinner"></div>
                     <div class="progress-bar">
@@ -50,7 +50,7 @@
                 </form>              
             </div>
 
-            <div id="uploadedVideos" class="uploaded-videos-container">
+            <div id="uploadedVideos" class="uploaded-videos-container animate">
                 <h2 class="videos-title">Загруженные Видео</h2>
                 <input type="text" id="searchInput" placeholder="Поиск по видео..." class="search-input" onkeyup="filterVideos()">
                 <div id="videoList" class="video-list">
@@ -87,7 +87,7 @@
                         <label for="editDescription">Описание:</label>
                         <textarea id="editDescription" required></textarea>
                         <div class="button-container">
-                            <button data-style="secondary" class="save-change-button" onclick="submitEdit()">Сохранить изменения</button>
+                            <button data-style="secondary" class="save-change-button animate" onclick="submitEdit()">Сохранить изменения</button>
                         </div>
                     </div>
                 </div>  
