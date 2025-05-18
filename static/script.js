@@ -280,21 +280,18 @@ function updateVoteCounts(title) {
 }
 
 function updateVoteButtons() {
-    document.getElementById('likeCount').innerText = likeCount;
-    document.getElementById('dislikeCount').innerText = dislikeCount;
-
     const likeButton = document.getElementsByClassName('like-icon')[0];
     const dislikeButton = document.getElementsByClassName('dislike-icon')[0];
 
     if (userVote === 'like') {
-        likeButton.style.backgroundColor = '#28a745'; 
-        dislikeButton.style.backgroundColor = '#6f42c1'; 
+        likeButton.querySelector('svg').setAttribute('fill', '#28a745'); // Зеленый для лайка
+        dislikeButton.querySelector('svg').setAttribute('fill', '#5f6368'); // Обычный цвет для дизлайка
     } else if (userVote === 'dislike') {
-        dislikeButton.style.backgroundColor = '#dc3545'; 
-        likeButton.style.backgroundColor = '#6f42c1'; 
+        dislikeButton.querySelector('svg').setAttribute('fill', '#dc3545'); // Красный для дизлайка
+        likeButton.querySelector('svg').setAttribute('fill', '#5f6368'); // Обычный цвет для лайка
     } else {
-        likeButton.style.backgroundColor = '#6f42c1'; 
-        dislikeButton.style.backgroundColor = '#6f42c1'; 
+        likeButton.querySelector('svg').setAttribute('fill', '#5f6368'); // Обычный цвет
+        dislikeButton.querySelector('svg').setAttribute('fill', '#5f6368'); // Обычный цвет
     }
 }
 
