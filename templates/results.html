@@ -15,7 +15,7 @@
 <body>
     {% include 'header.html' %}
 
-    <h2 class="results-title animate">Результаты студентов</h2>
+    <h2 class="results-title">Результаты студентов</h2>
 
     <div class="sorting-controls">
         <form id="sortForm" class="sort-form" action="{{ url_for('results') }}" method="GET">
@@ -63,7 +63,7 @@
         </form>
     </div> 
 
-    <table>
+    <table class="animate">
         <thead>
             <tr>
                 <th>ID</th>

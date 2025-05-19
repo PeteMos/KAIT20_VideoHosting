@@ -1024,3 +1024,9 @@ video::-webkit-media-controls-timeline {
 #progressText {
     margin-top: 5px;
 }
+
+.sort-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}

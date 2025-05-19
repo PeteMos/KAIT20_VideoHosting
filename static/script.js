@@ -171,14 +171,23 @@ function submitEdit() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Обновите заголовок и описание в интерфейсе
             const videoItem = document.querySelector(`.video-item[data-id="${videoId}"]`);
-            videoItem.querySelector('h3').innerText = title;
-            videoItem.querySelector('p:nth-of-type(1) span').innerText = description; // Обновляем описание
-            closeEditModal(); // Закрываем модальное окно
+            if (videoItem) {
+                videoItem.querySelector('h3').innerText = title;
+                const descriptionParagraph = videoItem.querySelector('p:nth-of-type(1)');
+                if (descriptionParagraph) {
+                    descriptionParagraph.innerHTML = `<strong>Описание:</strong> ${description}`;
+                }
+            }
+            closeEditModal();
+            alert('Изменения успешно сохранены!');
         } else {
             alert(data.error);
         }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при сохранении изменений.');
     });
 }
 
