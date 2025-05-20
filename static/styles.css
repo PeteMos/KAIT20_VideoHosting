@@ -1030,3 +1030,33 @@ video::-webkit-media-controls-timeline {
     justify-content: center;
     margin: 10px 0;
 }
+
+.alert {
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-family: "PT Serif Caption", serif;
+    text-align: center;
+}
+
+.alert-info {
+    background-color: transparent;
+    color: #6c757d;
+    border: none;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.alert-image img {
+    width: 150px;
+    height: auto;
+}
+
+.alert p {
+    margin-top: 15px;
+}

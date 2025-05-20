@@ -1,36 +1,43 @@
 <main>   
     <div class="container">
-        <!-- <div class="title-container">
-            <h2>Основы программирования</h2>
-        </div> -->
         <div class="header-container">
             <h2>Видеоуроки</h2>
             <div class="search-container">
                 <input type="text" id="searchInput" class="search-input" placeholder="Поиск видео..." oninput="searchVideos()">
             </div>
         </div>
+        
         {% if session.get('username') %}
         <div class="video-grid animate" id="videoGrid">
-            {% for video in videos %}
-                <div class="video-card" 
-                    data-title="{{ video.title }}" 
-                    data-description="{{ video.description }}" 
-                    data-details="Длительность: {{ video.duration }} 
-                                Дата публикации: 
-                                {% if video.timestamp and video.timestamp is not string %}
-                                    {{ video.timestamp.strftime('%d.%m.%y') }}
-                                {% else %}
-                                    Не указано
-                                {% endif %} 
-                                Автор: {{ video.author }}" 
-                    onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title|escape }}', '{{ video.description|escape }}', 'Длительность: {{ video.duration }} Дата публикации: {% if video.timestamp and video.timestamp is not string %}{{ video.timestamp.strftime('%d.%m.%y') }}{% else %}Не указано{% endif %} Автор: {{ video.author|escape }}')">
-                    
-                    <img class="video-preview" src="{{ url_for('thumbnails', filename=video.filename ~ '.jpg') }}" alt="Превью видео" onerror="this.onerror=null; this.src='{{ url_for('images', filename='video_placeholder.jpg') }}';">
-                    
-                    <h3>{{ video.title }}</h3>
-                    <p>{{ video.description }}</p>
+            {% if videos|length > 0 %}
+                {% for video in videos %}
+                    <div class="video-card" 
+                        data-title="{{ video.title }}" 
+                        data-description="{{ video.description }}" 
+                        data-details="Длительность: {{ video.duration }} 
+                                    Дата публикации: 
+                                    {% if video.timestamp and video.timestamp is not string %}
+                                        {{ video.timestamp.strftime('%d.%m.%y') }}
+                                    {% else %}
+                                        Не указано
+                                    {% endif %} 
+                                    Автор: {{ video.author }}" 
+                        onclick="openModal('{{ url_for('uploaded_video', filename=video.filename) }}', '{{ video.title|escape }}', '{{ video.description|escape }}', 'Длительность: {{ video.duration }} Дата публикации: {% if video.timestamp and video.timestamp is not string %}{{ video.timestamp.strftime('%d.%m.%y') }}{% else %}Не указано{% endif %} Автор: {{ video.author|escape }}')">
+                        
+                        <img class="video-preview" src="{{ url_for('thumbnails', filename=video.filename ~ '.jpg') }}" alt="Превью видео" onerror="this.onerror=null; this.src='{{ url_for('images', filename='video_placeholder.jpg') }}';">
+                        
+                        <h3>{{ video.title }}</h3>
+                        <p>{{ video.description }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    <div class="alert-image">
+                        <img src="{{ url_for('images', filename='no-video.png') }}" alt="Видео нет">
+                    </div>
+                    <p>Здесь пока ничего нет!</p>
                 </div>
-            {% endfor %}
+            {% endif %}
         </div>
         
         {% include 'video-modal.html' %}

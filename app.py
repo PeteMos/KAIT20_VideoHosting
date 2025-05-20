@@ -608,60 +608,7 @@ def course_programming():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в программирование",
-            "description": "В этом видео мы познакомимся с основами программирования и его значением в современном мире.",
-            "duration": "8:00",
-            "timestamp": "01.01.2025",
-            "author": "Иван Иванов",
-            "filename": "programming-intro.mp4"
-        },
-        {
-            "title": "Переменные и типы данных",
-            "description": "В этом видео мы обсудим, что такое переменные и какие типы данных существуют в Python.",
-            "duration": "10:00",
-            "timestamp": "02.01.2025",
-            "author": "Анна Петрова",
-            "filename": "variables.mp4"
-        },
-        {
-            "title": "Условные операторы",
-            "description": "В этом видео мы изучим, как использовать условные операторы для управления потоком программы.",
-            "duration": "12:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Кузнецов",
-            "filename": "conditional-statements.mp4"
-        },
-        {
-            "title": "Циклы",
-            "description": "В этом видео мы рассмотрим, что такое циклы и как их использовать в программировании.",
-            "duration": "14:00",
-            "timestamp": "04.01.2025",
-            "author": "Ольга Воронова",
-            "filename": "loops.mp4"
-        },
-        {
-            "title": "Функции",
-            "description": "В этом видео мы узнаем, как создавать и использовать функции в Python.",
-            "duration": "11:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Федоров",
-            "filename": "functions.mp4"
-        },
-        {
-            "title": "Обработка исключений",
-            "description": "В этом видео мы изучим, как обрабатывать исключения в Python.",
-            "duration": "13:00",
-            "timestamp": "06.01.2025",
-            "author": "Анна Смирнова",
-            "filename": "exception-handling.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -700,60 +647,7 @@ def course_web_development():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в веб-разработку",
-            "description": "Создайте свой первый веб-сайт с помощью HTML и CSS.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Иван Иванов",
-            "filename": "videos/web-development-intro.mp4"
-        },
-        {
-            "title": "CSS для начинающих",
-            "description": "Изучите основы CSS для стилизации веб-страниц.",
-            "duration": "15:00",
-            "timestamp": "01.02.2025",
-            "author": "Анна Петрова",
-            "filename": "videos/css_basics.mp4"
-        },
-        {
-            "title": "JavaScript для веб-разработчиков",
-            "description": "Научитесь писать скрипты на JavaScript.",
-            "duration": "20:00",
-            "timestamp": "01.03.2025",
-            "author": "Сергей Смирнов",
-            "filename": "videos/javascript_basics.mp4"
-        },
-        {
-            "title": "Создание адаптивного дизайна",
-            "description": "Узнайте, как сделать ваш сайт адаптивным.",
-            "duration": "25:00",
-            "timestamp": "01.04.2025",
-            "author": "Мария Иванова",
-            "filename": "videos/responsive_design.mp4"
-        },
-        {
-            "title": "Основы работы с API",
-            "description": "Научитесь взаимодействовать с API для получения данных.",
-            "duration": "18:00",
-            "timestamp": "01.05.2025",
-            "author": "Алексей Кузнецов",
-            "filename": "videos/api_basics.mp4"
-        },
-        {
-            "title": "Введение в фреймворк React",
-            "description": "Изучите основы работы с фреймворком React.",
-            "duration": "22:00",
-            "timestamp": "01.06.2025",
-            "author": "Ольга Сидорова",
-            "filename": "videos/react_intro.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -792,60 +686,7 @@ def course_design():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в Figma",
-            "description": "Основы работы с Figma и интерфейс программы.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Анна Иванова",
-            "filename": "videos/figma-intro.mp4"
-        },
-        {
-            "title": "Создание прототипов",
-            "description": "Как создавать интерактивные прототипы в Figma.",
-            "duration": "12:00",
-            "timestamp": "02.01.2025",
-            "author": "Мария Петрова",
-            "filename": "videos/figma-prototypes.mp4"
-        },
-        {
-            "title": "Работа с компонентами",
-            "description": "Изучите, как создавать и использовать компоненты в Figma.",
-            "duration": "15:00",
-            "timestamp": "03.01.2025",
-            "author": "Алексей Смирнов",
-            "filename": "videos/figma-components.mp4"
-        },
-        {
-            "title": "Создание дизайн-системы",
-            "description": "Как создать свою дизайн-систему в Figma.",
-            "duration": "20:00",
-            "timestamp": "04.01.2025",
-            "author": "Ирина Кузнецова",
-            "filename": "videos/figma-design-system.mp4"
-        },
-        {
-            "title": "Экспорт ресурсов",
-            "description": "Научитесь экспортировать ваши ресурсы из Figma.",
-            "duration": "8:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Волков",
-            "filename": "videos/figma-export.mp4"
-        },
-        {
-            "title": "Советы по дизайну",
-            "description": "Полезные советы для улучшения вашего дизайна в Figma.",
-            "duration": "10:00",
-            "timestamp": "06.01.2025",
-            "author": "Ольга Сергеева",
-            "filename": "videos/figma-design-tips.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -883,60 +724,7 @@ def course_javascript():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в JavaScript",
-            "description": "Научитесь основам JavaScript и его синтаксису.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Иван Петров",
-            "filename": "videos/javascript-intro.mp4"
-        },
-        {
-            "title": "Работа с переменными",
-            "description": "Как использовать переменные в JavaScript.",
-            "duration": "8:00",
-            "timestamp": "02.01.2025",
-            "author": "Анна Смирнова",
-            "filename": "videos/javascript-variables.mp4"
-        },
-        {
-            "title": "Условия и циклы",
-            "description": "Изучите условия и циклы в JavaScript.",
-            "duration": "12:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Кузнецов",
-            "filename": "videos/javascript-conditions-loops.mp4"
-        },
-        {
-            "title": "Функции",
-            "description": "Как создавать и использовать функции.",
-            "duration": "10:00",
-            "timestamp": "04.01.2025",
-            "author": "Ольга Воронова",
-            "filename": "videos/javascript-functions.mp4"
-        },
-        {
-            "title": "Объекты",
-            "description": "Изучите основы работы с объектами в JavaScript.",
-            "duration": "9:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Федоров",
-            "filename": "videos/javascript-objects.mp4"
-        },
-        {
-            "title": "Асинхронное программирование",
-            "description": "Как работать с асинхронным кодом.",
-            "duration": "11:00",
-            "timestamp": "06.01.2025",
-            "author": "Елена Соколова",
-            "filename": "videos/javascript-async.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -975,60 +763,7 @@ def course_machine_learning():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в машинное обучение",
-            "description": "Познакомьтесь с основами машинного обучения и его применения.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Иван Иванов",
-            "filename": "videos/machine-learning-intro.mp4"
-        },
-        {
-            "title": "Типы машинного обучения",
-            "description": "Изучите различные типы машинного обучения: supervised, unsupervised и reinforcement.",
-            "duration": "12:00",
-            "timestamp": "02.01.2025",
-            "author": "Мария Петрова",
-            "filename": "videos/machine-learning-types.mp4"
-        },
-        {
-            "title": "Алгоритмы машинного обучения",
-            "description": "Узнайте о популярных алгоритмах, таких как линейная регрессия и деревья решений.",
-            "duration": "15:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Кузнецов",
-            "filename": "videos/machine-learning-algorithms.mp4"
-        },
-        {
-            "title": "Обработка данных",
-            "description": "Научитесь обрабатывать и подготавливать данные для обучения моделей.",
-            "duration": "11:00",
-            "timestamp": "04.01.2025",
-            "author": "Ольга Воронова",
-            "filename": "videos/machine-learning-data-preprocessing.mp4"
-        },
-        {
-            "title": "Оценка моделей",
-            "description": "Как оценивать и улучшать производительность моделей машинного обучения.",
-            "duration": "14:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Федоров",
-            "filename": "videos/machine-learning-model-evaluation.mp4"
-        },
-        {
-            "title": "Супервизорное обучение",
-            "description": "Изучите основные принципы супервизорного обучения.",
-            "duration": "13:00",
-            "timestamp": "06.01.2025",
-            "author": "Анна Смирнова",
-            "filename": "videos/machine-learning-supervised-learning.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -1067,60 +802,7 @@ def course_mobile_development():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в разработку мобильных приложений",
-            "description": "Создайте свое первое мобильное приложение на React Native.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Алексей Смирнов",
-            "filename": "videos/mobile-development-intro.mp4"
-        },
-        {
-            "title": "Установка окружения",
-            "description": "Научитесь устанавливать необходимые инструменты для разработки.",
-            "duration": "12:00",
-            "timestamp": "02.01.2025",
-            "author": "Ирина Петрова",
-            "filename": "videos/mobile-development-setup.mp4"
-        },
-        {
-            "title": "Создание простого приложения",
-            "description": "Создайте простое приложение с использованием компонентов React Native.",
-            "duration": "15:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Кузнецов",
-            "filename": "videos/mobile-development-simple-app.mp4"
-        },
-        {
-            "title": "Работа с API",
-            "description": "Научитесь взаимодействовать с API для получения данных.",
-            "duration": "14:00",
-            "timestamp": "04.01.2025",
-            "author": "Ольга Воронова",
-            "filename": "videos/mobile-development-api.mp4"
-        },
-        {
-            "title": "Публикация приложения",
-            "description": "Узнайте, как опубликовать ваше приложение в App Store и Google Play.",
-            "duration": "13:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Федоров",
-            "filename": "videos/mobile-development-publishing.mp4"
-        },
-        {
-            "title": "Тестирование приложения",
-            "description": "Изучите методы тестирования мобильных приложений.",
-            "duration": "11:00",
-            "timestamp": "06.01.2025",
-            "author": "Анна Смирнова",
-            "filename": "videos/mobile-development-testing.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -1159,60 +841,7 @@ def course_cybersecurity():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в кибербезопасности",
-            "description": "Узнайте, как защитить свои данные и устройства.",
-            "duration": "8:00",
-            "timestamp": "01.01.2025",
-            "author": "Алексей Смирнов",
-            "filename": "cybersecurity_intro.mp4"
-        },
-        {
-            "title": "Основы сетевой безопасности",
-            "description": "Обзор основных принципов сетевой безопасности.",
-            "duration": "10:00",
-            "timestamp": "02.01.2025",
-            "author": "Мария Иванова",
-            "filename": "network_security.mp4"
-        },
-        {
-            "title": "Защита от вредоносного ПО",
-            "description": "Как защитить свои устройства от вирусов и вредоносных программ.",
-            "duration": "12:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Петров",
-            "filename": "malware_protection.mp4"
-        },
-        {
-            "title": "Социальная инженерия",
-            "description": "Изучите методы социальной инженерии и как от них защититься.",
-            "duration": "9:00",
-            "timestamp": "04.01.2025",
-            "author": "Ольга Кузнецова",
-            "filename": "social_engineering.mp4"
-        },
-        {
-            "title": "Безопасность мобильных устройств",
-            "description": "Как защитить свои мобильные устройства от угроз.",
-            "duration": "11:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Сидоров",
-            "filename": "mobile_security.mp4"
-        },
-        {
-            "title": "Шифрование данных",
-            "description": "Основы шифрования и его важность для безопасности.",
-            "duration": "15:00",
-            "timestamp": "06.01.2025",
-            "author": "Анна Сергеева",
-            "filename": "data_encryption.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -1251,60 +880,7 @@ def course_database():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в базы данных",
-            "description": "Основы работы с базами данных.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Иван Иванов",
-            "filename": "introduction_to_databases.mp4"
-        },
-        {
-            "title": "SQL для начинающих",
-            "description": "Изучите основы SQL.",
-            "duration": "12:00",
-            "timestamp": "02.01.2025",
-            "author": "Мария Петрова",
-            "filename": "sql_for_beginners.mp4"
-        },
-        {
-            "title": "Проектирование баз данных",
-            "description": "Как проектировать эффективные базы данных.",
-            "duration": "15:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Сидоров",
-            "filename": "database_design.mp4"
-        },
-        {
-            "title": "Оптимизация запросов",
-            "description": "Советы по оптимизации SQL-запросов.",
-            "duration": "14:00",
-            "timestamp": "04.01.2025",
-            "author": "Ольга Кузнецова",
-            "filename": "query_optimization.mp4"
-        },
-        {
-            "title": "Работа с NoSQL",
-            "description": "Основы работы с NoSQL базами данных.",
-            "duration": "13:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Смирнов",
-            "filename": "working_with_nosql.mp4"
-        },
-        {
-            "title": "Безопасность баз данных",
-            "description": "Как защитить свои базы данных.",
-            "duration": "16:00",
-            "timestamp": "06.01.2025",
-            "author": "Анна Сергеева",
-            "filename": "database_security.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -1343,60 +919,7 @@ def course_ux_ui_design():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в UX/UI дизайн",
-            "description": "В этом видео мы познакомимся с основами UX/UI дизайна и его значением.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Анастасия Смирнова",
-            "filename": "videos/ux-ui-design-intro.mp4"
-        },
-        {
-            "title": "Исследование пользователей",
-            "description": "Научитесь проводить исследования для понимания потребностей пользователей.",
-            "duration": "12:00",
-            "timestamp": "02.01.2025",
-            "author": "Олег Петров",
-            "filename": "videos/ux-ui-design-research.mp4"
-        },
-        {
-            "title": "Создание прототипов",
-            "description": "Изучите методы создания прототипов для тестирования идей.",
-            "duration": "15:00",
-            "timestamp": "03.01.2025",
-            "author": "Ирина Коваленко",
-            "filename": "videos/ux-ui-design-prototyping.mp4"
-        },
-        {
-            "title": "Дизайн интерфейса",
-            "description": "Как создавать привлекательные и функциональные интерфейсы.",
-            "duration": "11:00",
-            "timestamp": "04.01.2025",
-            "author": "Максим Иванов",
-            "filename": "videos/ux-ui-design-interface.mp4"
-        },
-        {
-            "title": "Тестирование пользовательского опыта",
-            "description": "Научитесь проводить тестирование для улучшения дизайна.",
-            "duration": "13:00",
-            "timestamp": "05.01.2025",
-            "author": "Светлана Фролова",
-            "filename": "videos/ux-ui-design-testing.mp4"
-        },
-        {
-            "title": "Продвинутые техники UX/UI",
-            "description": "Изучите более сложные техники и подходы в UX/UI дизайне.",
-            "duration": "14:00",
-            "timestamp": "06.01.2025",
-            "author": "Алексей Романов",
-            "filename": "videos/ux-ui-design-advanced.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -1435,60 +958,7 @@ def course_devops():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в DevOps",
-            "description": "Изучите практики DevOps и автоматизацию процессов разработки.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Алексей Смирнов",
-            "filename": "videos/devops-intro.mp4"
-        },
-        {
-            "title": "CI/CD в DevOps",
-            "description": "Как настроить непрерывную интеграцию и доставку.",
-            "duration": "12:00",
-            "timestamp": "02.01.2025",
-            "author": "Мария Петрова",
-            "filename": "videos/devops-ci-cd.mp4"
-        },
-        {
-            "title": "Контейнеризация с Docker",
-            "description": "Основы работы с Docker и контейнерами.",
-            "duration": "15:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Кузнецов",
-            "filename": "videos/devops-docker.mp4"
-        },
-        {
-            "title": "Мониторинг и логирование",
-            "description": "Как эффективно мониторить и логировать приложения.",
-            "duration": "8:00",
-            "timestamp": "04.01.2025",
-            "author": "Анна Иванова",
-            "filename": "videos/devops-monitoring-logging.mp4"
-        },
-        {
-            "title": "Управление конфигурацией",
-            "description": "Изучите инструменты управления конфигурацией.",
-            "duration": "10:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Федоров",
-            "filename": "videos/devops-configuration-management.mp4"
-        },
-        {
-            "title": "Автоматизация с Ansible",
-            "description": "Изучите, как использовать Ansible для автоматизации.",
-            "duration": "14:00",
-            "timestamp": "06.01.2025",
-            "author": "Ирина Сидорова",
-            "filename": "videos/devops-ansible.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -1527,60 +997,7 @@ def course_graphic_design():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в графический дизайн",
-            "description": "Научитесь основам графического дизайна и работе с Adobe Photoshop.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Иван Петров",
-            "filename": "videos/graphic-design-intro.mp4"
-        },
-        {
-            "title": "Работа с цветом",
-            "description": "Как использовать цвет в графическом дизайне.",
-            "duration": "8:00",
-            "timestamp": "02.01.2025",
-            "author": "Анна Смирнова",
-            "filename": "videos/graphic-design-color.mp4"
-        },
-        {
-            "title": "Основы композиции",
-            "description": "Изучите правила композиции в дизайне.",
-            "duration": "12:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Кузнецов",
-            "filename": "videos/graphic-design-composition.mp4"
-        },
-        {
-            "title": "Создание логотипов",
-            "description": "Как создать эффективный логотип для бренда.",
-            "duration": "10:00",
-            "timestamp": "04.01.2025",
-            "author": "Ольга Воронова",
-            "filename": "videos/graphic-design-logos.mp4"
-        },
-        {
-            "title": "Работа с типографикой",
-            "description": "Изучите основы работы с шрифтами в дизайне.",
-            "duration": "9:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Федоров",
-            "filename": "videos/graphic-design-typography.mp4"
-        },
-        {
-            "title": "Брендинг",
-            "description": "Как создать и развивать бренд.",
-            "duration": "11:00",
-            "timestamp": "06.01.2025",
-            "author": "Елена Соколова",
-            "filename": "videos/graphic-design-branding.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)
@@ -1619,60 +1036,7 @@ def course_digital_marketing():
             comments_by_video[comment.video_title] = []
         comments_by_video[comment.video_title].append(comment)
 
-    # Вручную добавленные видео
-    manual_videos = [
-        {
-            "title": "Введение в цифровой маркетинг",
-            "description": "Изучите стратегии и инструменты цифрового маркетинга.",
-            "duration": "10:00",
-            "timestamp": "01.01.2025",
-            "author": "Алексей Смирнов",
-            "filename": "videos/digital-marketing-intro.mp4"
-        },
-        {
-            "title": "SEO основы",
-            "description": "Научитесь оптимизировать сайты для поисковых систем.",
-            "duration": "12:00",
-            "timestamp": "02.01.2025",
-            "author": "Мария Петрова",
-            "filename": "videos/digital-marketing-seo.mp4"
-        },
-        {
-            "title": "Контент-маркетинг",
-            "description": "Создание и продвижение контента для привлечения клиентов.",
-            "duration": "15:00",
-            "timestamp": "03.01.2025",
-            "author": "Сергей Кузнецов",
-            "filename": "videos/digital-marketing-content.mp4"
-        },
-        {
-            "title": "Социальные сети",
-            "description": "Как использовать социальные сети для бизнеса.",
-            "duration": "10:00",
-            "timestamp": "04.01.2025",
-            "author": "Анна Иванова",
-            "filename": "videos/digital-marketing-social-media.mp4"
-        },
-        {
-            "title": "Email-маркетинг",
-            "description": "Создание эффективных email-кампаний.",
-            "duration": "8:00",
-            "timestamp": "05.01.2025",
-            "author": "Дмитрий Федоров",
-            "filename": "videos/digital-marketing-email.mp4"
-        },
-        {
-            "title": "Аналитика в цифровом маркетинге",
-            "description": "Как использовать аналитику для улучшения маркетинговых стратегий.",
-            "duration": "14:00",
-            "timestamp": "06.01.2025",
-            "author": "Ирина Сидорова",
-            "filename": "videos/digital-marketing-analytics.mp4"
-        }
-    ]
-
-    # Объединяем видео из базы данных и вручную добавленные видео
-    all_videos = videos_from_db + manual_videos
+    all_videos = videos_from_db
 
     # Реализация пагинации
     total_videos = len(all_videos)

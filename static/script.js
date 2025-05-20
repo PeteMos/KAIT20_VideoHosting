@@ -404,10 +404,18 @@ function deleteComment(commentId) {
 
 function searchVideos() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const videoCards = document.querySelectorAll('.video-card');
-    const gifPlaceholder = document.getElementById('gifPlaceholder');
+    const videoGrid = document.getElementById('videoGrid');
 
-    let hasVisibleVideos = false; // Флаг для проверки наличия видимых видео
+    // Проверяем, есть ли внутри блоков видео
+    const videoCards = videoGrid.querySelectorAll('.video-card');
+
+    // Если внутри есть хотя бы один элемент с классом 'video-card', ищем по ним
+    if (videoCards.length === 0) {
+        // Видео отсутствуют — отключаем фильтрацию
+        return;
+    }
+
+    let hasVisibleVideos = false;
 
     videoCards.forEach(card => {
         const title = card.getAttribute('data-title').toLowerCase();
@@ -415,18 +423,19 @@ function searchVideos() {
         const details = card.getAttribute('data-details').toLowerCase();
 
         if (title.includes(searchInput) || description.includes(searchInput) || details.includes(searchInput)) {
-            card.style.display = ''; // Показываем видео
-            hasVisibleVideos = true; // Устанавливаем флаг в true
+            card.style.display = '';
+            hasVisibleVideos = true;
         } else {
-            card.style.display = 'none'; // Скрываем видео
+            card.style.display = 'none';
         }
     });
 
-    // Если нет видимых видео, показываем GIF
+    // Управление отображением GIF-заглушки
+    const gifPlaceholder = document.getElementById('gifPlaceholder');
     if (!hasVisibleVideos) {
-        gifPlaceholder.style.display = 'block'; // Показываем заглушку
+        gifPlaceholder.style.display = 'block';
     } else {
-        gifPlaceholder.style.display = 'none'; // Скрываем заглушку
+        gifPlaceholder.style.display = 'none';
     }
 }
 
